@@ -12,7 +12,7 @@ class BaseController
 {
 public:
 	BaseController();
-	~BaseController();
+	virtual ~BaseController();
 
 	//Change Id.
 	std::string getId();

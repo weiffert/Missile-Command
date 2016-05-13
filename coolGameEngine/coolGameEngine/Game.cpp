@@ -59,6 +59,9 @@ int Game::run()
 	//Seed the random number generator.
 	srand(time(NULL));
 
+	delete assetManager;
+	delete systemManager;
+
 	return exitCode;
 }
 

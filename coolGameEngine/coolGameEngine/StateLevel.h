@@ -10,7 +10,7 @@ public:
 	//Takes in Game's systemManager and assetManager.
 	StateLevel();
 	StateLevel(SystemManager*, AssetManager *);
-	~StateLevel();
+	virtual ~StateLevel();
 
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow*);

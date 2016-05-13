@@ -14,7 +14,7 @@ class BaseState
 {
 public:
 	BaseState();
-	~BaseState();
+	virtual ~BaseState();
 
 	//Returns the state identification.
 	int getNumber();

@@ -13,7 +13,7 @@ public:
 	StateLoading();
 	//Takes in Game's systemManager and assetManager.
 	StateLoading(SystemManager *, AssetManager *);
-	~StateLoading();
+	virtual ~StateLoading();
 
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow *);

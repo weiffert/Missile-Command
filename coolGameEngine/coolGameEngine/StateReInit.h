@@ -13,7 +13,7 @@ public:
 	StateReInit();
 	//Takes in Game's systemManager and assetManager.
 	StateReInit(SystemManager *, AssetManager *);
-	~StateReInit();
+	virtual ~StateReInit();
 
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow*);

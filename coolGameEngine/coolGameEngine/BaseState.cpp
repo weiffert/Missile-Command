@@ -25,7 +25,6 @@ BaseState::BaseState()
 
 BaseState::~BaseState()
 {
-	
 }
 
 
