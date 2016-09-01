@@ -71,7 +71,7 @@ std::string StateStatic::update(double totalTime, sf::RenderWindow *window)
 			text->setPosition(0, 50);
 			text->setCharacterSize(30);
 			sf::Color c(255, 255, 255);
-			text->setColor(c);
+			text->setFillColor(c);
 			text->setFont(*t->getDataText().at(0)->getFont());
 			t->addData(text);
 

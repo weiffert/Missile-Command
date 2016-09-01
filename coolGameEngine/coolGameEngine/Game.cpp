@@ -31,7 +31,7 @@ Game::Game(int width, int height, std::string name)
 	gameName = name;
 	gameWindow.create( windowResolution, gameName);
 	gameWindow.setVerticalSyncEnabled(false);
-	gameWindow.setFramerateLimit(0);
+	gameWindow.setFramerateLimit(30);
 	systemManager = new SystemManager();
 	assetManager = new AssetManager();
 }

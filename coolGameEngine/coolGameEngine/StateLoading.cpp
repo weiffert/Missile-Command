@@ -701,7 +701,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 						else if (data.at(i) == "setColor")
 						{
 							sf::Color c(BaseState::conversionInt(data.at(++i)), BaseState::conversionInt(data.at(++i)), BaseState::conversionInt(data.at(++i)));
-							text->setColor(c);
+							text->setFillColor(c);
 						}
 						else if (data.at(i) == "setPosition")
 						{
@@ -1286,7 +1286,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 								else if (properties.at(y).at(i) == "setColor")
 								{
 									sf::Color c(BaseState::conversionInt(properties.at(y).at(++i)), BaseState::conversionInt(properties.at(y).at(++i)), BaseState::conversionInt(properties.at(y).at(++i)));
-									text->setColor(c);
+									text->setFillColor(c);
 								}
 								else if (properties.at(y).at(i) == "setPosition")
 								{
