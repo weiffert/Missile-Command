@@ -235,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetManager.h" />
-    <ClInclude Include="BaseController.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="Crosshairs.h" />
     <ClInclude Include="Entity.h" />
@@ -263,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="BaseController.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="coolGameEngine.cpp" />
     <ClCompile Include="CrossHairs.cpp" />

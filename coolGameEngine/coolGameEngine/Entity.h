@@ -4,11 +4,9 @@
 
 /*
 #include "Property.h"
-#include "BaseController.h"
 */
 
 class Property;
-class BaseController;
 
 class Entity
 {

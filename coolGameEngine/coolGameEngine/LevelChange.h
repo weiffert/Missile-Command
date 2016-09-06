@@ -1,6 +1,4 @@
 #pragma once
-#include "BaseController.h"
-
 #include <string>
 #include <iostream>
 
@@ -11,8 +9,7 @@
 #include "AssetManager.h"
 #include "Entity.h"
 
-class LevelChange :
-	public BaseController
+class LevelChange
 {
 public:
 	LevelChange();
