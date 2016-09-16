@@ -1,0 +1,8 @@
+Created object 005A6710
+Created object 005B1200
+Created object 005AB9F8
+Created object 03A09EC8
+Deleting object 005A6710
+Deleting object 005B1200
+Deleting object 005AB9F8
+Deleting object 03A09EC8

@@ -13,6 +13,8 @@
 #include "AssetManager.h"
 #include "Render.h"
 
+#include <fstream>
+
 
 BaseState::BaseState()
 {
@@ -20,11 +22,23 @@ BaseState::BaseState()
 	number = -1;
 	systemManager = nullptr;
 	assetManager = nullptr;
+
+	std::ofstream file;
+	BaseState *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created object " << ptr << std::endl;
+	file.close();
 }
 
 
 BaseState::~BaseState()
 {
+	std::ofstream file;
+	BaseState *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting object " << ptr << std::endl;
+	file.close();
+
 }
 
 
