@@ -220,6 +220,9 @@ Entity* SystemManager::getMaterial(std::string a)
 			return material.at(i);
 	}
 
+	std::cout << "getMaterial error" << std::endl;
+
+	throw std::bad_typeid("getMaterial error");
 	return nullptr;
 }
 
@@ -235,6 +238,9 @@ Property* SystemManager::getComponent(std::string a)
 			return component.at(i);
 	}
 
+	std::cout << "getComponent error" << std::endl;
+
+	throw std::bad_typeid("getComponent error");
 	return nullptr;
 }
 
@@ -250,6 +256,9 @@ BaseState* SystemManager::getState(std::string a)
 			return state.at(i);
 	}
 
+	std::cout << "getState error" << std::endl;
+
+	throw std::bad_typeid("getState error");
 	return nullptr;
 }
 
@@ -265,5 +274,8 @@ BaseState* SystemManager::getState(int a)
 			return state.at(i);
 	}
 
+	std::cout << "getState error" << std::endl;
+
+	throw std::bad_typeid("getState error");
 	return nullptr;
 }

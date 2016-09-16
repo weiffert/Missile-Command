@@ -95,7 +95,6 @@ StateLoading::StateLoading(SystemManager *s, AssetManager *a)
 			}
 		}
 	}
-
 	//Sorts the substrings into the proper order.
 	//substringSorter();
 }
@@ -246,6 +245,9 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 							type = word;
 						if (lineNumber > 2)
 							data.push_back(word);
+
+						if (word == "")
+							throw std::bad_typeid("Reading error");
 
 						file >> word;
 					}
@@ -765,6 +767,9 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 					file >> word;
 					while (word != ";") //Read until the end of the line
 					{
+						if (word == "")
+							throw std::bad_typeid("Error loading entity");
+
 						if (lineNumber == 1)
 							tempId = word;
 						//If it is reading in properties...
@@ -1352,6 +1357,9 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 					//Read until the end of the line
 					while (word != ";")
 					{
+						if (word == "")
+							throw std::bad_typeid("Error loading game state");
+
 						if (lineNumber == 1)
 							tempId = word;
 						if (lineNumber == 2)

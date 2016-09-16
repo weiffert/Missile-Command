@@ -3,6 +3,7 @@
 #include <string>
 #include <time.h>
 #include <stdlib.h>
+#include<iostream>
 
 #include "SFML\Window.hpp"
 #include "SFML\Audio.hpp"
@@ -91,7 +92,6 @@ int Game::gameLoop()
 		currentTime = newTime;
 
 		lag += frameTime;
-
 		//process input
 		//while (lag >= frameRate)
 		//{
@@ -103,6 +103,8 @@ int Game::gameLoop()
 		//}
 		//render with parameters.
 		state->render(lag/frameRate, &gameWindow);
+
+		
 
 		if (change != "constant")
 		{

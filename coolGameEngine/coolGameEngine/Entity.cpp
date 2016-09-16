@@ -103,5 +103,8 @@ Property* Entity::getComponent(std::string id)
 			return component.at(i);
 	}
 
+	std::cout << "Component error" << std::endl;
+
+	throw std::bad_typeid("getComponent error");
 	return nullptr;
 }

@@ -20,7 +20,6 @@ int conversion(std::string);
 int main()
 {
 	int exitCode = 0;
-	
 	//Log run
 	std::ofstream file;
 	file.open("log.txt", std::ios::app);
@@ -49,9 +48,18 @@ int main()
 		int two = conversion(data.at(1));
 
 		Game game(one, two, data.at(3));
-
-		//run the game
-		exitCode = game.run();
+		try{
+			//run the game
+			exitCode = game.run();
+		}catch (std::bad_typeid error)
+	{
+		std::cout << error.what() << std::endl;
+		std::cout << "Error code saved in game log" << std::endl;
+		file << error.what();
+		system("pause");
+		file.close();
+		return 0;
+	}
 
 		//log exit code
 		if (file.is_open())

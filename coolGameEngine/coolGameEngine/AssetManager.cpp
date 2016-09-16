@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <string>
 #include <vector>
+#include<iostream>
 
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -53,6 +54,9 @@ sf::Image* AssetManager::getImage(int location)
 		return image.at(location);
 	}
 
+	std::cout << "Image error" << std::endl;
+
+	throw std::bad_typeid("getImage error");
 	return nullptr;
 }
 
@@ -68,6 +72,9 @@ sf::Image* AssetManager::getImage(std::string filename)
 				return image.at(i);
 		}
 
+		std::cout << "Image error" << std::endl;
+
+	throw std::bad_typeid("getImage error");
 	return nullptr;
 }
 
@@ -81,6 +88,9 @@ sf::Sound* AssetManager::getSound(int location)
 		return sound.at(location);
 	}
 
+	std::cout << "Sound error" << std::endl;
+
+	throw std::bad_typeid("getSound error");
 	return nullptr;
 }
 
@@ -91,6 +101,9 @@ sf::SoundBuffer* AssetManager::getSoundBuffer(int location)
 		return soundBuffer.at(location);
 	}
 
+	std::cout << "SoundBuffer error" << std::endl;
+
+	throw std::bad_typeid("getSoundBuffer error");
 	return nullptr;
 }
 
@@ -106,6 +119,9 @@ sf::SoundBuffer* AssetManager::getSoundBuffer(std::string filename)
 				return soundBuffer.at(i);
 		}
 
+		std::cout << "soundBuffer error" << std::endl;
+
+	throw std::bad_typeid("getSoundBuffer error");
 	return nullptr;
 }
 
@@ -119,6 +135,9 @@ sf::Texture* AssetManager::getTexture(int location)
 		return texture.at(location);
 	}
 
+	std::cout << "getTexture error" << std::endl;
+
+	throw std::bad_typeid("getTexture error");
 	return nullptr;
 }
 
@@ -134,6 +153,9 @@ sf::Texture* AssetManager::getTexture(std::string filename)
 				return texture.at(i);
 		}
 
+		std::cout << "getTexture error" << std::endl;
+
+	throw std::bad_typeid("getTexture error");
 	return nullptr;
 }
 
@@ -145,6 +167,9 @@ sf::Font* AssetManager::getFont(int location)
 		return font.at(location);
 	}
 
+	std::cout << "getFont error" << std::endl;
+
+	throw std::bad_typeid("getFont error");
 	return nullptr;
 }
 
@@ -157,7 +182,10 @@ sf::Font* AssetManager::getFont(std::string filename)
 			if (i < font.size())
 				return font.at(i);
 		}
+	
+		std::cout << "getFont error" << std::endl;
 
+	throw std::bad_typeid("getFont error");
 	return nullptr;
 }
 
