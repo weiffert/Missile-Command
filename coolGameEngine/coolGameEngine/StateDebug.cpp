@@ -61,11 +61,23 @@ StateDebug::StateDebug()
 
 	//Sorts the substrings into the proper order.
 	substringSorter();
+
+	std::ofstream files;
+	StateDebug *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateDebug object " << ptr << std::endl;
+	files.close();
 }
 
 
 StateDebug::StateDebug(SystemManager *s, AssetManager *a, sf::RenderWindow *window)
 {
+	std::ofstream files;
+	StateDebug *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateDebug object " << ptr << std::endl;
+	files.close();
+
 	//Sets defaults.
 	id = "Debug";
 	number = 10;
@@ -1285,6 +1297,11 @@ StateDebug::StateDebug(SystemManager *s, AssetManager *a, sf::RenderWindow *wind
 
 StateDebug::~StateDebug()
 {
+	std::ofstream file;
+	StateDebug *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting StateDebug object " << ptr << std::endl;
+	file.close();
 }
 
 

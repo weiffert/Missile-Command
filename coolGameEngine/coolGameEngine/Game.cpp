@@ -3,7 +3,8 @@
 #include <string>
 #include <time.h>
 #include <stdlib.h>
-#include<iostream>
+#include <iostream>
+#include <fstream>
 
 #include "SFML\Window.hpp"
 #include "SFML\Audio.hpp"
@@ -19,6 +20,11 @@
 
 Game::Game()
 {
+	std::ofstream file;
+	Game *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created Game object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -35,12 +41,22 @@ Game::Game(int width, int height, std::string name)
 	gameWindow.setFramerateLimit(30);
 	systemManager = new SystemManager();
 	assetManager = new AssetManager();
+
+	std::ofstream file;
+	Game *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created Game object " << ptr << std::endl;
+	file.close();
 }
 
 
 Game::~Game()
 {
-
+	std::ofstream file;
+	Game *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting Game object " << ptr << std::endl;
+	file.close();
 }
 
 

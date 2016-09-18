@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include <fstream>
+
 #include "SFML\Window.hpp"
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -19,6 +21,13 @@ StateMenu::StateMenu()
 	number = 2;
 	systemManager = nullptr;
 	assetManager = nullptr;
+
+	std::ofstream files;
+	StateMenu *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateMenu object " << ptr << std::endl;
+	files.close();
+
 }
 
 StateMenu::StateMenu(SystemManager *s, AssetManager *a)
@@ -28,11 +37,22 @@ StateMenu::StateMenu(SystemManager *s, AssetManager *a)
 	number = 2;
 	systemManager = s;
 	assetManager = a;
+
+	std::ofstream files;
+	StateMenu *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateMenu object " << ptr << std::endl;
+	files.close();
 }
 
 
 StateMenu::~StateMenu()
 {
+	std::ofstream files;
+	StateMenu *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Deleting StateMenu object " << ptr << std::endl;
+	files.close();
 }
 
 

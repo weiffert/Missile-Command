@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <Windows.h>
+#include <fstream>
 
 #include "StateStatic.h"
 #include "SystemManager.h"
@@ -21,6 +22,12 @@ StateStatic::StateStatic()
 	number = 1;
 	systemManager = nullptr;
 	assetManager = nullptr;
+
+	std::ofstream files;
+	StateStatic *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateStatic object " << ptr << std::endl;
+	files.close();
 }
 
 
@@ -31,11 +38,21 @@ StateStatic::StateStatic(SystemManager *s, AssetManager *a)
 	number = 1;
 	systemManager = s;
 	assetManager = a;
+	std::ofstream files;
+	StateStatic *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Created StateStatic object " << ptr << std::endl;
+	files.close();
 }
 
 
 StateStatic::~StateStatic()
 {
+	std::ofstream files;
+	StateStatic *ptr = this;
+	files.open("object log.txt", std::ios::app);
+	files << "Deleting StateStatic object " << ptr << std::endl;
+	files.close();
 }
 
 

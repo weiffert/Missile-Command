@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include "SystemManager.h"
 #include "Entity.h"
@@ -12,6 +13,11 @@
 
 SystemManager::SystemManager()
 {
+	std::ofstream file;
+	SystemManager *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created SystemManager object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -38,6 +44,12 @@ SystemManager::~SystemManager()
   	delete component.at(i);
   	component.at(i) = nullptr;
   }
+
+  std::ofstream file;
+  SystemManager *ptr = this;
+  file.open("object log.txt", std::ios::app);
+  file << "Deleting SystemManager object " << ptr << std::endl;
+  file.close();
 }
 
 

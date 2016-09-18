@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include <string>
 #include <vector>
-#include<iostream>
+#include <iostream>
+#include <fstream>
 
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -11,7 +12,11 @@
 
 AssetManager::AssetManager()
 {
-
+	std::ofstream file;
+	AssetManager *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created AssetManager object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -42,6 +47,12 @@ AssetManager::~AssetManager()
 		delete font.at(font.size() - 1);
 		font.pop_back();
 	}
+
+	std::ofstream file;
+	AssetManager *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting AssetManager object " << ptr << std::endl;
+	file.close();
 }
 
 

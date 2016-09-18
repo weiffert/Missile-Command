@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
@@ -14,6 +15,12 @@ Property::Property()
 {
 	typeId = "type";
 	id = "Property";
+
+	std::ofstream file;
+	Property *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created Property object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -21,6 +28,12 @@ Property::Property(std::string type)
 {
 	typeId = type;
 	id = "Property";
+
+	std::ofstream file;
+	Property *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created Property object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -102,6 +115,12 @@ Property::~Property()
 	{
 		dataLine.erase(dataLine.begin() + i);
 	}
+
+	std::ofstream file;
+	Property *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting Property object " << ptr << std::endl;
+	file.close();
 }
 
 //Returns id

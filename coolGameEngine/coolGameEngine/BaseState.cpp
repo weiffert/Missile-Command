@@ -26,7 +26,7 @@ BaseState::BaseState()
 	std::ofstream file;
 	BaseState *ptr = this;
 	file.open("object log.txt", std::ios::app);
-	file << "Created object " << ptr << std::endl;
+	file << "Created BaseState object " << ptr << std::endl;
 	file.close();
 }
 
@@ -36,7 +36,7 @@ BaseState::~BaseState()
 	std::ofstream file;
 	BaseState *ptr = this;
 	file.open("object log.txt", std::ios::app);
-	file << "Deleting object " << ptr << std::endl;
+	file << "Deleting BaseState object " << ptr << std::endl;
 	file.close();
 
 }

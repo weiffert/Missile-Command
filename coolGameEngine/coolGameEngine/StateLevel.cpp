@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -29,6 +30,12 @@ StateLevel::StateLevel()
 	number = 3;
 	systemManager = nullptr;
 	assetManager = nullptr;
+
+	std::ofstream file;
+	StateLevel *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created StateLevel object " << ptr << std::endl;
+	file.close();
 }
 
 
@@ -39,11 +46,22 @@ StateLevel::StateLevel(SystemManager *s, AssetManager *a)
 	number = 3;
 	systemManager = s;
 	assetManager = a;
+
+	std::ofstream file;
+	StateLevel *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Created StateLevel object " << ptr << std::endl;
+	file.close();
 }
 
 
 StateLevel::~StateLevel()
 {
+	std::ofstream file;
+	StateLevel *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting StateLevel object " << ptr << std::endl;
+	file.close();
 }
 
 
