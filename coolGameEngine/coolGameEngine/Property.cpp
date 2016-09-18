@@ -40,80 +40,59 @@ Property::Property(std::string type)
 //Default destructor
 Property::~Property()
 {
-	for (int i = 0; i < dataInt.size(); i++)
-	{
-		dataInt.erase(dataInt.begin() + i);
-	}
-	for (int i = 0; i < dataDouble.size(); i++)
-	{
-		dataDouble.erase(dataDouble.begin() + i);
-	}
-	for (int i = 0; i < dataFloat.size(); i++)
-	{
-		dataFloat.erase(dataFloat.begin() + i);
-	}
-	for (int i = 0; i < dataChar.size(); i++)
-	{
-		dataChar.erase(dataChar.begin() + i);
-	}
-	for (int i = 0; i < dataBool.size(); i++)
-	{
-		dataBool.erase(dataBool.begin() + i);
-	}
-	for (int i = 0; i < dataString.size(); i++)
-	{
-		dataString.erase(dataString.begin() + i);
-	}
 	for (int i = 0; i < dataSprite.size(); i++)
 	{
 		delete dataSprite.at(i);
-		dataSprite.erase(dataSprite.begin() + i);
+		dataSprite.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataImage.size(); i++)
 	{
-		dataImage.erase(dataImage.begin() + i);
+		delete dataImage.at(i);
+		dataImage.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataTexture.size(); i++)
 	{
 		delete dataTexture.at(i);
-		dataTexture.erase(dataTexture.begin() + i);
+		dataTexture.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataSound.size(); i++)
 	{
-		dataSound.erase(dataSound.begin() + i);
+		delete dataSound.at(i);
+		dataSound.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataText.size(); i++)
 	{
 		delete dataText.at(i);
-		dataText.erase(dataText.begin() + i);
+		dataText.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataCircleShape.size(); i++)
 	{
 		delete dataCircleShape.at(i);
-		dataCircleShape.erase(dataCircleShape.begin() + i);
+		dataCircleShape.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataConvexShape.size(); i++)
 	{
 		delete dataConvexShape.at(i);
-		dataConvexShape.erase(dataConvexShape.begin() + i);
+		dataConvexShape.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataRectangleShape.size(); i++)
 	{
 		delete dataRectangleShape.at(i);
-		dataRectangleShape.erase(dataRectangleShape.begin() + i);
+		dataRectangleShape.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataEntity.size(); i++)
 	{
-		dataEntity.erase(dataEntity.begin() + i);
+		dataEntity.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataColor.size(); i++)
 	{
 		delete dataColor.at(i);
-		dataColor.erase(dataColor.begin() + i);
+		dataColor.at(i) = nullptr;
 	}
 	for (int i = 0; i < dataLine.size(); i++)
 	{
-		dataLine.erase(dataLine.begin() + i);
+		delete dataLine.at(i);
+		dataLine.at(i) = nullptr;
 	}
 
 	std::ofstream file;
