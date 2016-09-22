@@ -143,7 +143,7 @@ void Plane::update(sf::RenderWindow *window)
 			plane = currentPlane->getComponent("Sprite")->getDataSprite().at(0);
 			plane->setPosition(sf::Vector2f(temp1, currentPlane->getComponent("CurrentPosition")->getDataDouble().at(1)));
 
-			currentPlane->getComponent("CurrentPosition")->changeData(&temp1, 0);
+			currentPlane->getComponent("CurrentPosition")->changeData(temp1, 0);
 
 			//If it's off the screen kill the plane
 			if (temp1 < 0 || temp1 > 480)
@@ -250,7 +250,7 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 {
 	Entity * plane = nullptr;
 	int yHeight = 0;
-	std::string * direction = new std::string; //Avoids linker errors
+	std::string direction;
 	srand(time(NULL));
 
 
@@ -278,7 +278,7 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 	//Left
 	if (rand() % 2 == 0)
 	{
-		*direction = "Left";
+		direction = "Left";
 		plane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
@@ -288,7 +288,7 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 	//Right
 	else
 	{
-		*direction = "Right";
+		direction = "Right";
 		plane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
@@ -311,7 +311,7 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 	}
 	else
 	{
-		if (*direction == "Right")
+		if (direction == "Right")
 		{
 			if (!texture->loadFromFile("plane.png"))
 				std::cout << "Failed to load plane.png" << std::endl;
@@ -342,8 +342,6 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 	plane->getComponent("Move")->addData(true);
 	plane->getComponent("Explode")->deleteData();
 	plane->getComponent("Explode")->addData(false);
-
-	delete direction;
 }
 
 

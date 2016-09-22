@@ -24,32 +24,41 @@ SystemManager::SystemManager()
 //Deletes the data in the vectors off of the heap.
 SystemManager::~SystemManager()
 {
-  //Delete states
-  for(int i = 0; i < state.size(); i++)
-  {
-  	delete state.at(i);
-  	state.at(i) = nullptr;
-  }
-  
-  //Delete Entities
-  for (int i = 0; i < material.size(); i++)
-  {
-  	delete material.at(i);
-  	material.at(i) = nullptr;
-  }
-  
-  //Delete Components
-  for(int i = 0; i < component.size(); i++)
-  {
-  	delete component.at(i);
-  	component.at(i) = nullptr;
-  }
+	//Delete states
+	for (int i = 0; i < state.size(); i++)
+	{
+		if (state.at(i) != nullptr)
+		{
+			delete state.at(i);
+			state.at(i) = nullptr;
+		}
+	}
 
-  std::ofstream file;
-  SystemManager *ptr = this;
-  file.open("object log.txt", std::ios::app);
-  file << "Deleting SystemManager object " << ptr << std::endl;
-  file.close();
+	//Delete Entities
+	for (int i = 0; i < material.size(); i++)
+	{
+		if (material.at(i) != nullptr)
+		{
+			delete material.at(i);
+			material.at(i) = nullptr;
+		}
+	}
+
+	//Delete Components
+	for (int i = 0; i < component.size(); i++)
+	{
+		if (component.at(i) != nullptr)
+		{
+			delete component.at(i);
+			component.at(i) = nullptr;
+		}
+	}
+
+	std::ofstream file;
+	SystemManager *ptr = this;
+	file.open("object log.txt", std::ios::app);
+	file << "Deleting SystemManager object " << ptr << std::endl;
+	file.close();
 }
 
 

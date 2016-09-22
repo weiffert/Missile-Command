@@ -250,7 +250,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreKeeper.h" />
     <ClInclude Include="SmartBombControl.h" />
-    <ClInclude Include="StateDebug.h" />
     <ClInclude Include="StateReInit.h" />
     <ClInclude Include="StateLevel.h" />
     <ClInclude Include="StateLoading.h" />
@@ -278,7 +277,6 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="ScoreKeeper.cpp" />
     <ClCompile Include="SmartBombControl.cpp" />
-    <ClCompile Include="StateDebug.cpp" />
     <ClCompile Include="StateReInit.cpp" />
     <ClCompile Include="StateLevel.cpp" />
     <ClCompile Include="StateLoading.cpp" />

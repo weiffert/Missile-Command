@@ -282,8 +282,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 					for (int i = 0; i < data.size(); i++)
 					{
-						int integer = std::stoi(data.at(i));
-						temp->addData(integer);
+						temp->addData(std::stoi(data.at(i)));
 					}
 				}
 				else if (type == "char")
@@ -292,8 +291,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 					for (int i = 0; i < data.size(); i++)
 					{
-						char character = data.at(i).at(0);
-						temp->addData(character);
+						temp->addData(data.at(i).at(0));
 					}
 				}
 
@@ -303,8 +301,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 					for (int i = 0; i < data.size(); i++)
 					{
-						double reals = std::stod(data.at(i));
-						temp->addData(reals);
+						temp->addData(std::stod(data.at(i)));
 					}
 				}
 
@@ -314,8 +311,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 					for (int i = 0; i < data.size(); i++)
 					{
-						float smallerReals = std::stof(data.at(i));
-						temp->addData(smallerReals);
+						temp->addData(std::stof(data.at(i)));
 					}
 				}
 
@@ -762,7 +758,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 					temp = new Property("string");
 
 					for (int i = 0; i < data.size(); i++)
-						temp->addData(&(data.at(i)));
+						temp->addData(data.at(i));
 				}
 
 				//Edit.
@@ -833,8 +829,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 							for (int i = 1; i < properties.at(y).size(); i++)
 							{
-								int integer = std::stoi(properties.at(y).at(i));
-								component->addData(integer);
+								component->addData(std::stoi(properties.at(y).at(i)));
 							}
 						}
 						else if (type == "char")
@@ -843,8 +838,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 							for (int i = 1; i < properties.at(y).size(); i++)
 							{
-								char character = properties.at(y).at(i).at(0);
-								component->addData(character);
+								component->addData(properties.at(y).at(i).at(0));
 							}
 						}
 
@@ -854,8 +848,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 							for (int i = 1; i < properties.at(y).size(); i++)
 							{
-								double reals = std::stod(properties.at(y).at(i));
-								component->addData(reals);
+								component->addData(std::stod(properties.at(y).at(i)));
 							}
 						}
 
@@ -865,8 +858,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 
 							for (int i = 1; i < properties.at(y).size(); i++)
 							{
-								float smallerReals = std::stof(properties.at(y).at(i));
-								component->addData(smallerReals);
+								component->addData(std::stof(properties.at(y).at(i)));
 							}
 						}
 
@@ -1338,7 +1330,7 @@ std::string StateLoading::update(double totalTime, sf::RenderWindow *window)
 							component = new Property("string");
 
 							for (int i = 1; i < properties.at(y).size(); i++)
-								component->addData(&(properties.at(y).at(i)));
+								component->addData(properties.at(y).at(i));
 						}
 
 						component->setId(tempId);

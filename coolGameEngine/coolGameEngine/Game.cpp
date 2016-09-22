@@ -52,6 +52,11 @@ Game::Game(int width, int height, std::string name)
 
 Game::~Game()
 {
+	delete assetManager;
+	delete systemManager;
+	assetManager = nullptr;
+	systemManager = nullptr;
+
 	std::ofstream file;
 	Game *ptr = this;
 	file.open("object log.txt", std::ios::app);
@@ -75,9 +80,6 @@ int Game::run()
 
 	//Seed the random number generator.
 	srand(time(NULL));
-
-	delete assetManager;
-	delete systemManager;
 
 	return exitCode;
 }
