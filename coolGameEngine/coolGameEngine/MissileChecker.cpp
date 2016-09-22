@@ -36,16 +36,17 @@ MissileChecker::~MissileChecker()
 
 void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemManager)
 {
-  //Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
-	
+	//Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
+
 	MissileExploder exploder;
+	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
 	Entity *currentMissile = nullptr;
 	Entity *currentBase = nullptr;
 	Entity *temp = nullptr;
 	sf::Vector2f position;
 	bool collision = false;
 
-	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
+	//Only check for missiles that have been fired.
 	for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
 	{
 		if (i >= 0)
@@ -63,15 +64,17 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 				for (int u = 0; u < missiles.size(); u++)
 				{
 					temp = missiles.at(u);
-					//Makes sure that explosion is not done and has not started
+					//Makes sure that explosion is happening.
 					if (temp->getComponent("Explode")->getDataBool().at(0))
 					{
 						if (temp->hasComponent("CircleShape"))
 						{
+							//Check for collision.
 							if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 							{
 								collision = true;
 							}
+							//Add smart bomb behaviors.
 							if (currentMissile->hasComponent("IsSmart"))
 							{
 								if (currentMissile->getComponent("IsSmart")->getDataBool().at(0))
@@ -121,7 +124,6 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 	}
 }
 
-
 bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 {
 	float radius = circle->getLocalBounds().height / 2;
@@ -138,7 +140,6 @@ bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 
 	return intersects;
 }
-
 
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::CircleShape *other)
 {
