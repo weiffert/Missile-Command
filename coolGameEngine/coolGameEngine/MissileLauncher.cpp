@@ -91,11 +91,21 @@ int MissileLauncher::fire(Entity *currentMissile, Entity *currentBase, sf::Rende
 					//Check if it will be drawn and if it has not fired.
 					if (currentMissile->getComponent("Draw")->getDataBool().at(0) && !currentMissile->getComponent("Fired")->getDataBool().at(0))
 					{
+						sf::Sprite *s = currentMissile->getComponent("Sprite")->getDataSprite().at(0);
 						sf::RectangleShape *r = currentMissile->getComponent("RectangleShape")->getDataRectangleShape().at(0);
 
-						//Change color;
 						r->setFillColor(*(currentMissile->getComponent("ColorFriend")->getDataColor().at(0)));
 						r->setOutlineColor(*(currentMissile->getComponent("ColorFriend")->getDataColor().at(0)));
+
+						sf::Texture *t = new sf::Texture;
+						if (!t->loadFromFile("missile-transit-clear.png"))
+							std::cout << "Failed to open missile-transit-clear.png" << std::endl;
+						s->setTexture(*t, true);
+						s->setColor(*(currentMissile->getComponent("ColorFriend")->getDataColor().at(0)));
+						s->setOrigin(s->getLocalBounds().width / 2, s->getLocalBounds().height / 2);
+
+						delete t;
+						t = nullptr;
 					}
 				}
 

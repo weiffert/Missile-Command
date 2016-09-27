@@ -94,6 +94,7 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 				}
 			}
 		}
+
 		if (collision)
 		{
 			currentMissile->getComponent("Life")->deleteData();
@@ -145,27 +146,14 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Circle
 {
 	float radius = circle->getLocalBounds().height / 2;
 	float otherRadius = other->getLocalBounds().height / 2;
-	sf::Vector2f distance;
-	sf::Vector2f center;
+
 	sf::Vector2f point;
 	point.x = e->getComponent("CurrentPosition")->getDataDouble().at(0);
 	point.y = e->getComponent("CurrentPosition")->getDataDouble().at(1);
 
-	for (double theta = 0; theta < 2 * 3.141592654; theta += 3.141592654 / 6)
-	{
-		for (int i = 1; i <= otherRadius; i++)
-		{
-			//Set point on the radius.
-			point.x += i * cos(theta);
-			point.y += i * sin(theta);
+	if (intersection(circle, point))
+		return true;
 
-			if (intersection(circle, point))
-				return true;
-
-			point.x -= i*cos(theta);
-			point.y -= i*sin(theta);
-		}
-	}
 	return false;
 }
 
@@ -173,30 +161,27 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Circle
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite *other)
 {
 	float radius = circle->getLocalBounds().height / 2;
-	float x = other->getLocalBounds().width;
-	float y = other->getLocalBounds().height;
 
 	sf::Vector2f distance;
-	sf::Vector2f center;
-	sf::Vector2f point;
+	sf::Vector2f circleCenter;
+	sf::Vector2f spriteCenter;
 
-	point.x = e->getComponent("CurrentPosition")->getDataDouble().at(0);
-	point.y = e->getComponent("CurrentPosition")->getDataDouble().at(1);
+	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
+	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
+	
+	distance.x = circleCenter.x - spriteCenter.x;
+	distance.y = circleCenter.y - spriteCenter.y;
 
-	for (double theta = 0; theta < 2 * 3.141592654; theta += 3.141592654 / 6)
-	{
-		for (int i = 0; i <= radius; i++)
-		{
-			//Set point on the radius.
-			point.x += i * cos(theta);
-			point.y += i * sin(theta);
+	double angle = atan(distance.y / distance.x);
+	
+	if (distance.x > 0)
+		angle += 3.141592654 / 2;
 
-			if (other->getGlobalBounds().contains(point))
-				return true;
+	circleCenter.x += radius * cos(angle);
+	circleCenter.y -= radius * sin(angle);
 
-			point.x -= i * cos(theta);
-			point.y -= i * sin(theta);
-		}
-	}
+	if (other->getGlobalBounds().contains(circleCenter))
+		return true;
+
 	return false;
 }

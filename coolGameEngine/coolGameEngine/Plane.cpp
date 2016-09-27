@@ -84,20 +84,23 @@ void Plane::update(sf::RenderWindow *window)
 
 		if (currentPlane->getComponent("Draw")->getDataBool().at(0)) //Makes sure current plane is active
 		{
-			//Checks for collisions
-			std::vector<Entity *> explodingMissiles = systemManager->getComponent("ExplodingMissiles")->getDataEntity();
-			for (int u = 0; u < explodingMissiles.size(); u++)
+			if (currentPlane->getComponent("Life")->getDataBool().at(0))
 			{
-				temp = explodingMissiles.at(u);
-				//Makes sure that explosion is not done and has not started
-				if (temp->getComponent("Explode")->getDataBool().at(0))
+				//Checks for collisions
+				std::vector<Entity *> explodingMissiles = systemManager->getComponent("ExplodingMissiles")->getDataEntity();
+				for (int u = 0; u < explodingMissiles.size(); u++)
 				{
-					if (temp->hasComponent("CircleShape"))
+					temp = explodingMissiles.at(u);
+					//Makes sure that explosion is not done and has not started
+					if (temp->getComponent("Explode")->getDataBool().at(0))
 					{
-						MissileChecker checker;
-						if (checker.intersection(temp, temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentPlane->getComponent("Sprite")->getDataSprite().at(0)))
+						if (temp->hasComponent("CircleShape"))
 						{
-							collision = true;
+							MissileChecker checker;
+							if (checker.intersection(temp, temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentPlane->getComponent("Sprite")->getDataSprite().at(0)))
+							{
+								collision = true;
+							}
 						}
 					}
 				}
