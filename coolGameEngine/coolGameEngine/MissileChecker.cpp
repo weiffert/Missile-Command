@@ -169,12 +169,12 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite
 	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
 	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
 	
-	distance.x = circleCenter.x - spriteCenter.x;
-	distance.y = circleCenter.y - spriteCenter.y;
+	distance.x = spriteCenter.x - circleCenter.x;
+	distance.y = spriteCenter.y - circleCenter.y;
 
 	double angle = atan(distance.y / distance.x);
 	
-	if (distance.x > 0)
+	if (distance.x < 0)
 		angle += 3.141592654 / 2;
 
 	circleCenter.x += radius * cos(angle);
