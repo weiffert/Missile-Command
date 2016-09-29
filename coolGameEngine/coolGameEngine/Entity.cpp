@@ -13,22 +13,11 @@ Entity::Entity()
 {
 	//Set Defaults.
 	id = "Entity";
-
-	std::ofstream file;
-	Entity *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created Entity object " << ptr << std::endl;
-	file.close();
 }
 
 
 Entity::~Entity()
 {
-	std::ofstream file;
-	Entity *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting Entity object " << ptr << std::endl;
-	file.close();
 }
 
 

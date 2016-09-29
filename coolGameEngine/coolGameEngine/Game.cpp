@@ -20,11 +20,6 @@
 
 Game::Game()
 {
-	std::ofstream file;
-	Game *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created Game object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -41,12 +36,6 @@ Game::Game(int width, int height, std::string name)
 	gameWindow.setFramerateLimit(30);
 	systemManager = new SystemManager();
 	assetManager = new AssetManager();
-
-	std::ofstream file;
-	Game *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created Game object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -56,12 +45,6 @@ Game::~Game()
 	delete systemManager;
 	assetManager = nullptr;
 	systemManager = nullptr;
-
-	std::ofstream file;
-	Game *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting Game object " << ptr << std::endl;
-	file.close();
 }
 
 

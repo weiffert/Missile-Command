@@ -21,12 +21,6 @@
 //SFML includes
 StateReInit::StateReInit()
 {
-	std::ofstream files;
-	StateReInit *ptr = this;
-	files.open("object log.txt", std::ios::app);
-	files << "Created StateReInit object " << ptr << std::endl;
-	files.close();
-
 	//Sets defaults.
 	id = "End";
 	number = 4;
@@ -39,12 +33,6 @@ StateReInit::StateReInit()
 
 StateReInit::StateReInit(SystemManager *s, AssetManager *a)
 {
-	std::ofstream files;
-	StateReInit *ptr = this;
-	files.open("object log.txt", std::ios::app);
-	files << "Created StateReInit object " << ptr << std::endl;
-	files.close();
-
 	//Sets defaults.
 	id = "End";
 	number = 4;

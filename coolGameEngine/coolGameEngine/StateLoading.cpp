@@ -23,12 +23,6 @@
 
 StateLoading::StateLoading()
 {
-	std::ofstream files;
-	StateLoading *ptr = this;
-	files.open("object log.txt", std::ios::app);
-	files << "Created StateLoading object " << ptr << std::endl;
-	files.close();
-
 	//Sets defaults.
 	id = "Loading";
 	number = 0;
@@ -69,12 +63,6 @@ StateLoading::StateLoading()
 
 StateLoading::StateLoading(SystemManager *s, AssetManager *a)
 {
-	std::ofstream files;
-	StateLoading *ptr = this;
-	files.open("object log.txt", std::ios::app);
-	files << "Created StateLoading object " << ptr << std::endl;
-	files.close();
-
 	//Sets defaults.
 	id = "Loading";
 	number = 0;
@@ -114,11 +102,6 @@ StateLoading::StateLoading(SystemManager *s, AssetManager *a)
 
 StateLoading::~StateLoading()
 {
-	std::ofstream files;
-	StateLoading *ptr = this;
-	files.open("object log.txt", std::ios::app);
-	files << "Deleting StateLoading object " << ptr << std::endl;
-	files.close();
 }
 
 

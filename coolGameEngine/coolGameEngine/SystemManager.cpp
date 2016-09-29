@@ -13,11 +13,6 @@
 
 SystemManager::SystemManager()
 {
-	std::ofstream file;
-	SystemManager *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created SystemManager object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -53,12 +48,6 @@ SystemManager::~SystemManager()
 			component.at(i) = nullptr;
 		}
 	}
-
-	std::ofstream file;
-	SystemManager *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting SystemManager object " << ptr << std::endl;
-	file.close();
 }
 
 

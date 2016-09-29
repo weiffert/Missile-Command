@@ -30,12 +30,6 @@ StateLevel::StateLevel()
 	number = 3;
 	systemManager = nullptr;
 	assetManager = nullptr;
-
-	std::ofstream file;
-	StateLevel *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created StateLevel object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -46,12 +40,6 @@ StateLevel::StateLevel(SystemManager *s, AssetManager *a)
 	number = 3;
 	systemManager = s;
 	assetManager = a;
-
-	std::ofstream file;
-	StateLevel *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created StateLevel object " << ptr << std::endl;
-	file.close();
 }
 
 

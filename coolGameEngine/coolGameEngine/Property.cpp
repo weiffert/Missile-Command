@@ -15,12 +15,6 @@ Property::Property()
 {
 	typeId = "type";
 	id = "Property";
-
-	std::ofstream file;
-	Property *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created Property object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -28,12 +22,6 @@ Property::Property(std::string type)
 {
 	typeId = type;
 	id = "Property";
-
-	std::ofstream file;
-	Property *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created Property object " << ptr << std::endl;
-	file.close();
 }
 
 

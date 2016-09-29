@@ -22,22 +22,11 @@ BaseState::BaseState()
 	number = -1;
 	systemManager = nullptr;
 	assetManager = nullptr;
-
-	std::ofstream file;
-	BaseState *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created BaseState object " << ptr << std::endl;
-	file.close();
 }
 
 
 BaseState::~BaseState()
 {
-	std::ofstream file;
-	BaseState *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting BaseState object " << ptr << std::endl;
-	file.close();
 
 }
 

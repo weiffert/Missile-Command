@@ -12,11 +12,6 @@
 
 AssetManager::AssetManager()
 {
-	std::ofstream file;
-	AssetManager *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Created AssetManager object " << ptr << std::endl;
-	file.close();
 }
 
 
@@ -62,12 +57,6 @@ AssetManager::~AssetManager()
 			font.at(i) = nullptr;
 		}
 	}
-
-	std::ofstream file;
-	AssetManager *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting AssetManager object " << ptr << std::endl;
-	file.close();
 }
 
 
