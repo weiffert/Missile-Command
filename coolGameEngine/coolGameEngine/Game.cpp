@@ -80,6 +80,9 @@ int Game::gameLoop()
 	double lag = 0.0;
 	double currentTime = time(NULL);
 
+	sf::Clock clock;
+	float lastTime = 0;
+
 	//Run while the game window is open.
 	while(gameWindow.isOpen())
 	{
@@ -105,7 +108,12 @@ int Game::gameLoop()
 		//render with parameters.
 		state->render(lag/frameRate, &gameWindow);
 
-		
+		//Framerate counter
+		float currentTime = clock.restart().asSeconds();
+		int  fps = 1/ currentTime;
+		lastTime = currentTime;
+
+		std::cout << fps << std::endl;
 
 		if (change != "constant")
 		{
