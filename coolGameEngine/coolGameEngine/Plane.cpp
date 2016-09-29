@@ -96,7 +96,7 @@ void Plane::update(sf::RenderWindow *window)
 					{
 						if (temp->hasComponent("CircleShape"))
 						{
-							MissileChecker checker;
+							MissileChecker checker(systemManager, assetManager);
 							if (checker.intersection(temp, temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentPlane->getComponent("Sprite")->getDataSprite().at(0)))
 							{
 								collision = true;

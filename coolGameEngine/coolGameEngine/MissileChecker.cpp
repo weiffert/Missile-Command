@@ -173,9 +173,10 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite
 	distance.y = spriteCenter.y - circleCenter.y;
 
 	double angle = atan(distance.y / distance.x);
-	
+
+	angle *= -1;
 	if (distance.x < 0)
-		angle += 3.141592654 / 2;
+		angle += 3.141592654;
 
 	circleCenter.x += radius * cos(angle);
 	circleCenter.y -= radius * sin(angle);

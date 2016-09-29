@@ -45,11 +45,6 @@ StateLevel::StateLevel(SystemManager *s, AssetManager *a)
 
 StateLevel::~StateLevel()
 {
-	std::ofstream file;
-	StateLevel *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting StateLevel object " << ptr << std::endl;
-	file.close();
 }
 
 

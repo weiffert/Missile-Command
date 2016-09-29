@@ -115,12 +115,6 @@ Property::~Property()
 			dataLine.at(i) = nullptr;
 		}
 	}
-
-	std::ofstream file;
-	Property *ptr = this;
-	file.open("object log.txt", std::ios::app);
-	file << "Deleting Property object " << ptr << std::endl;
-	file.close();
 }
 
 //Returns id

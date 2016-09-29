@@ -1,200 +1,16 @@
-﻿Build started 9/29/2016 2:31:37 PM.
+﻿Build started 9/29/2016 2:53:46 PM.
      1>Project "C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\coolGameEngine\coolGameEngine.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.4.0\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt AssetManager.cpp BaseState.cpp Entity.cpp Game.cpp Property.cpp StateLevel.cpp StateLoading.cpp StateMenu.cpp StateReInit.cpp StateStatic.cpp SystemManager.cpp
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-         AssetManager.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(20): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(28): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(36): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(44): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(52): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(67): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(83): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(86): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(101): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(114): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(130): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(133): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(148): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(164): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(167): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(180): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(194): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\assetmanager.cpp(197): warning C4018: '<' : signed/unsigned mismatch
-         BaseState.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\basestate.cpp(80): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\basestate.cpp(96): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\basestate.cpp(120): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\basestate.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-         Entity.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\entity.cpp(50): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\entity.cpp(67): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\entity.cpp(85): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\entity.cpp(100): warning C4018: '<' : signed/unsigned mismatch
-         Game.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\game.cpp(65): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\game.cpp(81): warning C4244: 'initializing' : conversion from 'time_t' to 'double', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\game.cpp(87): warning C4244: 'initializing' : conversion from 'time_t' to 'double', possible loss of data
-         Property.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(31): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(39): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(47): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(55): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(63): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(71): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(79): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(87): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(95): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(102): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(110): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(289): warning C4244: 'argument' : conversion from 'int' to 'const float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(299): warning C4244: 'argument' : conversion from 'double' to 'const float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(508): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(521): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(534): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(547): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(560): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(573): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(586): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(600): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(614): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(628): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(642): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(656): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(670): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(684): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(698): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(712): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(725): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(744): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(751): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(758): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(765): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(772): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(779): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(786): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(794): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(802): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(810): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(818): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(826): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(834): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(842): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(850): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(858): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(865): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(873): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(887): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(906): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(916): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(926): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(936): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(946): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(956): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(966): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(976): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(986): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(996): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1006): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1016): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1026): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1036): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1046): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1056): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(1066): warning C4018: '<' : signed/unsigned mismatch
-         StateLevel.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\statelevel.cpp(236): warning C4018: '<' : signed/unsigned mismatch
-         StateLoading.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(115): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(142): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(168): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(266): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(275): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(285): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(295): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(307): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(319): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(331): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(347): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(370): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(388): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(406): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(426): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(448): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(474): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(509): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(535): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(570): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(596): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(632): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(658): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(705): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(729): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(743): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(797): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(813): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(822): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(832): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(842): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(853): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(865): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(877): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(894): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(917): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(935): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(952): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(972): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1022): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1057): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1083): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1118): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1144): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1180): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1206): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1233): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1291): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1315): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1403): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\stateloading.cpp(1407): warning C4018: '<' : signed/unsigned mismatch
-         StateMenu.cpp
-         StateReInit.cpp
-         StateStatic.cpp
-         SystemManager.cpp
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(23): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(33): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(43): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(82): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(99): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(116): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(133): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(150): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(167): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(184): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(204): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(227): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(245): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(263): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\systemmanager.cpp(281): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(180): warning C4715: 'Property::getDataChar' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(159): warning C4715: 'Property::getDataInt' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(166): warning C4715: 'Property::getDataDouble' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(187): warning C4715: 'Property::getDataBool' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(194): warning C4715: 'Property::getDataString' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(208): warning C4715: 'Property::getDataTexture' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(201): warning C4715: 'Property::getDataImage' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(215): warning C4715: 'Property::getDataSprite' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(222): warning C4715: 'Property::getDataCircleShape' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(229): warning C4715: 'Property::getDataConvexShape' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(236): warning C4715: 'Property::getDataRectangleShape' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(243): warning C4715: 'Property::getDataText' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(250): warning C4715: 'Property::getDataEntity' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(257): warning C4715: 'Property::getDataSound' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(264): warning C4715: 'Property::getDataSoundBuffer' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(278): warning C4715: 'Property::getDataLine' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(271): warning C4715: 'Property::getDataColor' : not all control paths return a value
-     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\property.cpp(173): warning C4715: 'Property::getDataFloat' : not all control paths return a value
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\SFML-2.4.0\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MissileChecker.cpp
+         MissileChecker.cpp
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(55): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(56): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(64): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(116): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(151): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(152): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(181): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\17wbe01\documents\github\missile-command\coolgameengine\coolgameengine\missilechecker.cpp(182): warning C4244: '-=' : conversion from 'double' to 'float', possible loss of data
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\Debug\coolGameEngine.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\SFML-2.4.0\lib" openal32.lib ws2_32.lib ogg.lib vorbis.lib vorbisfile.lib vorbisenc.lib flac.lib gdi32.lib winmm.lib jpeg.lib freetype.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" "sfml-audio-s-d.lib" "sfml-network-s-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\Debug\coolGameEngine.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\Debug\coolGameEngine.lib" /MACHINE:X86 Debug\coolGameEngine.res
          Debug\AssetManager.obj
@@ -221,10 +37,9 @@
          Debug\StateStatic.obj
          Debug\stdafx.obj
          Debug\SystemManager.obj
-     1>LINK : warning LNK4067: ambiguous entry point; selected 'mainCRTStartup'
          coolGameEngine.vcxproj -> C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\Debug\coolGameEngine.exe
      1>Done Building Project "C:\Users\17WBE01\Documents\GitHub\Missile-Command\coolGameEngine\coolGameEngine\coolGameEngine.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:11.64
+Time Elapsed 00:00:01.30
