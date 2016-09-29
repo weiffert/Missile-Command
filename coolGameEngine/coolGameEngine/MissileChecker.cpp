@@ -36,16 +36,17 @@ MissileChecker::~MissileChecker()
 
 void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemManager)
 {
-  //Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
-	
+	//Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
+
 	MissileExploder exploder;
+	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
 	Entity *currentMissile = nullptr;
 	Entity *currentBase = nullptr;
 	Entity *temp = nullptr;
 	sf::Vector2f position;
 	bool collision = false;
 
-	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
+	//Only check for missiles that have been fired.
 	for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
 	{
 		if (i >= 0)
@@ -63,15 +64,17 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 				for (int u = 0; u < missiles.size(); u++)
 				{
 					temp = missiles.at(u);
-					//Makes sure that explosion is not done and has not started
+					//Makes sure that explosion is happening.
 					if (temp->getComponent("Explode")->getDataBool().at(0))
 					{
 						if (temp->hasComponent("CircleShape"))
 						{
+							//Check for collision.
 							if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 							{
 								collision = true;
 							}
+							//Add smart bomb behaviors.
 							if (currentMissile->hasComponent("IsSmart"))
 							{
 								if (currentMissile->getComponent("IsSmart")->getDataBool().at(0))
@@ -91,6 +94,7 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 				}
 			}
 		}
+
 		if (collision)
 		{
 			currentMissile->getComponent("Life")->deleteData();
@@ -121,7 +125,6 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 	}
 }
 
-
 bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 {
 	float radius = circle->getLocalBounds().height / 2;
@@ -139,32 +142,18 @@ bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 	return intersects;
 }
 
-
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::CircleShape *other)
 {
 	float radius = circle->getLocalBounds().height / 2;
 	float otherRadius = other->getLocalBounds().height / 2;
-	sf::Vector2f distance;
-	sf::Vector2f center;
+
 	sf::Vector2f point;
 	point.x = e->getComponent("CurrentPosition")->getDataDouble().at(0);
 	point.y = e->getComponent("CurrentPosition")->getDataDouble().at(1);
 
-	for (double theta = 0; theta < 2 * 3.141592654; theta += 3.141592654 / 6)
-	{
-		for (int i = 1; i <= otherRadius; i++)
-		{
-			//Set point on the radius.
-			point.x += i * cos(theta);
-			point.y += i * sin(theta);
+	if (intersection(circle, point))
+		return true;
 
-			if (intersection(circle, point))
-				return true;
-
-			point.x -= i*cos(theta);
-			point.y -= i*sin(theta);
-		}
-	}
 	return false;
 }
 
@@ -172,30 +161,28 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Circle
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite *other)
 {
 	float radius = circle->getLocalBounds().height / 2;
-	float x = other->getLocalBounds().width;
-	float y = other->getLocalBounds().height;
 
 	sf::Vector2f distance;
-	sf::Vector2f center;
-	sf::Vector2f point;
+	sf::Vector2f circleCenter;
+	sf::Vector2f spriteCenter;
 
-	point.x = e->getComponent("CurrentPosition")->getDataDouble().at(0);
-	point.y = e->getComponent("CurrentPosition")->getDataDouble().at(1);
+	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
+	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
+	
+	distance.x = spriteCenter.x - circleCenter.x;
+	distance.y = spriteCenter.y - circleCenter.y;
 
-	for (double theta = 0; theta < 2 * 3.141592654; theta += 3.141592654 / 6)
-	{
-		for (int i = 0; i <= radius; i++)
-		{
-			//Set point on the radius.
-			point.x += i * cos(theta);
-			point.y += i * sin(theta);
+	double angle = atan(distance.y / distance.x);
 
-			if (other->getGlobalBounds().contains(point))
-				return true;
+	angle *= -1;
+	if (distance.x < 0)
+		angle += 3.141592654;
 
-			point.x -= i * cos(theta);
-			point.y -= i * sin(theta);
-		}
-	}
+	circleCenter.x += radius * cos(angle);
+	circleCenter.y -= radius * sin(angle);
+
+	if (other->getGlobalBounds().contains(circleCenter))
+		return true;
+
 	return false;
 }

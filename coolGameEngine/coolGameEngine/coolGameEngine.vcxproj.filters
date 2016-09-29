@@ -212,9 +212,6 @@
     <ClInclude Include="Property.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateDebug.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MissileChecker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -287,9 +284,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Property.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MissileChecker.cpp">

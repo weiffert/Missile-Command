@@ -1,7 +1,7 @@
 /*
 Authors: William Eiffert, Adam Sawyer, Zane Durante, Kendrick Austin
 Date Begin: 3 February 2016
-Last Edit: 6 April 2016
+Last Edit: 22 September 2016
 Purpose: This is a game engine designed to use entities and component based design.
 The implementation of the engine will be missile command.
 */
@@ -14,6 +14,9 @@ The implementation of the engine will be missile command.
 #include <time.h>
 
 #include "Game.h"
+
+#include<stdlib.h>
+#include<crtdbg.h>
 
 int conversion(std::string);
 
@@ -77,6 +80,8 @@ int main()
 	//clean up
 	file.close();
 	
+	_CrtDumpMemoryLeaks();
+
 	return 0;
 }
 

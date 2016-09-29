@@ -51,15 +51,18 @@ public:
 
 	template <typename T>
 	void addData(T*);
-
 	template <typename T>
 	void addData(T);
 
 	template <typename T>
 	void deleteData(T*);
+	template <typename T>
+	void deleteData(T);
 
 	template <typename T>
 	void changeData(T*, int);
+	template <typename T>
+	void changeData(T, int);
 
 private:
 	std::string id;

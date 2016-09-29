@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include <string>
 #include <vector>
-#include<iostream>
+#include <iostream>
+#include <fstream>
 
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -11,36 +12,50 @@
 
 AssetManager::AssetManager()
 {
-
 }
 
 
 AssetManager::~AssetManager()
 {
-	while (!image.empty())
+	for (int i = 0; i < image.size(); i++)
 	{
-		delete image.at(image.size() - 1);
-		image.pop_back();
+		if (image.at(i) != nullptr)
+		{
+			delete image.at(i);
+			image.at(i) = nullptr;
+		}
 	}
-	while (!sound.empty())
+	for (int i = 0; i < sound.size(); i++)
 	{
-		delete sound.at(sound.size() - 1);
-		sound.pop_back();
+		if (sound.at(i) != nullptr)
+		{
+			delete sound.at(i);
+			sound.at(i) = nullptr;
+		}
 	}
-	while (!soundBuffer.empty())
+	for (int i = 0; i < soundBuffer.size(); i++)
 	{
-		delete soundBuffer.at(soundBuffer.size() - 1);
-		soundBuffer.pop_back();
+		if (soundBuffer.at(i) != nullptr)
+		{
+			delete soundBuffer.at(i);
+			soundBuffer.at(i) = nullptr;
+		}
 	}
-	while (!texture.empty())
+	for (int i = 0; i < texture.size(); i++)
 	{
-		delete texture.at(texture.size() - 1);
-		texture.pop_back();
+		if (texture.at(i) != nullptr)
+		{
+			delete texture.at(i);
+			texture.at(i) = nullptr;
+		}
 	}
-	while (!font.empty())
+	for (int i = 0; i < font.size(); i++)
 	{
-		delete font.at(font.size() - 1);
-		font.pop_back();
+		if (font.at(i) != nullptr)
+		{
+			delete font.at(i);
+			font.at(i) = nullptr;
+		}
 	}
 }
 

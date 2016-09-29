@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <Windows.h>
+#include <fstream>
 
 #include "StateStatic.h"
 #include "SystemManager.h"

@@ -13,6 +13,8 @@
 #include "AssetManager.h"
 #include "Render.h"
 
+#include <fstream>
+
 
 BaseState::BaseState()
 {
@@ -25,6 +27,7 @@ BaseState::BaseState()
 
 BaseState::~BaseState()
 {
+
 }
 
 

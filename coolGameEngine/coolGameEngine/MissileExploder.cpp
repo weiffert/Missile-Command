@@ -23,6 +23,7 @@ MissileExploder::~MissileExploder()
 //This function is called from MissileLauncher
 void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * window, Entity *missile)
 {
+	//Explosion Rate.
 	double rate;
 	rate = 2;
 	double tempRadius;
@@ -31,16 +32,9 @@ void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * w
 		//If it doesn't already have an explosion, create one (property "ExplosionPhase" is 0)
 		if (missile->getComponent("ExplosionPhase")->getDataInt().at(0) == 0)
 		{
+			//In the first part of the explosion phase.
 			missile->getComponent("ExplosionPhase")->deleteData();
 			missile->getComponent("ExplosionPhase")->addData(1);
-
-			//Play explosion sound. This has been moved to outside of missile exploder
-			//if (missile->hasComponent("SoundMissileExplosion"))
-			//{
-			//	sf::Sound s;
-			//	s.setBuffer(*(missile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0)));
-			//	s.play();
-			//}
 
 			//Points handling.
 			if (missile->hasComponent("ShotDown"))
@@ -49,6 +43,7 @@ void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * w
 				{
 					ScoreKeeper scoreKeeper;
 					//If its a missile.
+					//Handling for satellite?
 					if (missile->getId().find("Plane") == std::string::npos)
 					{
 						if (missile->getId().find("Enemy") != std::string::npos)
@@ -82,7 +77,7 @@ void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * w
 			systemManager->getComponent("ExplodingMissiles")->addData(missile);
 		}
 
-		//Check radius
+		//Check radius. 30 is the explosion radius max.
 		if (missile->getComponent("ExplosionRadius")->getDataDouble().at(0) >= 30)
 		{
 			missile->getComponent("ExplosionPhase")->deleteData();
@@ -103,6 +98,7 @@ void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * w
 			systemManager->getComponent("ExplodingMissiles")->deleteDataPosition(missile->getId());
 		}
 
+		//Change the explosion circle.
 		tempRadius = missile->getComponent("ExplosionRadius")->getDataDouble().at(0);
 		tempRadius += rate * missile->getComponent("ExplosionPhase")->getDataInt().at(0);
 		missile->getComponent("ExplosionRadius")->deleteData();

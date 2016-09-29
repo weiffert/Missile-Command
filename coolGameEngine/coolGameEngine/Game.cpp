@@ -3,7 +3,8 @@
 #include <string>
 #include <time.h>
 #include <stdlib.h>
-#include<iostream>
+#include <iostream>
+#include <fstream>
 
 #include "SFML\Window.hpp"
 #include "SFML\Audio.hpp"
@@ -40,7 +41,10 @@ Game::Game(int width, int height, std::string name)
 
 Game::~Game()
 {
-
+	delete assetManager;
+	delete systemManager;
+	assetManager = nullptr;
+	systemManager = nullptr;
 }
 
 
@@ -59,9 +63,6 @@ int Game::run()
 
 	//Seed the random number generator.
 	srand(time(NULL));
-
-	delete assetManager;
-	delete systemManager;
 
 	return exitCode;
 }

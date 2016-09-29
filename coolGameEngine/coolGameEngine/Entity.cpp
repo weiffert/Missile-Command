@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include "Entity.h"
 #include "Property.h"
@@ -17,7 +18,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-
 }
 
 

@@ -12,9 +12,9 @@
 
 ScoreKeeper::ScoreKeeper()
 {
-  totalScore = 0;
-  recentScore = 0;
-  stockedCities = 0;
+	totalScore = 0;
+	recentScore = 0;
+	stockedCities = 0;
 }
 
 ScoreKeeper::~ScoreKeeper()

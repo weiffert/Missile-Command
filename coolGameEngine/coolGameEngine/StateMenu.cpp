@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include <fstream>
+
 #include "SFML\Window.hpp"
 #include "SFML\Audio.hpp"
 #include "SFML\Graphics.hpp"
@@ -19,6 +21,7 @@ StateMenu::StateMenu()
 	number = 2;
 	systemManager = nullptr;
 	assetManager = nullptr;
+
 }
 
 StateMenu::StateMenu(SystemManager *s, AssetManager *a)
