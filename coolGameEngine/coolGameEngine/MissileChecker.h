@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+
 #include "SystemManager.h"
 #include "AssetManager.h"
 
@@ -21,4 +23,7 @@ public:
 private:
 	SystemManager * systemManager = nullptr;
 	AssetManager * assetManager = nullptr;
+
+	void storeAndSort(double, double, std::string, std::vector<double> &, std::vector<std::string> &);
+	std::vector<std::string> checkables(std::string, std::vector<std::string>);
 };

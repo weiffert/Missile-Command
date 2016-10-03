@@ -36,13 +36,13 @@ MissileChecker::~MissileChecker()
 
 void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemManager)
 {
+	/*
+	//Old checker.
 	//Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
 
 	MissileExploder exploder;
 	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
 	Entity *currentMissile = nullptr;
-	Entity *currentBase = nullptr;
-	Entity *temp = nullptr;
 	sf::Vector2f position;
 	bool collision = false;
 
@@ -63,7 +63,7 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 				std::vector<Entity *> missiles = systemManager->getComponent("ExplodingMissiles")->getDataEntity();
 				for (int u = 0; u < missiles.size(); u++)
 				{
-					temp = missiles.at(u);
+					Entity *temp = missiles.at(u);
 					//Makes sure that explosion is happening.
 					if (temp->getComponent("Explode")->getDataBool().at(0))
 					{
@@ -121,6 +121,125 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 			sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
 			assetManager->add(sound);
 			sound->play();
+		}
+	}
+	*/
+
+	//New Checker.
+	std::vector<std::string> idX, idY;
+	std::vector<double> posX, posY;
+	std::string keyword = "Explosion";
+	//Store limits.
+	//Store explosions.
+	Entity *temp = nullptr;
+	std::vector<Entity *> missiles = systemManager->getComponent("ExplodingMissiles")->getDataEntity();
+	
+	if (missiles.size() > 0)
+	{
+		for (int i = 0; i < missiles.size(); i++)
+		{
+			//Get new limits.
+			temp = missiles.at(i);
+			sf::CircleShape *c = temp->getComponent("CircleShape")->getDataCircleShape().at(0);
+			double xLeft, xRight, yTop, yBottom;
+			xLeft = c->getGlobalBounds().left;
+			xRight = xLeft + c->getGlobalBounds().width;
+			yTop = c->getGlobalBounds().top;
+			yBottom = yTop + c->getGlobalBounds().height;
+			std::string id = keyword + temp->getId();
+
+			//Insert into proper locations
+			storeAndSort(xLeft, xRight, id, posX, idX);
+			storeAndSort(yTop, yBottom, id, posY, idY);
+		}
+
+		//Storing missiles.
+		Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
+
+		for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
+		{
+			if (i >= 0)
+			{
+				//Get new limits.
+				double xLeft, xRight, yTop, yBottom;
+				temp = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
+				sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+				xLeft = s->getGlobalBounds().left;
+				xRight = xLeft + s->getGlobalBounds().width;
+				yTop = s->getGlobalBounds().top;
+				yBottom = yTop + s->getGlobalBounds().height;
+				std::string id = temp->getId();
+
+				//Insert into proper locations
+				storeAndSort(xLeft, xRight, id, posX, idX);
+				storeAndSort(yTop, yBottom, id, posY, idY);
+			}
+		}
+
+		/*
+		//Storing Planes.
+		for (int i = launcherAi->getComponent("CurrentPlaneCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalPlaneCount")->getDataInt().at(0); i++)
+		{
+		if (i >= 0)
+		{
+		//Get new limits.
+		double xLeft, xRight, yTop, yBottom;
+		temp = launcherAi->getComponent("PlanesHeld")->getDataEntity().at(i);
+		sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+		xLeft = s->getGlobalBounds().left;
+		xRight = xLeft + s->getGlobalBounds().width;
+		yTop = s->getGlobalBounds().top;
+		yBottom = yTop + s->getGlobalBounds().height;
+		std::string id = temp->getId();
+
+		//Insert into proper locations
+		storeAndSort(xLeft, xRight, id, posX, idX);
+		storeAndSort(yTop, yBottom, id, posY, idY);
+		}
+		}
+		*/
+
+		//Check ids.
+		std::vector<std::string> checkTheseIdsX = checkables(keyword, idX);
+		std::vector<std::string> checkTheseIdsY = checkables(keyword, idY);
+
+		for (int i = 0; i < checkTheseIdsX.size(); i++)
+		{
+			for (int j = 0; j < checkTheseIdsX.size(); j++)
+			{
+				if (checkTheseIdsX.at(i) == checkTheseIdsY.at(j))
+				{
+					//Explode
+					Entity *currentMissile = systemManager->getMaterial(checkTheseIdsX.at(i));
+
+					currentMissile->getComponent("Life")->deleteData();
+					currentMissile->getComponent("Life")->addData(false);
+					currentMissile->getComponent("DrawSprite")->deleteData();
+					currentMissile->getComponent("DrawSprite")->addData(false);
+					currentMissile->getComponent("DrawCircleShape")->deleteData();
+					currentMissile->getComponent("DrawCircleShape")->addData(true);
+					currentMissile->getComponent("DrawRectangleShape")->deleteData();
+					currentMissile->getComponent("DrawRectangleShape")->addData(false);
+					currentMissile->getComponent("Move")->deleteData();
+					currentMissile->getComponent("Move")->addData(false);
+					currentMissile->getComponent("Explode")->deleteData();
+					currentMissile->getComponent("Explode")->addData(true);
+					currentMissile->getComponent("ShotDown")->deleteData();
+					currentMissile->getComponent("ShotDown")->addData(true);
+
+					MissileExploder exploder;
+					exploder.control(systemManager, window, currentMissile);
+					sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
+					c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1));
+
+					//Make sound
+					//Explosion sound
+					sf::Sound * sound = new sf::Sound;
+					sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
+					assetManager->add(sound);
+					sound->play();
+				}
+			}
 		}
 	}
 }
@@ -185,4 +304,79 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite
 		return true;
 
 	return false;
+}
+
+
+void MissileChecker::storeAndSort(double small, double large, std::string id, std::vector<double> & pos, std::vector<std::string> & ids)
+{
+	bool insertLow = false;
+	bool insertHigh = false;
+	int increment = 0;
+
+	while (!insertLow && !insertHigh)
+	{
+		if (increment < pos.size())
+		{
+			if (!insertLow && small < pos.at(increment))
+			{
+				pos.insert(pos.begin() + increment, small);
+				ids.insert(ids.begin() + increment, id);
+				insertLow = true;
+			}
+			if (!insertHigh && large < pos.at(increment))
+			{
+				pos.insert(pos.begin() + increment, large);
+				ids.insert(ids.begin() + increment, id);
+				insertHigh = true;
+			}
+		}
+		else
+		{
+			if (small < large)
+			{
+				pos.push_back(small);
+				pos.push_back(large);
+				ids.push_back(id);
+			}
+			else
+			{
+				pos.push_back(large);
+				pos.push_back(small);
+				ids.push_back(id);
+			}
+		}
+		increment++;
+	}
+
+	return;
+}
+
+
+std::vector<std::string> MissileChecker::checkables(std::string keyword, std::vector<std::string> list)
+{
+	std::vector<std::string> checkTheseIds;
+	for (int i = 0; i < list.size(); i++)
+	{
+		if (list.at(i).find(keyword))
+		{
+			bool foundEnd = false;
+			int added = i;
+			do
+			{
+				if (list.at(added) == list.at(i))
+				{
+					foundEnd = true;
+				}
+				else
+				{
+					checkTheseIds.push_back(list.at(added));
+				}
+				added++;
+			} while (!foundEnd);
+
+			i = added;
+		}
+	}
+
+	return checkTheseIds;
 }

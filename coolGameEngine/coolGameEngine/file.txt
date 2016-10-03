@@ -1,6 +1,7 @@
 Filenames
 
 propertyMissilesHeld.txt
+propertyPlanesHeld.txt
 propertyStateNumber.txt
 propertyStateId.txt
 propertySprite.txt
@@ -21,6 +22,8 @@ propertyDrawRectangleShape.txt
 propertyExplode.txt
 propertyCurrentMissileCount.txt
 propertyTotalMissileCount.txt
+propertyCurrentPlaneCount.txt
+propertyTotalPlaneCount.txt
 propertyPoints.txt
 propertyCircleShape.txt
 propertyRectangleShape.txt
