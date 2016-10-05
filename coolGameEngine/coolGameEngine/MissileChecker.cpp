@@ -155,24 +155,27 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 
 		//Storing missiles.
 		Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
-
-		for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
+		int totalMissileCount = launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0);
+		for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0); i < totalMissileCount; i++)
 		{
 			if (i >= 0)
 			{
-				//Get new limits.
-				double xLeft, xRight, yTop, yBottom;
 				temp = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
-				sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
-				xLeft = s->getGlobalBounds().left;
-				xRight = xLeft + s->getGlobalBounds().width;
-				yTop = s->getGlobalBounds().top;
-				yBottom = yTop + s->getGlobalBounds().height;
-				std::string id = temp->getId();
+				if (temp->getComponent("Fired")->getDataBool().at(0) && temp->getComponent("Life")->getDataBool().at(0))
+				{
+					//Get new limits.
+					double xLeft, xRight, yTop, yBottom;
+					sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+					xLeft = s->getGlobalBounds().left;
+					xRight = xLeft + s->getGlobalBounds().width;
+					yTop = s->getGlobalBounds().top;
+					yBottom = yTop + s->getGlobalBounds().height;
+					std::string id = temp->getId();
 
-				//Insert into proper locations
-				storeAndSort(xLeft, xRight, id, posX, idX);
-				storeAndSort(yTop, yBottom, id, posY, idY);
+					//Insert into proper locations
+					storeAndSort(xLeft, xRight, id, posX, idX);
+					storeAndSort(yTop, yBottom, id, posY, idY);
+				}
 			}
 		}
 
@@ -205,7 +208,7 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 
 		for (int i = 0; i < checkTheseIdsX.size(); i++)
 		{
-			for (int j = 0; j < checkTheseIdsX.size(); j++)
+			for (int j = 0; j < checkTheseIdsY.size(); j++)
 			{
 				if (checkTheseIdsX.at(i) == checkTheseIdsY.at(j))
 				{
@@ -244,6 +247,95 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 	}
 }
 
+void MissileChecker::storeAndSort(double small, double large, std::string id, std::vector<double> & pos, std::vector<std::string> & ids)
+{
+	bool insertLow = false;
+	bool insertHigh = false;
+	int increment = 0;
+
+	while (!insertLow && !insertHigh)
+	{
+		if (increment < pos.size())
+		{
+			if (!insertLow && small < pos.at(increment))
+			{
+				pos.insert(pos.begin() + increment, small);
+
+				if (increment < ids.size())
+					ids.insert(ids.begin() + increment, id);
+				else
+					ids.push_back(id);
+
+				insertLow = true;
+			}
+			if (!insertHigh && large < pos.at(increment))
+			{
+				pos.insert(pos.begin() + increment, large);
+
+				if (increment < ids.size())
+					ids.insert(ids.begin() + increment, id);
+				else
+					ids.push_back(id);
+
+				insertHigh = true;
+			}
+		}
+
+		else
+		{
+			if (small < large)
+			{
+				pos.push_back(small);
+				pos.push_back(large);
+				ids.push_back(id);
+				ids.push_back(id);
+			}
+			else
+			{
+				pos.push_back(large);
+				pos.push_back(small);
+				ids.push_back(id);
+				ids.push_back(id);
+			}
+			insertLow = true;
+			insertHigh = true;
+		}
+		increment++;
+	}
+
+	return;
+}
+
+std::vector<std::string> MissileChecker::checkables(std::string keyword, std::vector<std::string> list)
+{
+	std::vector<std::string> checkTheseIds;
+	for (int i = 0; i < list.size(); i++)
+	{
+		if (list.at(i).find(keyword) != std::string::npos)
+		{
+			bool foundEnd = false;
+			int added = i + 1;
+			while (!foundEnd && added < list.size())
+			{
+				if (list.at(added) == list.at(i))
+				{
+					foundEnd = true;
+				}
+				else
+				{
+					if (list.at(added).find(keyword) == std::string::npos)
+						checkTheseIds.push_back(list.at(added));
+				}
+				added++;
+			}
+			i = added;
+		}
+	}
+
+	return checkTheseIds;
+}
+
+
 bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 {
 	float radius = circle->getLocalBounds().height / 2;
@@ -260,6 +352,7 @@ bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 
 	return intersects;
 }
+
 
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::CircleShape *other)
 {
@@ -287,7 +380,7 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite
 
 	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
 	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
-	
+
 	distance.x = spriteCenter.x - circleCenter.x;
 	distance.y = spriteCenter.y - circleCenter.y;
 
@@ -306,77 +399,3 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite
 	return false;
 }
 
-
-void MissileChecker::storeAndSort(double small, double large, std::string id, std::vector<double> & pos, std::vector<std::string> & ids)
-{
-	bool insertLow = false;
-	bool insertHigh = false;
-	int increment = 0;
-
-	while (!insertLow && !insertHigh)
-	{
-		if (increment < pos.size())
-		{
-			if (!insertLow && small < pos.at(increment))
-			{
-				pos.insert(pos.begin() + increment, small);
-				ids.insert(ids.begin() + increment, id);
-				insertLow = true;
-			}
-			if (!insertHigh && large < pos.at(increment))
-			{
-				pos.insert(pos.begin() + increment, large);
-				ids.insert(ids.begin() + increment, id);
-				insertHigh = true;
-			}
-		}
-		else
-		{
-			if (small < large)
-			{
-				pos.push_back(small);
-				pos.push_back(large);
-				ids.push_back(id);
-			}
-			else
-			{
-				pos.push_back(large);
-				pos.push_back(small);
-				ids.push_back(id);
-			}
-		}
-		increment++;
-	}
-
-	return;
-}
-
-
-std::vector<std::string> MissileChecker::checkables(std::string keyword, std::vector<std::string> list)
-{
-	std::vector<std::string> checkTheseIds;
-	for (int i = 0; i < list.size(); i++)
-	{
-		if (list.at(i).find(keyword))
-		{
-			bool foundEnd = false;
-			int added = i;
-			do
-			{
-				if (list.at(added) == list.at(i))
-				{
-					foundEnd = true;
-				}
-				else
-				{
-					checkTheseIds.push_back(list.at(added));
-				}
-				added++;
-			} while (!foundEnd);
-
-			i = added;
-		}
-	}
-
-	return checkTheseIds;
-}

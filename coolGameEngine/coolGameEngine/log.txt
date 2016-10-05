@@ -3,4 +3,15 @@ Exit Code: getComponent errorProgram run at: 1475527577
 Exit Code: getComponent errorProgram run at: 1475527623
 Exit Code: getComponent errorProgram run at: 1475528233
 Exit Code: Program run at: 1475528249
-Exit Code: 
+Exit Code: Program run at: 1475695577
+Exit Code: Program run at: 1475695970
+Exit Code: Program run at: 1475696333
+Exit Code: Program run at: 1475696627
+Exit Code: 0
+Program run at: 1475696872
+Exit Code: 0
+Program run at: 1475699384
+Exit Code: getMaterial errorProgram run at: 1475699563
+Exit Code: getMaterial errorProgram run at: 1475699989
+Exit Code: getMaterial errorProgram run at: 1475700687
+Exit Code: 0
