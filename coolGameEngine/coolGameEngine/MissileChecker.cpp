@@ -205,6 +205,8 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 		//Check ids.
 		std::vector<std::string> checkTheseIdsX = checkables(keyword, idX);
 		std::vector<std::string> checkTheseIdsY = checkables(keyword, idY);
+		std::vector<std::string> triggersX = triggers(keyword, idX);
+		std::vector<std::string> triggersY = triggers(keyword, idY);
 
 		for (int i = 0; i < checkTheseIdsX.size(); i++)
 		{
@@ -212,35 +214,51 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 			{
 				if (checkTheseIdsX.at(i) == checkTheseIdsY.at(j))
 				{
-					//Explode
+					sf::Vector2f position;
 					Entity *currentMissile = systemManager->getMaterial(checkTheseIdsX.at(i));
-
-					currentMissile->getComponent("Life")->deleteData();
-					currentMissile->getComponent("Life")->addData(false);
-					currentMissile->getComponent("DrawSprite")->deleteData();
-					currentMissile->getComponent("DrawSprite")->addData(false);
-					currentMissile->getComponent("DrawCircleShape")->deleteData();
-					currentMissile->getComponent("DrawCircleShape")->addData(true);
-					currentMissile->getComponent("DrawRectangleShape")->deleteData();
-					currentMissile->getComponent("DrawRectangleShape")->addData(false);
-					currentMissile->getComponent("Move")->deleteData();
-					currentMissile->getComponent("Move")->addData(false);
-					currentMissile->getComponent("Explode")->deleteData();
-					currentMissile->getComponent("Explode")->addData(true);
-					currentMissile->getComponent("ShotDown")->deleteData();
-					currentMissile->getComponent("ShotDown")->addData(true);
-
-					MissileExploder exploder;
-					exploder.control(systemManager, window, currentMissile);
-					sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
-					c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1));
-
-					//Make sound
-					//Explosion sound
-					sf::Sound * sound = new sf::Sound;
-					sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
-					assetManager->add(sound);
-					sound->play();
+					position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
+					position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
+					for(int x = 0; x < triggersX.size(); x++)
+					{
+						for(int y = 0; y < triggersY.size(); y++)
+						{
+							if(triggersX.at(x) == triggersY.at(y))
+							{
+								temp = systemManager->getMaterial(triggersX.at(x));
+								if(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position)
+								{
+									//Explode
+			
+									currentMissile->getComponent("Life")->deleteData();
+									currentMissile->getComponent("Life")->addData(false);
+									currentMissile->getComponent("DrawSprite")->deleteData();
+									currentMissile->getComponent("DrawSprite")->addData(false);
+									currentMissile->getComponent("DrawCircleShape")->deleteData();
+									currentMissile->getComponent("DrawCircleShape")->addData(true);
+									currentMissile->getComponent("DrawRectangleShape")->deleteData();
+									currentMissile->getComponent("DrawRectangleShape")->addData(false);
+									currentMissile->getComponent("Move")->deleteData();
+									currentMissile->getComponent("Move")->addData(false);
+									currentMissile->getComponent("Explode")->deleteData();
+									currentMissile->getComponent("Explode")->addData(true);
+									currentMissile->getComponent("ShotDown")->deleteData();
+									currentMissile->getComponent("ShotDown")->addData(true);
+				
+									MissileExploder exploder;
+									exploder.control(systemManager, window, currentMissile);
+									sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
+									c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1));
+				
+									//Make sound
+									//Explosion sound
+									sf::Sound * sound = new sf::Sound;
+									sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
+									assetManager->add(sound);
+									sound->play();
+								}
+							}
+						}
+					}
 				}
 			}
 		}
@@ -334,6 +352,43 @@ std::vector<std::string> MissileChecker::checkables(std::string keyword, std::ve
 
 	return checkTheseIds;
 }
+
+std::vector<std::string> MissileChecker::triggers(std::string keyword, std::vector<std::string> list)
+{
+	std::vector<std::string> trigger;
+	for (int i = 0; i < list.size(); i++)
+	{
+		if (list.at(i).find(keyword) != std::string::npos)
+		{
+			bool foundEnd = false;
+			int added = i + 1;
+			bool intersects = false;
+			while (!foundEnd && added < list.size())
+			{
+				if (list.at(added) == list.at(i))
+				{
+					foundEnd = true;
+					if(intersects)
+					{
+						std::string s = list.at(added);
+						s = s.substr(keyword.length(), keyword.length() - 1);
+						trigger.pushBack(s);
+					}
+				}
+				else
+				{
+					if (list.at(added).find(keyword) == std::string::npos)
+						intersects = true;
+				}
+				added++;
+			}
+			i = added;
+		}
+	}
+
+	return trigger;
+}
+
 
 
 bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
