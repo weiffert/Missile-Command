@@ -26,4 +26,5 @@ private:
 
 	void storeAndSort(double, double, std::string, std::vector<double> &, std::vector<std::string> &);
 	std::vector<std::string> checkables(std::string, std::vector<std::string>);
+	std::vector<std::string> triggers(std::string, std::vector<std::string>);
 };
