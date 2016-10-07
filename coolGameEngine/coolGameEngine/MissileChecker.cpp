@@ -235,12 +235,13 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 							{
 								found = true;
 								//Update the x value from the for loop so that the same values are not rechecked.
-								x = increment;
+								//x = increment;
 							}
 							else
 							{
 								//Push back the missile ids.
-								finalCheckX.push_back(checkTheseIdsX.at(increment));
+								if (checkTheseIdsX.at(increment).find(keyword) == std::string::npos)
+									finalCheckX.push_back(checkTheseIdsX.at(increment));
 								increment++;
 							}
 						}
@@ -256,12 +257,13 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 							{
 								found = true;
 								//Update the y value from the for loop so that the same values are not rechecked.
-								y = increment;
+								//y = increment;
 							}
 							else
 							{
 								//Push back the missile ids.
-								finalCheckY.push_back(checkTheseIdsY.at(increment));
+								if (checkTheseIdsY.at(increment).find(keyword) == std::string::npos)
+									finalCheckY.push_back(checkTheseIdsY.at(increment));
 								increment++;
 							}
 						}
@@ -389,33 +391,19 @@ void MissileChecker::checkables(std::string keyword, std::vector<std::string> li
 			bool foundEnd = false;
 			int added = i + 1;
 			bool intersects = false;
+
+			checkTheseIds.push_back(list.at(i));
+
 			while (!foundEnd && added < list.size())
 			{
 				if (list.at(added) == list.at(i))
 				{
 					foundEnd = true;
-					if (intersects)
-					{
-						checkTheseIds.push_back(list.at(added));
-					}
+					checkTheseIds.push_back(list.at(added));
 				}
 				else
 				{
-					if (list.at(added).find(keyword) == std::string::npos)
-					{
-						if (!intersects)
-						{
-							/*
-							std::string s = list.at(added);
-							s = s.substr(keyword.length(), keyword.length());
-							checkTheseIds.push_back(s);
-							*/
-							checkTheseIds.push_back(list.at(i));
-							intersects = true;
-						}
-
-						checkTheseIds.push_back(list.at(added));
-					}
+					checkTheseIds.push_back(list.at(added));
 				}
 				added++;
 			}
