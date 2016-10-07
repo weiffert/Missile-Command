@@ -203,29 +203,79 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 		*/
 
 		//Check ids.
-		std::vector<std::string> checkTheseIdsX = checkables(keyword, idX);
-		std::vector<std::string> checkTheseIdsY = checkables(keyword, idY);
-		std::vector<std::string> triggersX = triggers(keyword, idX);
-		std::vector<std::string> triggersY = triggers(keyword, idY);
+		std::vector<std::string> checkTheseIdsX, checkTheseIdsY, triggersX, triggersY;
+		checkables(keyword, idX, checkTheseIdsX);
+		checkables(keyword, idY, checkTheseIdsY);
 
 		for (int i = 0; i < checkTheseIdsX.size(); i++)
 		{
 			for (int j = 0; j < checkTheseIdsY.size(); j++)
 			{
+				if (checkTheseIdsX.at(i).find(keyword) != std::string::npos && checkTheseIdsX.at(i) == checkTheseIdsY.at(j))
+				{
+					int incrementX = i+1;
+					int incrementY = j+1;
+					while (checkTheseIdsX.at(i) != checkTheseIdsX.at(incrementX))
+					{
+						while (checkTheseIdsY.at(j) != checkTheseIdsY.at(incrementY))
+						{
+							if (checkTheseIdsX.at(incrementX) == checkTheseIdsY.at(incrementY))
+							{
+								sf::Vector2f position;
+								Entity *currentMissile = systemManager->getMaterial(checkTheseIdsX.at(i));
+								position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
+								//position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
+								//temp = systemManager->getMaterial(triggersX.at(x));
+								if(intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
+								{
+								//Explode
+
+								currentMissile->getComponent("Life")->deleteData();
+								currentMissile->getComponent("Life")->addData(false);
+								currentMissile->getComponent("DrawSprite")->deleteData();
+								currentMissile->getComponent("DrawSprite")->addData(false);
+								currentMissile->getComponent("DrawCircleShape")->deleteData();
+								currentMissile->getComponent("DrawCircleShape")->addData(true);
+								currentMissile->getComponent("DrawRectangleShape")->deleteData();
+								currentMissile->getComponent("DrawRectangleShape")->addData(false);
+								currentMissile->getComponent("Move")->deleteData();
+								currentMissile->getComponent("Move")->addData(false);
+								currentMissile->getComponent("Explode")->deleteData();
+								currentMissile->getComponent("Explode")->addData(true);
+								currentMissile->getComponent("ShotDown")->deleteData();
+								currentMissile->getComponent("ShotDown")->addData(true);
+
+								MissileExploder exploder;
+								exploder.control(systemManager, window, currentMissile);
+								sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
+								c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1));
+
+								//Make sound
+								//Explosion sound
+								sf::Sound * sound = new sf::Sound;
+								sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
+								assetManager->add(sound);
+								sound->play();
+								}
+							}
+						}
+					}
+				}
+				/*
 				if (checkTheseIdsX.at(i) == checkTheseIdsY.at(j))
 				{
-					sf::Vector2f position;
-					Entity *currentMissile = systemManager->getMaterial(checkTheseIdsX.at(i));
-					position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
-					position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
 					for(int x = 0; x < triggersX.size(); x++)
 					{
 						for(int y = 0; y < triggersY.size(); y++)
 						{
 							if(triggersX.at(x) == triggersY.at(y))
 							{
-								temp = systemManager->getMaterial(triggersX.at(x));
-								if(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position)
+								sf::Vector2f position;
+								Entity *currentMissile = systemManager->getMaterial(checkTheseIdsX.at(i));
+								/*position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
+								//position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
+								//temp = systemManager->getMaterial(triggersX.at(x));
+								if(intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 								{
 									//Explode
 			
@@ -255,11 +305,11 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 									sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
 									assetManager->add(sound);
 									sound->play();
-								}
+								/*}
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 	}
@@ -324,38 +374,8 @@ void MissileChecker::storeAndSort(double small, double large, std::string id, st
 	return;
 }
 
-std::vector<std::string> MissileChecker::checkables(std::string keyword, std::vector<std::string> list)
+void MissileChecker::checkables(std::string keyword, std::vector<std::string> list, std::vector<std::string> & checkTheseIds)
 {
-	std::vector<std::string> checkTheseIds;
-	for (int i = 0; i < list.size(); i++)
-	{
-		if (list.at(i).find(keyword) != std::string::npos)
-		{
-			bool foundEnd = false;
-			int added = i + 1;
-			while (!foundEnd && added < list.size())
-			{
-				if (list.at(added) == list.at(i))
-				{
-					foundEnd = true;
-				}
-				else
-				{
-					if (list.at(added).find(keyword) == std::string::npos)
-						checkTheseIds.push_back(list.at(added));
-				}
-				added++;
-			}
-			i = added;
-		}
-	}
-
-	return checkTheseIds;
-}
-
-std::vector<std::string> MissileChecker::triggers(std::string keyword, std::vector<std::string> list)
-{
-	std::vector<std::string> trigger;
 	for (int i = 0; i < list.size(); i++)
 	{
 		if (list.at(i).find(keyword) != std::string::npos)
@@ -368,27 +388,35 @@ std::vector<std::string> MissileChecker::triggers(std::string keyword, std::vect
 				if (list.at(added) == list.at(i))
 				{
 					foundEnd = true;
-					if(intersects)
+					if (intersects)
 					{
-						std::string s = list.at(added);
-						s = s.substr(keyword.length(), keyword.length() - 1);
-						trigger.pushBack(s);
+						checkTheseIds.push_back(list.at(added));
 					}
 				}
 				else
 				{
 					if (list.at(added).find(keyword) == std::string::npos)
-						intersects = true;
+					{
+						if (!intersects)
+						{
+							/*
+							std::string s = list.at(added);
+							s = s.substr(keyword.length(), keyword.length());
+							checkTheseIds.push_back(s);
+							*/
+							checkTheseIds.push_back(list.at(added));
+							intersects = true;
+						}
+
+						checkTheseIds.push_back(list.at(added));
+					}
 				}
 				added++;
 			}
 			i = added;
 		}
 	}
-
-	return trigger;
 }
-
 
 
 bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
@@ -426,6 +454,36 @@ bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Circle
 
 
 bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite *other)
+{
+	float radius = circle->getLocalBounds().height / 2;
+
+	sf::Vector2f distance;
+	sf::Vector2f circleCenter;
+	sf::Vector2f spriteCenter;
+
+	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
+	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
+
+	distance.x = spriteCenter.x - circleCenter.x;
+	distance.y = spriteCenter.y - circleCenter.y;
+
+	double angle = atan(distance.y / distance.x);
+
+	angle *= -1;
+	if (distance.x < 0)
+		angle += 3.141592654;
+
+	circleCenter.x += radius * cos(angle);
+	circleCenter.y -= radius * sin(angle);
+
+	if (other->getGlobalBounds().contains(circleCenter))
+		return true;
+
+	return false;
+}
+
+
+bool MissileChecker::intersection(sf::CircleShape *circle, sf::Sprite *other)
 {
 	float radius = circle->getLocalBounds().height / 2;
 
