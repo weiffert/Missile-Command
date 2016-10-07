@@ -207,29 +207,39 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 		checkables(keyword, idX, checkTheseIdsX);
 		checkables(keyword, idY, checkTheseIdsY);
 
+		//Pass through y values.
 		for (int y = 0; y < checkTheseIdsY.size(); y++)
 		{
+			//Find explosion.
 			if (checkTheseIdsY.at(y).find(keyword) != std::string::npos)
 			{
+				//Pass through x values.
 				for (int x = 0; x < checkTheseIdsX.size(); x++)
 				{
+					//If the other explosion limit is found
 					if (checkTheseIdsX.at(x) == checkTheseIdsY.at(y))
 					{
+						//Save the explosion id.
 						std::string explosionId = checkTheseIdsX.at(x);
 						explosionId = explosionId.substr(keyword.length(), explosionId.length() - keyword.length());
 
+						//Find missiles that are inside of the explosion.
 						bool found = false;
 						int increment = x + 1;
 						std::vector<std::string> finalCheckX;
+						//Repeat while the other end is not found and we have not stepped out of bounds.
 						while (!found && increment < checkTheseIdsX.size())
 						{
-							if (checkTheseIdsX.at(increment).find(keyword) != std::string::npos)
+							//If the other explosion limit is found.
+							if (checkTheseIdsX.at(increment) == checkTheseIdsX.at(x))
 							{
 								found = true;
+								//Update the x value from the for loop so that the same values are not rechecked.
 								x = increment;
 							}
 							else
 							{
+								//Push back the missile ids.
 								finalCheckX.push_back(checkTheseIdsX.at(increment));
 								increment++;
 							}
@@ -238,24 +248,30 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 						increment = y + 1;
 						found = false;
 						std::vector<std::string> finalCheckY;
+						//Repeat while the other end is not found and we have not stepped out of bounds.
 						while (!found && increment < checkTheseIdsY.size())
 						{
-							if (checkTheseIdsY.at(increment).find(keyword) != std::string::npos)
+							//If the other explosion limit is found.
+							if (checkTheseIdsY.at(increment) == checkTheseIdsY.at(y))
 							{
 								found = true;
+								//Update the y value from the for loop so that the same values are not rechecked.
 								y = increment;
 							}
 							else
 							{
+								//Push back the missile ids.
 								finalCheckY.push_back(checkTheseIdsY.at(increment));
 								increment++;
 							}
 						}
 
+						//Pass through the missile ids that are in the explosion.
 						for (int i = 0; i < finalCheckX.size(); i++)
 						{
 							for (int j = 0; j < finalCheckY.size(); j++)
 							{
+								//If it is in both...
 								if (finalCheckX.at(i) == finalCheckY.at(j))
 								{
 									sf::Vector2f position;
@@ -263,6 +279,8 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 									position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
 									position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
 									temp = systemManager->getMaterial(explosionId);
+
+									//Check for collision.
 									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 									{
 										//Explode

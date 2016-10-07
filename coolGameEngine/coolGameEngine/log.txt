@@ -28,3 +28,7 @@ Exit Code: 0
 Program run at: 1475801896
 Exit Code: getMaterial errorProgram run at: 1475802374
 Exit Code: 0
+Program run at: 1475802956
+Exit Code: 0
+Program run at: 1475802981
+Exit Code: 0
