@@ -1,0 +1,5 @@
+Pause ;
+StateId StateMenu;
+StateNumber 2 ;
+Draw true ;
+Text setString "Paused" setFont Square.ttf setCharacterSize 20 setColor 255 255 255 ;

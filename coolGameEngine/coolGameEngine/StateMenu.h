@@ -14,6 +14,10 @@ public:
 
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow *);
+
+	//Function to control pause menu
+	void paused(sf::RenderWindow*);
+
 private:
 	sf::Mouse mouse;
 	sf::Vector2i centerCoordinates;

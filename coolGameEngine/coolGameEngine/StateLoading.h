@@ -18,6 +18,8 @@ public:
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow *);
 
+	virtual void paused(sf::RenderWindow*) { return; }
+
 private:
 	//Stores filenames.
 	std::vector<std::string> filenames;

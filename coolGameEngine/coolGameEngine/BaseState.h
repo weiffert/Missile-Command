@@ -10,6 +10,8 @@
 #include "SystemManager.h"
 #include "AssetManager.h"
 
+#include<iostream>
+
 class BaseState
 {
 public:
@@ -32,6 +34,9 @@ public:
 
 	//Update function.
 	virtual std::string update(double, sf::RenderWindow *) = 0;
+
+	//Pause function for use in StateMenu, needed for inheritance but is useless in BaseState
+	virtual void paused(sf::RenderWindow*) { return; }
 
 protected:
 	int number;

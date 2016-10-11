@@ -23,6 +23,8 @@
 #include "LevelChange.h"
 #include "Plane.h"
 
+#include"StateMenu.h"
+
 StateLevel::StateLevel()
 {
 	//Sets defaults.
@@ -63,6 +65,7 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	Entity * player = systemManager->getMaterial("Player");
 
 
+
 	bool found;
 
 	//Check for arrow key and space bar events
@@ -70,9 +73,22 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	while (window->pollEvent(event))
 	{
 		//Checks if escape key pressed
-		if ((event.type == sf::Event::KeyReleased) && (event.key.code == sf::Keyboard::Escape))
-			//BaseState::changeState(this, "Pause");
-			window->close();
+		if ((event.type == sf::Event::KeyPressed) && (event.key.code == sf::Keyboard::Escape))
+		{
+			//If a menu state hasn't been created, make one
+			try
+			{
+				systemManager->getState("Menu");
+			}
+			catch (std::bad_typeid& error)
+			{
+				systemManager->add(new StateMenu(systemManager, assetManager));
+			}
+			
+			//Pause state
+			systemManager->getState("Menu")->paused(window);
+		}
+
 		if (event.type == sf::Event::Closed)
 			window->close();
 

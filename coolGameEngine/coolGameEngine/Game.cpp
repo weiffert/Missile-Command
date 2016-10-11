@@ -16,6 +16,7 @@
 #include "AssetManager.h"
 #include "StateLoading.h"
 #include "StateDebug.h"
+#include"StateMenu.h"
 
 
 Game::Game()
@@ -59,6 +60,7 @@ int Game::run()
 
 	state->setMaterial(systemManager->getMaterial(state));
 	//run the game loop, which returns the exit code.
+
 	exitCode = gameLoop();
 
 	//Seed the random number generator.
@@ -72,6 +74,7 @@ int Game::run()
 //Returns the exit code.
 int Game::gameLoop()
 {
+
 	std::string change = "constant";
 	//initialize time keepers
 	double totalTime = 0.0;
