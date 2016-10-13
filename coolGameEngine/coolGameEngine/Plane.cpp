@@ -266,7 +266,6 @@ void Plane::launchPlane(sf::RenderWindow * window, int planeNumber)
 	{
 		plane = systemManager->getMaterial("Plane2");
 	}
-
 	else
 	{
 		plane = systemManager->getMaterial("Plane3");

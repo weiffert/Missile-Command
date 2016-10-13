@@ -16,11 +16,6 @@
 #include "SmartBombControl.h"
 
 
-MissileChecker::MissileChecker()
-{
-}
-
-
 MissileChecker::MissileChecker(SystemManager * s, AssetManager * a)
 {
 	systemManager = s;
@@ -34,7 +29,7 @@ MissileChecker::~MissileChecker()
 }
 
 
-void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemManager)
+void MissileChecker::control(sf::RenderWindow * window)
 {
 	/*
 	//Old checker.
@@ -179,28 +174,26 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 			}
 		}
 
-		/*
 		//Storing Planes.
 		for (int i = launcherAi->getComponent("CurrentPlaneCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalPlaneCount")->getDataInt().at(0); i++)
 		{
-		if (i >= 0)
-		{
-		//Get new limits.
-		double xLeft, xRight, yTop, yBottom;
-		temp = launcherAi->getComponent("PlanesHeld")->getDataEntity().at(i);
-		sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
-		xLeft = s->getGlobalBounds().left;
-		xRight = xLeft + s->getGlobalBounds().width;
-		yTop = s->getGlobalBounds().top;
-		yBottom = yTop + s->getGlobalBounds().height;
-		std::string id = temp->getId();
+			if (i >= 0)
+			{
+				//Get new limits.
+				double xLeft, xRight, yTop, yBottom;
+				temp = launcherAi->getComponent("PlanesHeld")->getDataEntity().at(i);
+				sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+				xLeft = s->getGlobalBounds().left;
+				xRight = xLeft + s->getGlobalBounds().width;
+				yTop = s->getGlobalBounds().top;
+				yBottom = yTop + s->getGlobalBounds().height;
+				std::string id = temp->getId();
 
-		//Insert into proper locations
-		storeAndSort(xLeft, xRight, id, posX, idX);
-		storeAndSort(yTop, yBottom, id, posY, idY);
+				//Insert into proper locations
+				storeAndSort(xLeft, xRight, id, posX, idX);
+				storeAndSort(yTop, yBottom, id, posY, idY);
+			}
 		}
-		}
-		*/
 
 		//Check ids.
 		std::vector<std::string> checkTheseIdsX, checkTheseIdsY, triggersX, triggersY;
@@ -285,33 +278,20 @@ void MissileChecker::control(sf::RenderWindow * window, SystemManager * systemMa
 									//Check for collision.
 									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 									{
+										//Set proper flags.
+										//No missileExploder call because that is handled in the missileLaunchers.
 										//Explode
-										currentMissile->getComponent("Life")->deleteData();
-										currentMissile->getComponent("Life")->addData(false);
-										currentMissile->getComponent("DrawSprite")->deleteData();
-										currentMissile->getComponent("DrawSprite")->addData(false);
-										currentMissile->getComponent("DrawCircleShape")->deleteData();
-										currentMissile->getComponent("DrawCircleShape")->addData(true);
-										currentMissile->getComponent("DrawRectangleShape")->deleteData();
-										currentMissile->getComponent("DrawRectangleShape")->addData(false);
-										currentMissile->getComponent("Move")->deleteData();
-										currentMissile->getComponent("Move")->addData(false);
 										currentMissile->getComponent("Explode")->deleteData();
 										currentMissile->getComponent("Explode")->addData(true);
+										
+										//Update Explosion Position
+										currentMissile->getComponent("ExplodingPosition")->deleteData();
+										currentMissile->getComponent("ExplodingPosition")->addData(position.x);
+										currentMissile->getComponent("ExplodingPosition")->addData(position.y);
+
+										//Kept for knowing wheter to add points.
 										currentMissile->getComponent("ShotDown")->deleteData();
 										currentMissile->getComponent("ShotDown")->addData(true);
-
-										MissileExploder exploder;
-										exploder.control(systemManager, window, currentMissile);
-										sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
-										c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1));
-
-										//Make sound
-										//Explosion sound
-										sf::Sound * sound = new sf::Sound;
-										sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
-										assetManager->add(sound);
-										sound->play();
 									}
 								}
 							}

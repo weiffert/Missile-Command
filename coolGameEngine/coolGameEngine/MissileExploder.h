@@ -4,12 +4,17 @@
 #include "SFML\Window.hpp"
 
 #include "SystemManager.h"
+#include "AssetManager.h"
 #include "Entity.h"
 
 class MissileExploder
 {
 public:
-	MissileExploder();
+	MissileExploder(SystemManager *, AssetManager *);
 	~MissileExploder();
-	void control(SystemManager *, sf::RenderWindow *, Entity *);
+	void control(sf::RenderWindow *, Entity *);
+
+private:
+	SystemManager *systemManager = nullptr;
+	AssetManager *assetManager = nullptr;
 };

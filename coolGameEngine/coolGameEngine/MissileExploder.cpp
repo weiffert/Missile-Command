@@ -9,8 +9,10 @@
 #include "ScoreKeeper.h"
 
 
-MissileExploder::MissileExploder()
+MissileExploder::MissileExploder(SystemManager *s, AssetManager *a)
 {
+	systemManager = s;
+	assetManager = a;
 }
 
 
@@ -21,7 +23,7 @@ MissileExploder::~MissileExploder()
 
 //This function currently explodes a missile, and creates a circle explosion
 //This function is called from MissileLauncher
-void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * window, Entity *missile)
+void MissileExploder::control(sf::RenderWindow * window, Entity *missile)
 {
 	//Explosion Rate.
 	double rate;
@@ -36,6 +38,28 @@ void MissileExploder::control(SystemManager *systemManager, sf::RenderWindow * w
 			missile->getComponent("ExplosionPhase")->deleteData();
 			missile->getComponent("ExplosionPhase")->addData(1);
 
+			//Set Explosion circle location.
+			sf::CircleShape *c = missile->getComponent("CircleShape")->getDataCircleShape().at(0);
+			c->setPosition(missile->getComponent("ExplodingPosition")->getDataDouble().at(0), missile->getComponent("ExplodingPosition")->getDataDouble().at(1));
+
+			//Change Missile Properties
+			missile->getComponent("Life")->deleteData();
+			missile->getComponent("Life")->addData(false);
+			missile->getComponent("DrawSprite")->deleteData();
+			missile->getComponent("DrawSprite")->addData(false);
+			missile->getComponent("DrawCircleShape")->deleteData();
+			missile->getComponent("DrawCircleShape")->addData(true);
+			missile->getComponent("DrawRectangleShape")->deleteData();
+			missile->getComponent("DrawRectangleShape")->addData(false);
+			missile->getComponent("Move")->deleteData();
+			missile->getComponent("Move")->addData(false);
+
+			//Make Explosion sound
+			sf::Sound * sound = new sf::Sound;
+			sound->setBuffer(*missile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
+			assetManager->add(sound);
+			sound->play();
+			
 			//Points handling.
 			if (missile->hasComponent("ShotDown"))
 			{

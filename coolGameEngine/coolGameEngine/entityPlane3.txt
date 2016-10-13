@@ -3,6 +3,7 @@ StateId Level1 ;
 StateNumber 2 ;
 CurrentPosition 0 0 ;
 Life true ;
+Fired false ;
 Draw false ;
 DrawSprite true ;
 DrawCircleShape false ;

@@ -21,7 +21,6 @@
 #include "MissileChecker.h"
 #include "ScoreKeeper.h"
 #include "LevelChange.h"
-#include "Plane.h"
 
 StateLevel::StateLevel()
 {
@@ -58,10 +57,8 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	Crosshairs crosshairs; 
 	MissileChecker missileChecker(systemManager, assetManager);
 	LevelChange levelChange;
-	Plane planeController(systemManager, assetManager);
 
 	Entity * player = systemManager->getMaterial("Player");
-
 
 	bool found;
 
@@ -292,8 +289,7 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 		assetManager->add(s);
 	}
 
-	missileChecker.control(window, systemManager);
-	planeController.update(window); //Planes should be self-reliant 
+	missileChecker.control(window);
 	missileLauncher.update(window, systemManager->getMaterial("Base1"), systemManager->getMaterial("Base2"), systemManager->getMaterial("Base3"));
 	missileLauncherAi.update(window, launcherAi);
 	crosshairs.control(window, systemManager);
