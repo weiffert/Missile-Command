@@ -1,11 +1,23 @@
 keyword: Explosion
 
 idX: 
-ExplosionMissile1
-EnemyMissile5
-ExplosionMissile1
+Explosion1
+Explosion2
+Explosion1
+Missile1
+Explosion2
+Missile2
+Missile3
+Missile4
 
 idY: 
-ExplosionMissile1
-EnemyMissile4
-ExplosionMissile1
+Explosion2
+Explosion1
+Missile1
+Explosion1
+Missile2
+Missile3
+Explosion2
+Missile4
+Explosion3
+Explosion3
