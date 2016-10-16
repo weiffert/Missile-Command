@@ -1,0 +1,11 @@
+keyword: Explosion
+
+idX: 
+ExplosionMissile1
+EnemyMissile5
+ExplosionMissile1
+
+idY: 
+ExplosionMissile1
+EnemyMissile4
+ExplosionMissile1
