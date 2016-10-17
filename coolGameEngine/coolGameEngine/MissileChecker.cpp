@@ -219,7 +219,7 @@ void MissileChecker::control(sf::RenderWindow * window)
 						//Find missiles that are inside of the explosion.
 						bool found = false;
 						int increment = x + 1;
-						std::vector<std::string> finalCheckX;
+						std::vector<std::string> finalCheckX, tempX;
 						//Repeat while the other end is not found and we have not stepped out of bounds.
 						while (!found && increment < checkTheseIdsX.size())
 						{
@@ -227,21 +227,30 @@ void MissileChecker::control(sf::RenderWindow * window)
 							if (checkTheseIdsX.at(increment) == checkTheseIdsX.at(x))
 							{
 								found = true;
-								//Update the x value from the for loop so that the same values are not rechecked.
-								//x = increment;
+								checkTheseIdsX.erase(checkTheseIdsX.begin() + increment);
+								//Update the y value from the for loop so that the same values are not rechecked.
+								//y = increment;
 							}
 							else
 							{
 								//Push back the missile ids.
 								if (checkTheseIdsX.at(increment).find(keyword) == std::string::npos)
-									finalCheckX.push_back(checkTheseIdsX.at(increment));
+									tempX.push_back(checkTheseIdsX.at(increment));
 								increment++;
+							}
+						}
+
+						if (found)
+						{
+							for (int i = 0; i < tempX.size(); i++)
+							{
+								finalCheckX.push_back(tempX.at(i));
 							}
 						}
 
 						increment = y + 1;
 						found = false;
-						std::vector<std::string> finalCheckY;
+						std::vector<std::string> finalCheckY, tempY;
 						//Repeat while the other end is not found and we have not stepped out of bounds.
 						while (!found && increment < checkTheseIdsY.size())
 						{
@@ -251,13 +260,22 @@ void MissileChecker::control(sf::RenderWindow * window)
 								found = true;
 								//Update the y value from the for loop so that the same values are not rechecked.
 								//y = increment;
+								checkTheseIdsY.erase(checkTheseIdsY.begin() + increment);
 							}
 							else
 							{
 								//Push back the missile ids.
 								if (checkTheseIdsY.at(increment).find(keyword) == std::string::npos)
-									finalCheckY.push_back(checkTheseIdsY.at(increment));
+									tempY.push_back(checkTheseIdsY.at(increment));
 								increment++;
+							}
+						}
+
+						if (found)
+						{
+							for (int i = 0; i < tempY.size(); i++)
+							{
+								finalCheckY.push_back(tempY.at(i));
 							}
 						}
 
@@ -283,7 +301,7 @@ void MissileChecker::control(sf::RenderWindow * window)
 										//Explode
 										currentMissile->getComponent("Explode")->deleteData();
 										currentMissile->getComponent("Explode")->addData(true);
-										
+
 										//Update Explosion Position
 										currentMissile->getComponent("ExplodingPosition")->deleteData();
 										currentMissile->getComponent("ExplodingPosition")->addData(position.x);
@@ -362,33 +380,34 @@ void MissileChecker::storeAndSort(double small, double large, std::string id, st
 	return;
 }
 
+
 void MissileChecker::checkables(std::string keyword, std::vector<std::string> list, std::vector<std::string> & checkTheseIds)
 {
-	for (int i = 0; i < list.size(); i++)
+	for (int i = list.size() - 1; i >= 0; i--)
 	{
 		if (list.at(i).find(keyword) != std::string::npos)
 		{
-			bool foundEnd = false;
-			int added = i + 1;
-			bool intersects = false;
-
-			checkTheseIds.push_back(list.at(i));
-
-			while (!foundEnd && added < list.size())
+			int decrement = list.size() - 2;
+			std::vector<std::string> tempList;
+			while (decrement >= 0 && list.at(decrement) != list.at(list.size() - 1))
 			{
-				if (list.at(added) == list.at(i))
-				{
-					foundEnd = true;
-					checkTheseIds.push_back(list.at(added));
-				}
-				else
-				{
-					checkTheseIds.push_back(list.at(added));
-				}
-				added++;
+				if (list.at(decrement).find(keyword) == std::string::npos)
+					tempList.push_back(list.at(decrement));
+				decrement--;
 			}
-			i = added;
+			if (tempList.size() > 0 && decrement >= 0)
+			{
+				checkTheseIds.push_back(list.at(list.size() - 1));
+
+				for (int i = 0; i < tempList.size(); i++)
+				{
+					checkTheseIds.push_back(tempList.at(i));
+				}
+
+				checkTheseIds.push_back(list.at(list.size() - 1));
+			}
 		}
+		list.pop_back();
 	}
 }
 

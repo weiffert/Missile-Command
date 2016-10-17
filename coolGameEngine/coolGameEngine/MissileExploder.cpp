@@ -34,6 +34,9 @@ void MissileExploder::control(sf::RenderWindow * window, Entity *missile)
 		//If it doesn't already have an explosion, create one (property "ExplosionPhase" is 0)
 		if (missile->getComponent("ExplosionPhase")->getDataInt().at(0) == 0)
 		{
+			//Add missile to exploding missiles for missileChecker.
+			systemManager->getComponent("ExplodingMissiles")->addData(missile);
+
 			//In the first part of the explosion phase.
 			missile->getComponent("ExplosionPhase")->deleteData();
 			missile->getComponent("ExplosionPhase")->addData(1);
@@ -97,8 +100,6 @@ void MissileExploder::control(sf::RenderWindow * window, Entity *missile)
 				}
 			}
 
-			//Add missile to exploding missiles for missileChecker.
-			systemManager->getComponent("ExplodingMissiles")->addData(missile);
 		}
 
 		//Check radius. 30 is the explosion radius max.
