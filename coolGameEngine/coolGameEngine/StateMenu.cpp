@@ -87,12 +87,36 @@ std::string StateMenu::update(double totalTime, sf::RenderWindow *window)
 
 void StateMenu::paused(sf::RenderWindow* window)
 {
-	/*
-	Clear isn't working for some reason
-	window->clear(sf::Color::Black);
-	*/
+	//Set mouse to visible
+	window->setMouseCursorVisible(true);
 
+	
+	//Clear window
+	window->clear(sf::Color::Black);
+	
 	//Draw pause message
+	sf::Text pauseMessage;
+	sf::Font font;
+	
+	//Set up font for message
+	if (!font.loadFromFile("square.ttf"))
+	{
+		std::cout << "Failed to load font" << std::endl;
+		system("pause");
+		window->close();
+		return;
+	}
+
+	pauseMessage.setFont(font);
+	pauseMessage.setString("\n\n\n\n\n\n\n\n\n\n\nPaused\nPress escape to continue");
+	window->draw(pauseMessage);
+
+	sf::Text score;
+	score.setFont(font);
+	score.setString((char)systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0));
+	window->draw(score);
+
+	window->display();
 
 	//Stay paused until escape is pressed to unpause
 	sf::Event newEvent;
@@ -110,6 +134,9 @@ void StateMenu::paused(sf::RenderWindow* window)
 		}
 
 	} while (paused);
+
+	//Set mouse back to invisible
+	window->setMouseCursorVisible(false);
 
 	return;
 }
