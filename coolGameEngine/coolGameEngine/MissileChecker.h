@@ -25,5 +25,6 @@ private:
 	AssetManager *assetManager = nullptr;
 
 	void storeAndSort(double, double, std::string, std::vector<double> &, std::vector<std::string> &);
+	void storeAndSort(double, std::string, std::vector<double> &, std::vector<std::string> &);
 	void checkables(std::string, std::vector<std::string>, std::vector<std::string> &);
 };

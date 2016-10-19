@@ -44,16 +44,22 @@ int _tmain(int argc, _TCHAR* argv[])
 		//Insert into proper locations
 		storeAndSort(dataX.at(i), dataX.at(i + 1), rawIdX.at(increment), posX, idX);
 		increment++;
+		print("posX", posX);
+		print("idX", idX);
 	}
+	system("pause");
 
 	increment = 0;
 	for (int i = 0; i < dataY.size() - 1; i += 2)
 	{
 		//Insert into proper locations
-		storeAndSort(dataY.at(i), dataY.at(i + 1), rawIdY.at(increment), posX, idY);
+		storeAndSort(dataY.at(i), dataY.at(i + 1), rawIdY.at(increment), posY, idY);
 		increment++;
+		print("idY", idY);
+		print("posY", posY);
 	}
 
+	/*
 	std::cout << "Testing idX." << std::endl;
 	for (int i = 0; i < idX.size(); i++)
 	{
@@ -71,6 +77,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::cout << "Success at " << i << std::endl;
 		}
 	}
+	*/
 
 	std::cout << "\n" << std::endl;
 
@@ -255,7 +262,7 @@ void storeAndSort(double small, double large, std::string id, std::vector<double
 	bool insertHigh = false;
 	int increment = 0;
 
-	while (!insertLow && !insertHigh)
+	while (!insertLow || !insertHigh)
 	{
 		if (increment < pos.size())
 		{

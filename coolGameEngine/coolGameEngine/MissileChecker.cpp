@@ -31,95 +31,6 @@ MissileChecker::~MissileChecker()
 
 void MissileChecker::control(sf::RenderWindow * window)
 {
-	/*
-	//Old checker.
-	//Goes through each enemy missile and determines if they should explode, if they should explode call on MissileExploder
-
-	MissileExploder exploder;
-	Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
-	Entity *currentMissile = nullptr;
-	sf::Vector2f position;
-	bool collision = false;
-
-	//Only check for missiles that have been fired.
-	for (int i = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
-	{
-		if (i >= 0)
-		{
-			currentMissile = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
-			position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
-			position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
-			collision = false;
-
-			//Go through each active missile and see if it is colliding with a circle shape from any missile explosion
-			if (currentMissile->getComponent("Fired")->getDataBool().at(0) && currentMissile->getComponent("Life")->getDataBool().at(0))
-			{
-				//Check to see if it is colliding with a user fired missile explosion
-				std::vector<Entity *> missiles = systemManager->getComponent("ExplodingMissiles")->getDataEntity();
-				for (int u = 0; u < missiles.size(); u++)
-				{
-					Entity *temp = missiles.at(u);
-					//Makes sure that explosion is happening.
-					if (temp->getComponent("Explode")->getDataBool().at(0))
-					{
-						if (temp->hasComponent("CircleShape"))
-						{
-							//Check for collision.
-							if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
-							{
-								collision = true;
-							}
-							//Add smart bomb behaviors.
-							if (currentMissile->hasComponent("IsSmart"))
-							{
-								if (currentMissile->getComponent("IsSmart")->getDataBool().at(0))
-								{
-									if (currentMissile->hasComponent("DodgeCircle"))
-									{
-										if (intersection(currentMissile, temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentMissile->getComponent("DodgeCircle")->getDataCircleShape().at(0)))
-										{
-											SmartBombControl smartBombControl(systemManager);
-											smartBombControl.control(currentMissile, temp);
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-
-		if (collision)
-		{
-			currentMissile->getComponent("Life")->deleteData();
-			currentMissile->getComponent("Life")->addData(false);
-			currentMissile->getComponent("DrawSprite")->deleteData();
-			currentMissile->getComponent("DrawSprite")->addData(false);
-			currentMissile->getComponent("DrawCircleShape")->deleteData();
-			currentMissile->getComponent("DrawCircleShape")->addData(true);
-			currentMissile->getComponent("DrawRectangleShape")->deleteData();
-			currentMissile->getComponent("DrawRectangleShape")->addData(false);
-			currentMissile->getComponent("Move")->deleteData();
-			currentMissile->getComponent("Move")->addData(false);
-			currentMissile->getComponent("Explode")->deleteData();
-			currentMissile->getComponent("Explode")->addData(true);
-			currentMissile->getComponent("ShotDown")->deleteData();
-			currentMissile->getComponent("ShotDown")->addData(true);
-			exploder.control(systemManager, window, currentMissile);
-			sf::CircleShape *c = currentMissile->getComponent("CircleShape")->getDataCircleShape().at(0);
-			c->setPosition(currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0), currentMissile ->getComponent("CurrentPosition")->getDataDouble().at(1));
-
-			//Make sound
-			//Explosion sound
-			sf::Sound * sound = new sf::Sound;
-			sound->setBuffer(*currentMissile->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
-			assetManager->add(sound);
-			sound->play();
-		}
-	}
-	*/
-
 	//New Checker.
 	std::vector<std::string> idX, idY;
 	std::vector<double> posX, posY;
@@ -159,17 +70,23 @@ void MissileChecker::control(sf::RenderWindow * window)
 				if (temp->getComponent("Fired")->getDataBool().at(0) && temp->getComponent("Life")->getDataBool().at(0))
 				{
 					//Get new limits.
-					double xLeft, xRight, yTop, yBottom;
 					sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+					double x, y;
+					x = s->getGlobalBounds().left + s->getGlobalBounds().width / 2;
+					y = s->getGlobalBounds().top + s->getGlobalBounds().height / 2;
+					//For all conventional purposes, it is basically a point.
+					/*
+					double xLeft, xRight, yTop, yBottom;
 					xLeft = s->getGlobalBounds().left;
 					xRight = xLeft + s->getGlobalBounds().width;
 					yTop = s->getGlobalBounds().top;
 					yBottom = yTop + s->getGlobalBounds().height;
+					*/
 					std::string id = temp->getId();
 
 					//Insert into proper locations
-					storeAndSort(xLeft, xRight, id, posX, idX);
-					storeAndSort(yTop, yBottom, id, posY, idY);
+					storeAndSort(x, id, posX, idX);
+					storeAndSort(y, id, posY, idY);
 				}
 			}
 		}
@@ -327,7 +244,7 @@ void MissileChecker::storeAndSort(double small, double large, std::string id, st
 	bool insertHigh = false;
 	int increment = 0;
 
-	while (!insertLow && !insertHigh)
+	while (!insertLow || !insertHigh)
 	{
 		if (increment < pos.size())
 		{
@@ -373,6 +290,40 @@ void MissileChecker::storeAndSort(double small, double large, std::string id, st
 			}
 			insertLow = true;
 			insertHigh = true;
+		}
+		increment++;
+	}
+
+	return;
+}
+
+void MissileChecker::storeAndSort(double value, std::string id, std::vector<double> & pos, std::vector<std::string> & ids)
+{
+	bool insert = false;
+	int increment = 0;
+
+	while (!insert)
+	{
+		if (increment < pos.size())
+		{
+			if (value < pos.at(increment))
+			{
+				pos.insert(pos.begin() + increment, value);
+
+				if (increment < ids.size())
+					ids.insert(ids.begin() + increment, id);
+				else
+					ids.push_back(id);
+
+				insert = true;
+			}
+		}
+
+		else
+		{
+			pos.push_back(value);
+			ids.push_back(id);
+			insert = true;
 		}
 		increment++;
 	}
