@@ -708,7 +708,7 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 				currentPlane->getComponent("CurrentPosition")->changeData(temp1, 0);
 
 				//If it's off the screen kill the plane
-				if (temp1 < 0 || temp1 > window->getSize().x)
+				if (temp1 < 0 && currentPlane->getComponent("Direction")->getDataString().at(0) == "Right" || temp1 > window->getSize().x && currentPlane->getComponent("Direction")->getDataString().at(0) == "Left")
 				{
 					currentPlane->getComponent("Life")->deleteData();
 					currentPlane->getComponent("Life")->addData(false);
