@@ -58,11 +58,12 @@ int Game::run()
 	systemManager->add(state);
 
 	state->setMaterial(systemManager->getMaterial(state));
-	//run the game loop, which returns the exit code.
-	exitCode = gameLoop();
 
 	//Seed the random number generator.
 	srand(time(NULL));
+
+	//run the game loop, which returns the exit code.
+	exitCode = gameLoop();
 
 	return exitCode;
 }

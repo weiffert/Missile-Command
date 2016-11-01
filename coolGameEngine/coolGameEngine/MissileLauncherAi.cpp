@@ -402,9 +402,7 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		currentPlane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
-		//A variable is used to remedy unsigned int error.
-		int width = window->getSize().x;
-		currentPlane->getComponent("CurrentPosition")->addData(width + 100);//1 greater than screen size
+		currentPlane->getComponent("CurrentPosition")->addData(-100);
 	}
 
 	//Right
@@ -414,7 +412,9 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		currentPlane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
-		currentPlane->getComponent("CurrentPosition")->addData(-100);
+		//A variable is used to remedy unsigned int error.
+		int width = window->getSize().x;
+		currentPlane->getComponent("CurrentPosition")->addData(width + 100);
 	}
 
 	//Give "random" y height below window height * 5 / 6 and higher than window height / 4.
@@ -422,6 +422,7 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 	{
 		yHeight = rand() % window->getSize().y * 5 / 6;
 	} while (yHeight > window->getSize().y / 4);
+	yHeight = 50;
 
 	currentPlane->getComponent("CurrentPosition")->addData(yHeight);
 
@@ -708,7 +709,7 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 				currentPlane->getComponent("CurrentPosition")->changeData(temp1, 0);
 
 				//If it's off the screen kill the plane
-				if (temp1 < 0 && currentPlane->getComponent("Direction")->getDataString().at(0) == "Right" || temp1 > window->getSize().x && currentPlane->getComponent("Direction")->getDataString().at(0) == "Left")
+				if ((temp1 < window->getSize().x && currentPlane->getComponent("Direction")->getDataString().at(0) == "Right") || (temp1 > 0 && currentPlane->getComponent("Direction")->getDataString().at(0) == "Left"))
 				{
 					currentPlane->getComponent("Life")->deleteData();
 					currentPlane->getComponent("Life")->addData(false);
@@ -716,11 +717,12 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 					currentPlane->getComponent("Draw")->addData(false);
 				}
 			}
+			/*
 			if (!(currentPlane->getComponent("Fired")->getDataBool().at(0)))
 			{
 				if (currentPlane->getComponent("Life")->getDataBool().at(0))
 					launchPlanes(currentPlane, window);
-			}
+			}**/
 		}
 
 		if (planes.at(i)->hasComponent("Explode"))
