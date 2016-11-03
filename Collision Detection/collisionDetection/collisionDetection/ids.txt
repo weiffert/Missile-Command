@@ -1,19 +1,21 @@
 keyword: a
 
 idX: 
-a
+a1
+b1
+b2
+a1
 a2
-a3
-c
-c2
-c3
-c4
+c1
+a2
+
 
 idY: 
-a
+a1
+b1
+b2
+c1
+a1
 a2
-a3
-c
-c2
-c3
-c4
+c1
+a2

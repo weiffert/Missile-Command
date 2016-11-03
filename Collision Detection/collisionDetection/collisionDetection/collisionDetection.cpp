@@ -26,69 +26,12 @@ void storeAndSort(double, double, std::string, std::vector<double> &, std::vecto
 int _tmain(int argc, _TCHAR* argv[])
 {
 	std::string keyword;
-	std::vector<std::string> idX, idY, rawIdX, rawIdY, finalX, finalY;
-	std::vector<double> dataX, dataY, posX, posY;
+	std::vector<std::string> idX, idY;
 
-	initData(keyword, "ids.txt", rawIdX, rawIdY);
-	initData(keyword, "data.txt", dataX, dataY);
-	initData(keyword, "finalIds.txt", finalX, finalY);
-
-	//print("RawIdX", rawIdX);
-	//print("RawIdY", rawIdY);
-	//print("DataX", dataX);
-	//print("DataY", dataY);
-
-	int increment = 0;
-	for (int i = 0; i < dataX.size() - 1; i+=2)
-	{
-		//Insert into proper locations
-		storeAndSort(dataX.at(i), dataX.at(i + 1), rawIdX.at(increment), posX, idX);
-		increment++;
-		print("posX", posX);
-		print("idX", idX);
-	}
-	system("pause");
-
-	increment = 0;
-	for (int i = 0; i < dataY.size() - 1; i += 2)
-	{
-		//Insert into proper locations
-		storeAndSort(dataY.at(i), dataY.at(i + 1), rawIdY.at(increment), posY, idY);
-		increment++;
-		print("idY", idY);
-		print("posY", posY);
-	}
-
-	/*
-	std::cout << "Testing idX." << std::endl;
-	for (int i = 0; i < idX.size(); i++)
-	{
-		if (idX.at(i) == finalX.at(i))
-		{
-			std::cout << "Success at " << i << std::endl;
-		}
-	}
-
-	std::cout << "\nTesting idY." << std::endl;
-	for (int i = 0; i < idY.size(); i++)
-	{
-		if (idY.at(i) == finalY.at(i))
-		{
-			std::cout << "Success at " << i << std::endl;
-		}
-	}
-	*/
-
-	std::cout << "\n" << std::endl;
-
-	print("finalX", finalX);
-	print("finalY", finalY);
-	print("idX", idX);
-	print("idY", idY);
-	/*
+	initData(keyword, "ids.txt", idX, idY);
 	//Begin testing.
 	//Check ids.
-	std::vector<std::string> checkTheseIdsX, checkTheseIdsY;
+	std::vector<std::string> checkTheseIdsX, checkTheseIdsY, exploded;
 	checkables(keyword, idX, checkTheseIdsX);
 	checkables(keyword, idY, checkTheseIdsY);
 
@@ -174,6 +117,7 @@ int _tmain(int argc, _TCHAR* argv[])
 						}
 					}
 
+
 					//Pass through the missile ids that are in the explosion.
 					for (int i = 0; i < finalCheckX.size(); i++)
 					{
@@ -183,6 +127,7 @@ int _tmain(int argc, _TCHAR* argv[])
 							if (finalCheckX.at(i) == finalCheckY.at(j))
 							{
 								std::cout << "EXPLODE " + finalCheckX.at(i) << std::endl;
+								exploded.push_back(finalCheckX.at(i));
 								/*
 								sf::Vector2f position;
 								Entity *currentMissile = systemManager->getMaterial(finalCheckX.at(i));
@@ -193,32 +138,32 @@ int _tmain(int argc, _TCHAR* argv[])
 								//Check for collision.
 								if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 								{
-									//Set proper flags.
-									//No missileExploder call because that is handled in the missileLaunchers.
-									//Explode
-									currentMissile->getComponent("Explode")->deleteData();
-									currentMissile->getComponent("Explode")->addData(true);
+								//Set proper flags.
+								//No missileExploder call because that is handled in the missileLaunchers.
+								//Explode
+								currentMissile->getComponent("Explode")->deleteData();
+								currentMissile->getComponent("Explode")->addData(true);
 
-									//Update Explosion Position
-									currentMissile->getComponent("ExplodingPosition")->deleteData();
-									currentMissile->getComponent("ExplodingPosition")->addData(position.x);
-									currentMissile->getComponent("ExplodingPosition")->addData(position.y);
+								//Update Explosion Position
+								currentMissile->getComponent("ExplodingPosition")->deleteData();
+								currentMissile->getComponent("ExplodingPosition")->addData(position.x);
+								currentMissile->getComponent("ExplodingPosition")->addData(position.y);
 
-									//Kept for knowing wheter to add points.
-									currentMissile->getComponent("ShotDown")->deleteData();
-									currentMissile->getComponent("ShotDown")->addData(true);
+								//Kept for knowing wheter to add points.
+								currentMissile->getComponent("ShotDown")->deleteData();
+								currentMissile->getComponent("ShotDown")->addData(true);
 								}
+								*/
 							}
 						}
 					}
-					
-					//print("finalCheckX", finalCheckX);
-					//print("finalCheckY", finalCheckY);
 				}
+
+				//print("finalCheckX", finalCheckX);
+				//print("finalCheckY", finalCheckY);
 			}
 		}
 	}
-	*/
 	system("pause");
 	return 0;
 }

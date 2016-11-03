@@ -113,7 +113,7 @@ void MissileChecker::control(sf::RenderWindow * window)
 		}
 
 		//Check ids.
-		std::vector<std::string> checkTheseIdsX, checkTheseIdsY, triggersX, triggersY;
+		std::vector<std::string> checkTheseIdsX, checkTheseIdsY;
 		checkables(keyword, idX, checkTheseIdsX);
 		checkables(keyword, idY, checkTheseIdsY);
 
