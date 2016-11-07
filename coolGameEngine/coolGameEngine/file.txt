@@ -33,7 +33,8 @@ propertyText.txt
 propertySplit.txt
 propertySplitChance.txt
 propertySplitFired.txt
-propertyFireRate.txt
+propertyMissileFireRate.txt
+propertyPlaneFireRate.txt
 propertyFireRateIncrement.txt
 propertySplitChanceIncrement.txt
 propertySpriteStartPosition.txt

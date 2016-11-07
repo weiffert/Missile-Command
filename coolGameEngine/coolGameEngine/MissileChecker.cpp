@@ -205,28 +205,29 @@ void MissileChecker::control(sf::RenderWindow * window)
 								if (finalCheckX.at(i) == finalCheckY.at(j))
 								{
 									sf::Vector2f position;
-									Entity *currentMissile = systemManager->getMaterial(finalCheckX.at(i));
-									position.x = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(0);
-									position.y = currentMissile->getComponent("CurrentPosition")->getDataDouble().at(1);
+									Entity *currentExplodable = systemManager->getMaterial(finalCheckX.at(i));
+									position.x = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(0);
+									position.y = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(1);
 									temp = systemManager->getMaterial(explosionId);
 
 									//Check for collision.
-									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
+									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentExplodable->getComponent("Sprite")->getDataSprite().at(0)) 
+										|| intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 									{
 										//Set proper flags.
 										//No missileExploder call because that is handled in the missileLaunchers.
 										//Explode
-										currentMissile->getComponent("Explode")->deleteData();
-										currentMissile->getComponent("Explode")->addData(true);
+										currentExplodable->getComponent("Explode")->deleteData();
+										currentExplodable->getComponent("Explode")->addData(true);
 
 										//Update Explosion Position
-										currentMissile->getComponent("ExplodingPosition")->deleteData();
-										currentMissile->getComponent("ExplodingPosition")->addData(position.x);
-										currentMissile->getComponent("ExplodingPosition")->addData(position.y);
+										currentExplodable->getComponent("ExplodingPosition")->deleteData();
+										currentExplodable->getComponent("ExplodingPosition")->addData(position.x);
+										currentExplodable->getComponent("ExplodingPosition")->addData(position.y);
 
 										//Kept for knowing wheter to add points.
-										currentMissile->getComponent("ShotDown")->deleteData();
-										currentMissile->getComponent("ShotDown")->addData(true);
+										currentExplodable->getComponent("ShotDown")->deleteData();
+										currentExplodable->getComponent("ShotDown")->addData(true);
 									}
 								}
 							}
@@ -455,4 +456,3 @@ bool MissileChecker::intersection(sf::CircleShape *circle, sf::Sprite *other)
 
 	return false;
 }
-

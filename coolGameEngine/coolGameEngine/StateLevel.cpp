@@ -257,7 +257,7 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	int decrement = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1;
 	Entity *missile = nullptr;
 
-	if (rand() % launcherAi->getComponent("FireRate")->getDataInt().at(0) == 0)  //Occurs at relatively random times.
+	if (rand() % launcherAi->getComponent("MissileFireRate")->getDataInt().at(0) == 0)  //Occurs at relatively random times.
 	{
 		while (!found && decrement >= 0)
 		{

@@ -272,7 +272,7 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 	for (int i = 0; i < viablePlanes.size(); i++)
 	{
 		//Random chance to fire missiles
-		if (rand() % launcherAi->getComponent("FireRate")->getDataInt().at(0) == 0)
+		if (rand() % launcherAi->getComponent("MissileFireRate")->getDataInt().at(0) == 0)
 		{
 			notFiredFromPlane = false;
 
@@ -727,7 +727,12 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 			if (!(currentPlane->getComponent("Fired")->getDataBool().at(0)))
 			{
 				if (currentPlane->getComponent("Life")->getDataBool().at(0))
-					launchPlanes(currentPlane, window);
+				{
+					if (rand() % launcherAi->getComponent("PlaneFireRate")->getDataInt().at(0) == 0)
+					{
+						launchPlanes(currentPlane, window);
+					}
+				}
 			}
 		}
 
