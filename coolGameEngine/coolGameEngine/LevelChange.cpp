@@ -135,9 +135,9 @@ std::string LevelChange::control(SystemManager * systemManager, AssetManager *as
 				temp->getComponent("CurrentMissileCount")->deleteData();
 				temp->getComponent("CurrentMissileCount")->addData(temp->getComponent("TotalMissileCount")->getDataInt().at(0));
 
-				int fireRate = temp->getComponent("FireRate")->getDataInt().at(0);
-				temp->getComponent("FireRate")->deleteData();
-				temp->getComponent("FireRate")->addData(fireRate - temp->getComponent("FireRateIncrement")->getDataInt().at(0));
+				int fireRate = temp->getComponent("MissileFireRate")->getDataInt().at(0);
+				temp->getComponent("MissileFireRate")->deleteData();
+				temp->getComponent("MissileFireRate")->addData(fireRate - temp->getComponent("FireRateIncrement")->getDataInt().at(0));
 
 				int splitChance = temp->getComponent("SplitChance")->getDataInt().at(0);
 				temp->getComponent("SplitChance")->deleteData();
@@ -293,6 +293,8 @@ std::string LevelChange::control(SystemManager * systemManager, AssetManager *as
 					planes[i]->getComponent("DrawCircleShape")->addData(false);
 					planes[i]->getComponent("Move")->deleteData();
 					planes[i]->getComponent("Move")->addData(true);
+					planes[i]->getComponent("Fired")->deleteData();
+					planes[i]->getComponent("Fired")->addData(false);
 					planes[i]->getComponent("Explode")->deleteData();
 					planes[i]->getComponent("Explode")->addData(false);
 					planes[i]->getComponent("ShotDown")->deleteData();

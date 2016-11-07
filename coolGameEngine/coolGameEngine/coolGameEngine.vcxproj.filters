@@ -165,6 +165,9 @@
     <Text Include="propertyShotDown.txt" />
     <Text Include="propertyLevelStart.txt" />
     <Text Include="propertyBeenMoved.txt" />
+    <Text Include="propertyPlanesHeld.txt" />
+    <Text Include="propertyCurrentPlaneCount.txt" />
+    <Text Include="propertyTotalPlaneCount.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -225,9 +228,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SmartBombControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Crosshairs.h">
@@ -299,9 +299,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SmartBombControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CrossHairs.cpp">

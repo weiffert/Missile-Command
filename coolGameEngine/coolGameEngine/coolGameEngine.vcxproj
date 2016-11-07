@@ -173,6 +173,7 @@
     <Text Include="propertyColorEnemy.txt" />
     <Text Include="propertyColorFriend.txt" />
     <Text Include="propertyCurrentMissileCount.txt" />
+    <Text Include="propertyCurrentPlaneCount.txt" />
     <Text Include="propertyCurrentPosition.txt" />
     <Text Include="propertyDirection.txt" />
     <Text Include="propertyDodgeCircle.txt" />
@@ -194,6 +195,7 @@
     <Text Include="propertyLife.txt" />
     <Text Include="propertyMissilesHeld.txt" />
     <Text Include="propertyMove.txt" />
+    <Text Include="propertyPlanesHeld.txt" />
     <Text Include="propertyPoints.txt" />
     <Text Include="propertyPointsPerLiveCity.txt" />
     <Text Include="propertyPointsPerUnusedMissile.txt" />
@@ -227,6 +229,7 @@
     <Text Include="propertyText.txt" />
     <Text Include="propertyTexture.txt" />
     <Text Include="propertyTotalMissileCount.txt" />
+    <Text Include="propertyTotalPlaneCount.txt" />
     <Text Include="propertyVelocity.txt" />
     <Text Include="ReadMe.txt" />
     <Text Include="stateGameOver.txt" />
@@ -244,7 +247,6 @@
     <ClInclude Include="MissileExploder.h" />
     <ClInclude Include="MissileLauncher.h" />
     <ClInclude Include="MissileLauncherAi.h" />
-    <ClInclude Include="Plane.h" />
     <ClInclude Include="Property.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="resource.h" />
@@ -272,7 +274,6 @@
     <ClCompile Include="MissileExploder.cpp" />
     <ClCompile Include="MissileLauncher.cpp" />
     <ClCompile Include="MissileLauncherAi.cpp" />
-    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Property.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="ScoreKeeper.cpp" />
