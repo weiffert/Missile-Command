@@ -114,8 +114,6 @@ int Game::gameLoop()
 		int  fps = 1/ currentTime;
 		lastTime = currentTime;
 
-		std::cout << fps << std::endl;
-
 		if (change != "constant")
 		{
 			if (change != "next")
