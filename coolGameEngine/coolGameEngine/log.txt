@@ -1,79 +1,180 @@
-Program run at: 1474055887
-Exit Code: Error loading game stateProgram run at: 1474056185
+Program run at: 1475527557
+Exit Code: getComponent errorProgram run at: 1475527577
+Exit Code: getComponent errorProgram run at: 1475527623
+Exit Code: getComponent errorProgram run at: 1475528233
+Exit Code: Program run at: 1475528249
+Exit Code: Program run at: 1475695577
+Exit Code: Program run at: 1475695970
+Exit Code: Program run at: 1475696333
+Exit Code: Program run at: 1475696627
 Exit Code: 0
-Program run at: 1474056270
+Program run at: 1475696872
 Exit Code: 0
-Program run at: 1474056927
+Program run at: 1475699384
+Exit Code: getMaterial errorProgram run at: 1475699563
+Exit Code: getMaterial errorProgram run at: 1475699989
+Exit Code: getMaterial errorProgram run at: 1475700687
 Exit Code: 0
-Program run at: 1474057482
+Program run at: 1475783372
 Exit Code: 0
-Program run at: 1474057716
+Program run at: 1475783461
 Exit Code: 0
-Program run at: 1474057834
+Program run at: 1475783876
 Exit Code: 0
-Program run at: 1474057922
+Program run at: 1475785073
 Exit Code: 0
-Program run at: 1474058233
+Program run at: 1475797386
 Exit Code: 0
-Program run at: 1474058495
+Program run at: 1475801896
+Exit Code: getMaterial errorProgram run at: 1475802374
 Exit Code: 0
-Program run at: 1474058744
+Program run at: 1475802956
 Exit Code: 0
-Program run at: 1474059568
+Program run at: 1475802981
 Exit Code: 0
-Program run at: 1474164091
+Program run at: 1475803515
 Exit Code: 0
-Program run at: 1474165290
+Program run at: 1475803605
 Exit Code: 0
-Program run at: 1474502710
+Program run at: 1476047917
 Exit Code: 0
-Program run at: 1474503300
+Program run at: 1476050021
 Exit Code: 0
-Program run at: 1474572112
+Program run at: 1476050056
 Exit Code: 0
-Program run at: 1474573717
+Program run at: 1476050095
 Exit Code: 0
-Program run at: 1475006414
+Program run at: 1476050123
 Exit Code: 0
-Program run at: 1475007061
+Program run at: 1476128459
 Exit Code: 0
-Program run at: 1475007145
+Program run at: 1476128485
+Exit Code: getComponent errorProgram run at: 1476128565
+Exit Code: getComponent errorProgram run at: 1476128617
+Exit Code: getComponent errorProgram run at: 1476128872
 Exit Code: 0
-Program run at: 1475007300
+Program run at: 1476129241
 Exit Code: 0
-Program run at: 1475007352
+Program run at: 1476129942
 Exit Code: 0
-Program run at: 1475007813
+Program run at: 1476130002
 Exit Code: 0
-Program run at: 1475008315
+Program run at: 1476299571
 Exit Code: 0
-Program run at: 1475008564
+Program run at: 1476300059
 Exit Code: 0
-Program run at: 1475008877
+Program run at: 1476300143
 Exit Code: 0
-Program run at: 1475008918
+Program run at: 1476300400
 Exit Code: 0
-Program run at: 1475009140
+Program run at: 1476300537
+Exit Code: getComponent errorProgram run at: 1476300599
+Exit Code: getComponent errorProgram run at: 1476300634
 Exit Code: 0
-Program run at: 1475009328
+Program run at: 1476303965
 Exit Code: 0
-Program run at: 1475009381
+Program run at: 1476320886
 Exit Code: 0
-Program run at: 1475009576
+Program run at: 1476321176
 Exit Code: 0
-Program run at: 1475177228
+Program run at: 1476321553
+Exit Code: getComponent errorProgram run at: 1476321912
 Exit Code: 0
-Program run at: 1475177510
+Program run at: 1476322088
 Exit Code: 0
-Program run at: 1475177723
+Program run at: 1476732798
 Exit Code: 0
-Program run at: 1475177819
+Program run at: 1476732882
 Exit Code: 0
-Program run at: 1475178694
+Program run at: 1476733005
 Exit Code: 0
-Program run at: 1475178740
+Program run at: 1476734137
 Exit Code: 0
-Program run at: 1475178894
+Program run at: 1476904558
+Exit Code: 0
+Program run at: 1476905223
+Exit Code: 0
+Program run at: 1477423891
+Exit Code: 0
+Program run at: 1477424431
+Exit Code: 0
+Program run at: 1477424559
+Exit Code: 0
+Program run at: 1477429271
+Exit Code: 0
+Program run at: 1477429285
+Exit Code: 0
+Program run at: 1478033384
+Exit Code: 0
+Program run at: 1478033470
+Exit Code: 0
+Program run at: 1478033664
+Exit Code: 0
+Program run at: 1478033703
+Exit Code: 0
+Program run at: 1478033725
+Exit Code: 0
+Program run at: 1478033799
+Exit Code: 0
+Program run at: 1478033883
+Exit Code: 0
+Program run at: 1478033922
+Exit Code: 0
+Program run at: 1478034067
+Exit Code: 0
+Program run at: 1478201351
+Exit Code: 0
+Program run at: 1478201753
+Exit Code: 0
+Program run at: 1478202093
+Exit Code: 0
+Program run at: 1478202267
+Exit Code: 0
+Program run at: 1478202390
+Exit Code: 0
+Program run at: 1478202581
+Exit Code: 0
+Program run at: 1478202761
+Exit Code: 0
+Program run at: 1478203433
+Exit Code: getComponent errorProgram run at: 1478203571
+Exit Code: getComponent errorProgram run at: 1478203626
+Exit Code: getComponent errorProgram run at: 1478203689
+Exit Code: getComponent errorProgram run at: 1478203788
+Exit Code: getComponent errorProgram run at: 1478203814
+Exit Code: getComponent errorProgram run at: 1478203876
+Exit Code: getComponent errorProgram run at: 1478204003
+Exit Code: 0
+Program run at: 1478204031
+Exit Code: 0
+Program run at: 1478550852
+Exit Code: 0
+Program run at: 1478550956
+Exit Code: 0
+Program run at: 1478551252
+Exit Code: 0
+Program run at: 1478551448
+Exit Code: 0
+Program run at: 1478551679
+Exit Code: 0
+Program run at: 1478551757
+Exit Code: 0
+Program run at: 1478551775
+Exit Code: 0
+Program run at: 1478551946
+Exit Code: 0
+Program run at: 1478552506
+Exit Code: 0
+Program run at: 1478552791
+Exit Code: Reading errorProgram run at: 1478552825
+Exit Code: Reading errorProgram run at: 1478552940
+Exit Code: getComponent errorProgram run at: 1478553066
+Exit Code: getComponent errorProgram run at: 1478553280
+Exit Code: getComponent errorProgram run at: 1478553311
+Exit Code: 0
+Program run at: 1478553564
+Exit Code: 0
+Program run at: 1478808985
 Exit Code: 0
 Program run at: 1475696602
 Exit Code: 0

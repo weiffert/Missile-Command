@@ -21,7 +21,6 @@
 #include "MissileChecker.h"
 #include "ScoreKeeper.h"
 #include "LevelChange.h"
-#include "Plane.h"
 
 #include"StateMenu.h"
 
@@ -60,12 +59,14 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	Crosshairs crosshairs; 
 	MissileChecker missileChecker(systemManager, assetManager);
 	LevelChange levelChange;
-	Plane planeController(systemManager, assetManager);
 
 	Entity * player = systemManager->getMaterial("Player");
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/remotes/origin/master
 	bool found;
 
 	//Check for arrow key and space bar events
@@ -281,7 +282,7 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	int decrement = launcherAi->getComponent("CurrentMissileCount")->getDataInt().at(0) - 1;
 	Entity *missile = nullptr;
 
-	if (rand() % launcherAi->getComponent("FireRate")->getDataInt().at(0) == 0)  //Occurs at relatively random times.
+	if (rand() % launcherAi->getComponent("MissileFireRate")->getDataInt().at(0) == 0)  //Occurs at relatively random times.
 	{
 		while (!found && decrement >= 0)
 		{
@@ -313,8 +314,7 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 		assetManager->add(s);
 	}
 
-	missileChecker.control(window, systemManager);
-	planeController.update(window); //Planes should be self-reliant 
+	missileChecker.control(window);
 	missileLauncher.update(window, systemManager->getMaterial("Base1"), systemManager->getMaterial("Base2"), systemManager->getMaterial("Base3"));
 	missileLauncherAi.update(window, launcherAi);
 	crosshairs.control(window, systemManager);

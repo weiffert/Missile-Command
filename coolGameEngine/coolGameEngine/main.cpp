@@ -16,7 +16,6 @@ The implementation of the engine will be missile command.
 #include "Game.h"
 
 #include<stdlib.h>
-#include<crtdbg.h>
 
 int conversion(std::string);
 
@@ -81,7 +80,11 @@ int main()
 
 	//clean up
 	file.close();
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> refs/remotes/origin/master
 	return 0;
 }
 
