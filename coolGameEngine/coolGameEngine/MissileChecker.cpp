@@ -69,24 +69,47 @@ void MissileChecker::control(sf::RenderWindow * window)
 				temp = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
 				if (temp->getComponent("Fired")->getDataBool().at(0) && temp->getComponent("Life")->getDataBool().at(0))
 				{
-					//Get new limits.
-					sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
-					double x, y;
-					x = s->getGlobalBounds().left + s->getGlobalBounds().width / 2;
-					y = s->getGlobalBounds().top + s->getGlobalBounds().height / 2;
-					//For all conventional purposes, it is basically a point.
-					/*
-					double xLeft, xRight, yTop, yBottom;
-					xLeft = s->getGlobalBounds().left;
-					xRight = xLeft + s->getGlobalBounds().width;
-					yTop = s->getGlobalBounds().top;
-					yBottom = yTop + s->getGlobalBounds().height;
-					*/
-					std::string id = temp->getId();
+					if (temp->getComponent("IsSmart")->getDataBool().at(0))
+					{
+						sf::CircleShape *c = temp->getComponent("DodgeCircle")->getDataCircleShape().at(0);
+						double xLeft, xRight, yTop, yBottom;
+						xLeft = c->getGlobalBounds().left;
+						xRight = xLeft + c->getGlobalBounds().width;
+						yTop = c->getGlobalBounds().top;
+						yBottom = yTop + c->getGlobalBounds().height;
 
-					//Insert into proper locations
-					storeAndSort(x, id, posX, idX);
-					storeAndSort(y, id, posY, idY);
+						std::string id = "DodgeCircle" + temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(xLeft, xRight, id, posX, idX);
+						storeAndSort(yTop, yBottom, id, posY, idY);
+
+						sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+						xLeft = s->getGlobalBounds().left;
+						xRight = xLeft + s->getGlobalBounds().width;
+						yTop = s->getGlobalBounds().top;
+						yBottom = yTop + s->getGlobalBounds().height;
+
+						id = temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(xLeft, xRight, id, posX, idX);
+						storeAndSort(yTop, yBottom, id, posY, idY);
+					}
+					else
+					{
+						//Get new limits.
+						sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+						double x, y;
+						x = s->getGlobalBounds().left + s->getGlobalBounds().width / 2;
+						y = s->getGlobalBounds().top + s->getGlobalBounds().height / 2;
+						//For all conventional purposes, it is basically a point.
+						std::string id = temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(x, id, posX, idX);
+						storeAndSort(y, id, posY, idY);
+					}
 				}
 			}
 		}
@@ -205,7 +228,16 @@ void MissileChecker::control(sf::RenderWindow * window)
 								if (finalCheckX.at(i) == finalCheckY.at(j))
 								{
 									sf::Vector2f position;
-									Entity *currentExplodable = systemManager->getMaterial(finalCheckX.at(i));
+									Entity *currentExplodable;
+									std::string dodge = "DodgeCircle";
+									bool smart = false;
+									if (finalCheckX.at(i).find(dodge) == std::string::npos)
+										currentExplodable = systemManager->getMaterial(finalCheckX.at(i));
+									else
+									{
+										currentExplodable = systemManager->getMaterial(finalCheckX.at(i).substr(dodge.length()));
+										smart = true;
+									}
 									position.x = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(0);
 									position.y = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(1);
 									temp = systemManager->getMaterial(explosionId);
@@ -214,7 +246,13 @@ void MissileChecker::control(sf::RenderWindow * window)
 									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentExplodable->getComponent("Sprite")->getDataSprite().at(0)) 
 										|| intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 									{
-										//Set proper flags.
+										if (smart)
+										{
+											SmartBombControl smartBombControl;
+											std::cout << "SMART BOMB CONTROL" << std::endl;
+											//smartBombControl.control(currentExplodable, /*Explosion*/);
+										}
+											//Set proper flags.
 										//No missileExploder call because that is handled in the missileLaunchers.
 										//Explode
 										currentExplodable->getComponent("Explode")->deleteData();

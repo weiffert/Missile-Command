@@ -7,7 +7,6 @@
 #include "AssetManager.h"
 #include "Entity.h"
 #include "Property.h"
-#include "MissileChecker.h"
 
 SmartBombControl::SmartBombControl()
 {
@@ -27,7 +26,6 @@ SmartBombControl::~SmartBombControl()
 
 void SmartBombControl::control(Entity *smartBomb, Entity *missile)
 {
-	MissileChecker *missileChecker = nullptr;
 	sf::CircleShape* dodgeRadius = (smartBomb->getComponent("DodgeCircle")->getDataCircleShape().at(0));
 	dodgeRadius->setPosition(smartBomb->getComponent("CurrentPosition")->getDataDouble().at(0), smartBomb->getComponent("CurrentPosition")->getDataDouble().at(1));
 

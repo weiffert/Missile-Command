@@ -372,11 +372,17 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 			assetManager->add(t);
 
 			currentMissile->getComponent("DrawRectangleShape")->deleteData();
-			currentMissile->getComponent("DrawRectangleShape")->addData(false);
+			currentMissile->getComponent("DrawRectangleShape")->addData(true); 
 			currentMissile->getComponent("Split")->deleteData();
 			currentMissile->getComponent("Split")->addData(true);
 			currentMissile->getComponent("SplitFired")->deleteData();
 			currentMissile->getComponent("SplitFired")->addData(true);
+
+			sf::RectangleShape *r = currentMissile->getComponent("RectangleShape")->getDataRectangleShape().at(0);
+			sf::Color *c = new sf::Color(0, 0, 225);
+			r->setFillColor(*c);
+			r->setOutlineColor(*c);
+
 		}
 	}
 
@@ -543,6 +549,12 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 						sf::Sprite *s = missiles.at(i)->getComponent("Sprite")->getDataSprite().at(0);
 						s->setPosition(temp1, temp2);
 
+						if (missiles.at(i)->getComponent("IsSmart")->getDataBool().at(0))
+						{
+							sf::CircleShape *c = missiles.at(i)->getComponent("DodgeCircle")->getDataCircleShape().at(0);
+							c->setPosition(temp1, temp2);
+						}
+
 						if (missiles.at(i)->getComponent("DrawRectangleShape")->getDataBool().at(0))
 						{
 							//Update the chem trails, set the chem trail length to the velocity
@@ -677,7 +689,6 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							launchMissiles(missile, window);
 						}
 					}
-
 				}
 			}
 		}
