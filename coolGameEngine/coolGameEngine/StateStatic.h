@@ -16,4 +16,6 @@ public:
 	virtual std::string update(double, sf::RenderWindow *);
 
 	virtual void paused(sf::RenderWindow*) { return; }
+	virtual void endGame(sf::RenderWindow*) { return; }
+
 };
