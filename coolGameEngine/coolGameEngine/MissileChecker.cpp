@@ -250,7 +250,7 @@ void MissileChecker::control(sf::RenderWindow * window)
 										{
 											SmartBombControl smartBombControl;
 											std::cout << "SMART BOMB CONTROL" << std::endl;
-											//smartBombControl.control(currentExplodable, /*Explosion*/);
+											smartBombControl.control(currentExplodable, temp);
 										}
 											//Set proper flags.
 										//No missileExploder call because that is handled in the missileLaunchers.
