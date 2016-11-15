@@ -83,6 +83,9 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 			catch (std::bad_typeid& error)
 			{
 				systemManager->add(new StateMenu(systemManager, assetManager));
+
+				//Clear off the getstate warning caused by this try failing
+				system("cls");
 			}
 			
 			//Pause state
@@ -90,7 +93,9 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 		}
 
 		if (event.type == sf::Event::Closed)
+		{
 			window->close();
+		}
 
 		centerCoordinates.x = (window->getSize().x) / 2;
 		centerCoordinates.y = (window->getSize().y) / 2;
