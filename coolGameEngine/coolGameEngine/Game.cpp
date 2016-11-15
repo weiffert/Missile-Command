@@ -17,6 +17,7 @@
 #include "StateLoading.h"
 #include "StateDebug.h"
 #include"StateMenu.h"
+#include"Property.h"
 
 
 Game::Game()
@@ -59,8 +60,8 @@ int Game::run()
 	systemManager->add(state);
 
 	state->setMaterial(systemManager->getMaterial(state));
-	//run the game loop, which returns the exit code.
 
+	//run the game loop, which returns the exit code.
 	exitCode = gameLoop();
 
 	//Seed the random number generator.
@@ -108,8 +109,6 @@ int Game::gameLoop()
 		//render with parameters.
 		state->render(lag/frameRate, &gameWindow);
 
-		
-
 		if (change != "constant")
 		{
 			if (change != "next")
@@ -118,6 +117,28 @@ int Game::gameLoop()
 				state = systemManager->getState(state->getNumber() + 1);
 		}
 	}
+	
+	/*Store the player score in the scores file for easy access
+	std::fstream scores;
+	scores.open("scores.txt", std::ios::app);
+	scores << std::endl << std::endl << systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0) << std::endl;
+	scores.close();
+	*/
+
+	//If a menu state hasn't been created, make one
+	try
+	{
+		systemManager->getState("Menu");
+	}
+	catch (std::bad_typeid& error)
+	{
+		systemManager->add(new StateMenu(systemManager, assetManager));
+
+		//Clear off the getstate warning caused by this try failing
+		system("cls");
+	}
+
+	systemManager->getState("Menu")->endGame(&gameWindow);
 
 	return exitCode;
 }

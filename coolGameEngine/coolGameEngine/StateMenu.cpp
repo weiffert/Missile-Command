@@ -14,6 +14,7 @@
 //include controllers.
 
 #include<iostream>
+#include<sstream>
 
 StateMenu::StateMenu()
 {
@@ -108,12 +109,19 @@ void StateMenu::paused(sf::RenderWindow* window)
 	}
 
 	pauseMessage.setFont(font);
-	pauseMessage.setString("\n\n\n\n\n\n\n\n\n\n\nPaused\nPress escape to continue");
+
+	//Actual pause message to display
+	pauseMessage.setString("\nPaused\nPress escape to continue");
+	pauseMessage.setCharacterSize(18);
 	window->draw(pauseMessage);
 
+	//Set up score to display in pause menu
 	sf::Text score;
 	score.setFont(font);
-	score.setString((char)systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0));
+	std::stringstream points;
+	points << (systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0));
+	score.setString(points.str());
+	score.setCharacterSize(18);
 	window->draw(score);
 
 	window->display();
@@ -139,4 +147,57 @@ void StateMenu::paused(sf::RenderWindow* window)
 	window->setMouseCursorVisible(false);
 
 	return;
+}
+
+void StateMenu::endGame(sf::RenderWindow* window)
+{
+	std::cout << systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0) << std::endl;
+
+	//Read all the scores from the file
+	std::string scoreOne, scoreTwo, scoreThree, scoreFour, scoreFive, playerScore, name;
+	std::fstream scores;
+	scores.open("scores.txt");
+	getline(scores, scoreOne);
+	getline(scores, scoreTwo);
+	getline(scores, scoreThree);
+	getline(scores, scoreFour);
+	getline(scores, scoreFive);
+	std::stringstream points;
+	points << (systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0));
+	playerScore=(points.str());
+	scores.close();
+
+	//Only edit the window if it's open
+	if (!window->isOpen())
+	{
+		window = new sf::RenderWindow;
+		sf::VideoMode windowResolution;
+		windowResolution.width = 480;
+		windowResolution.height = 480;
+		std::string gameName = "missileCommad";
+		window->create(windowResolution, gameName);
+		window->setVerticalSyncEnabled(false);
+		window->setFramerateLimit(30);
+		window->clear(sf::Color::Black);
+		//window->draw();
+	}
+	
+	window->clear(sf::Color::Black);
+
+	//Set up score to display in endgame menu
+	sf::Font font;
+	if (!font.loadFromFile("square.ttf"))
+	{
+		std::cout << "Failed to load font" << std::endl;
+		system("pause");
+		window->close();
+		return;
+	}
+	sf::Text score;
+	score.setFont(font);
+	score.setString(points.str());
+	score.setCharacterSize(18);
+	window->draw(score);
+
+	system("pause");
 }

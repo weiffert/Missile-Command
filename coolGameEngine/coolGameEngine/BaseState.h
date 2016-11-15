@@ -38,6 +38,9 @@ public:
 	//Pause function for use in StateMenu, needed for inheritance but is useless in BaseState
 	virtual void paused(sf::RenderWindow*) { return; }
 
+	//End of game scorekeeping function for use in StateMenu, needed for inheritance
+	virtual void endGame(sf::RenderWindow*) { return; }
+
 protected:
 	int number;
 	std::string id;

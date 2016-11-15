@@ -18,6 +18,10 @@ public:
 	//Function to control pause menu
 	void paused(sf::RenderWindow*);
 
+	//Function to control the end of game scorekeeping
+	void endGame(sf::RenderWindow*);
+
+
 private:
 	sf::Mouse mouse;
 	sf::Vector2i centerCoordinates;
