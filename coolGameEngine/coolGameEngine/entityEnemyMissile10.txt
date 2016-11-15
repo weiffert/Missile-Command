@@ -25,6 +25,6 @@ IsSmart false ;
 Split false ;
 SplitFired false ;
 Target default ;
-DodgeCircle ;
+DodgeCircle setRadius 20 setOrigin 20 20 setPosition 0 0 ;
 ShotDown false ;
 BeenMoved false ;

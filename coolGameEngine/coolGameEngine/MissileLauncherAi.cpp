@@ -372,7 +372,9 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 			assetManager->add(t);
 
 			currentMissile->getComponent("DrawRectangleShape")->deleteData();
-			currentMissile->getComponent("DrawRectangleShape")->addData(true); 
+			currentMissile->getComponent("DrawRectangleShape")->addData(false);
+			currentMissile->getComponent("DrawSprite")->deleteData();
+			currentMissile->getComponent("DrawSprite")->addData(true);
 			currentMissile->getComponent("Split")->deleteData();
 			currentMissile->getComponent("Split")->addData(true);
 			currentMissile->getComponent("SplitFired")->deleteData();

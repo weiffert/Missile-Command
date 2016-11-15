@@ -43,6 +43,7 @@ void SmartBombControl::control(Entity *smartBomb, Entity *missile)
 			smartBomb->getComponent("BeenMoved")->addData(true);
 			
 			double theta = atan((smartBomb->getComponent("CurrentPosition")->getDataDouble().at(1) - smartBomb->getComponent("ExplodingPosition")->getDataDouble().at(1)) / (smartBomb->getComponent("ExplodingPosition")->getDataDouble().at(0) - smartBomb->getComponent("CurrentPosition")->getDataDouble().at(0)));
+			theta = 3.141592654 / 5;
 			theta *= -1;
 			double lengthX = -1 * velocity * cos(theta);
 			double lengthY = -1 * velocity * sin(theta); 
@@ -78,6 +79,7 @@ void SmartBombControl::control(Entity *smartBomb, Entity *missile)
 			smartBomb->getComponent("BeenMoved")->addData(true);
 
 			double theta = atan((smartBomb->getComponent("CurrentPosition")->getDataDouble().at(1) - smartBomb->getComponent("ExplodingPosition")->getDataDouble().at(1)) / (smartBomb->getComponent("ExplodingPosition")->getDataDouble().at(0) - smartBomb->getComponent("CurrentPosition")->getDataDouble().at(0)));
+			theta = 3.141592654 / 4 * 7; 
 			theta *= -1;
 			double lengthX = -1 * velocity * cos(theta);
 			double lengthY = -1 *  velocity * sin(theta);

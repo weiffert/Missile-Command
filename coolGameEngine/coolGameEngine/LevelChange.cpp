@@ -100,7 +100,7 @@ std::string LevelChange::control(SystemManager * systemManager, AssetManager *as
 
 						while (!set)
 						{
-							place = rand() % 6 + 1;
+							place = rand() % 6;
 
 							if (city[place]->getComponent("Life")->getDataBool().at(0) == false)
 							{
