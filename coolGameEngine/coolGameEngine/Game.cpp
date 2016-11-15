@@ -61,11 +61,15 @@ int Game::run()
 
 	state->setMaterial(systemManager->getMaterial(state));
 
+
 	//run the game loop, which returns the exit code.
 	exitCode = gameLoop();
 
 	//Seed the random number generator.
 	srand(time(NULL));
+
+	//run the game loop, which returns the exit code.
+	exitCode = gameLoop();
 
 	return exitCode;
 }
@@ -83,6 +87,9 @@ int Game::gameLoop()
 
 	double lag = 0.0;
 	double currentTime = time(NULL);
+
+	sf::Clock clock;
+	float lastTime = 0;
 
 	//Run while the game window is open.
 	while(gameWindow.isOpen())
@@ -109,6 +116,17 @@ int Game::gameLoop()
 		//render with parameters.
 		state->render(lag/frameRate, &gameWindow);
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		//Framerate counter
+		float currentTime = clock.restart().asSeconds();
+		int  fps = 1/ currentTime;
+		lastTime = currentTime;
+
+>>>>>>> refs/remotes/origin/master
+>>>>>>> origin/UI
 		if (change != "constant")
 		{
 			if (change != "next")

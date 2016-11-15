@@ -204,15 +204,16 @@ void MissileLauncher::update(sf::RenderWindow *window, Entity *Base1, Entity *Ba
 	//Goes through all the missiles for the three bases
 	for (int base = 0; base < 3; base++)
 	{
-		int missileNumber = 10;
+		int totalMissileCount = bases.at(base)->getComponent("TotalMissileCount")->getDataInt().at(0);
+		int missileNumber = bases.at(base)->getComponent("CurrentMissileCount")->getDataInt().at(0);
 		std::vector<Entity *> missiles = bases.at(base)->getComponent("MissilesHeld")->getDataEntity();
 		//Go through all of the missiles.
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < totalMissileCount; i++)
 		{
 			//Check only fired ones.
 			if (missiles.at(i)->getComponent("Fired")->getDataBool().at(0))
 			{
-				missileNumber--;
+				//missileNumber--;
 				if (missiles.at(i)->getComponent("Life")->getDataBool().at(0))
 				{
 					double curX = missiles.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0);
@@ -276,28 +277,8 @@ void MissileLauncher::update(sf::RenderWindow *window, Entity *Base1, Entity *Ba
 						if (expY - velocity <= curY && expY + velocity >= curY)
 						{
 							//Make the missile explode
-							missiles.at(i)->getComponent("Life")->deleteData();
-							missiles.at(i)->getComponent("Life")->addData(false);
-							missiles.at(i)->getComponent("DrawSprite")->deleteData();
-							missiles.at(i)->getComponent("DrawSprite")->addData(false);
-							missiles.at(i)->getComponent("DrawCircleShape")->deleteData();
-							missiles.at(i)->getComponent("DrawCircleShape")->addData(true);
-							missiles.at(i)->getComponent("DrawRectangleShape")->deleteData();
-							missiles.at(i)->getComponent("DrawRectangleShape")->addData(false);
-							missiles.at(i)->getComponent("Move")->deleteData();
-							missiles.at(i)->getComponent("Move")->addData(false);
 							missiles.at(i)->getComponent("Explode")->deleteData();
 							missiles.at(i)->getComponent("Explode")->addData(true);
-
-							//Explosion sound
-							sf::Sound * sound = new sf::Sound;
-							sound->setBuffer(*missiles.at(i)->getComponent("SoundMissileExplosion")->getDataSoundBuffer().at(0));
-							assetManager->add(sound);
-							sound->play();
-
-							//Start Exploder control.
-							sf::CircleShape *c = missiles.at(i)->getComponent("CircleShape")->getDataCircleShape().at(0);
-							c->setPosition(missiles.at(i)->getComponent("ExplodingPosition")->getDataDouble().at(0), missiles.at(i)->getComponent("ExplodingPosition")->getDataDouble().at(1));
 						}
 					}
 				}
@@ -324,8 +305,8 @@ void MissileLauncher::update(sf::RenderWindow *window, Entity *Base1, Entity *Ba
 			{
 				if (missiles.at(i)->getComponent("Explode")->getDataBool().at(0))
 				{
-					MissileExploder exploder;
-					exploder.control(systemManager, window, missiles.at(i));
+					MissileExploder exploder(systemManager, assetManager);
+					exploder.control(window, missiles.at(i));
 				}
 			}
 		}
