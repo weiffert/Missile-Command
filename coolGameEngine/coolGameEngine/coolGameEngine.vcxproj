@@ -316,6 +316,7 @@
     <Image Include="missile.png" />
     <Image Include="plane-other-direction.png" />
     <Image Include="plane.png" />
+    <Image Include="ruin.png" />
     <Image Include="satellite.png" />
     <Image Include="smartBomb.png" />
   </ItemGroup>

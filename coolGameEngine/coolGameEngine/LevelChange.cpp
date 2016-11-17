@@ -108,10 +108,16 @@ std::string LevelChange::control(SystemManager * systemManager, AssetManager *as
 								set = true;
 								city[place]->getComponent("Life")->deleteData();
 								city[place]->getComponent("Life")->addData(true);
-								city[place]->getComponent("Draw")->deleteData();
-								city[place]->getComponent("Draw")->addData(true);
-								city[place]->getComponent("DrawSprite")->deleteData();
-								city[place]->getComponent("DrawSprite")->addData(true);
+
+								sf::Sprite *s = city[place]->getComponent("Sprite")->getDataSprite().at(0);
+								sf::Texture *t = new sf::Texture;
+
+								if (!t->loadFromFile("city.png"))
+									std::cout << "Failed to load city.png" << std::endl;
+								s->setTexture(*t, true);
+
+								assetManager->add(t);
+
 								systemManager->getMaterial("Player")->getComponent("BonusCityThreshold")->deleteData();
 								systemManager->getMaterial("Player")->getComponent("BonusCityThreshold")->addData(bonusCityThreshold + systemManager->getMaterial("Player")->getComponent("BonusCityIncrement")->getDataInt().at(0));
 							}

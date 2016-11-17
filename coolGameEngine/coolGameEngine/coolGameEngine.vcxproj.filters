@@ -364,6 +364,9 @@
     <Image Include="plane-other-direction.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="ruin.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="FreeCity.wav">

@@ -622,10 +622,14 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							{
 								target->getComponent("Life")->deleteData();
 								target->getComponent("Life")->addData(false);
-								target->getComponent("Draw")->deleteData();
-								target->getComponent("Draw")->addData(false);
-								target->getComponent("DrawSprite")->deleteData();
-								target->getComponent("DrawSprite")->addData(false);
+								sf::Sprite *s = target->getComponent("Sprite")->getDataSprite().at(0);
+								sf::Texture *t = new sf::Texture;
+
+								if (!t->loadFromFile("ruin.png"))
+									std::cout << "Failed to load ruin.png" << std::endl;
+								s->setTexture(*t, true);
+
+								assetManager->add(t);
 
 								if (targetString.find("Base") != std::string::npos)
 								{
