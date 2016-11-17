@@ -213,37 +213,37 @@ std::string LevelChange::end(SystemManager *systemManager, AssetManager *assetMa
 		systemManager->getMaterial("Player")->getComponent("LevelStart")->addData(true);
 
 		//Reset MissileLauncherAi
-		Entity *temp = systemManager->getMaterial("MissileLauncherAi");
-		temp->getComponent("CurrentMissileCount")->deleteData();
-		temp->getComponent("CurrentMissileCount")->addData(temp->getComponent("TotalMissileCount")->getDataInt().at(0));
+		Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
+		launcherAi->getComponent("CurrentMissileCount")->deleteData();
+		launcherAi->getComponent("CurrentMissileCount")->addData(launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0));
 
-		int fireRate = temp->getComponent("MissileFireRate")->getDataInt().at(0);
-		temp->getComponent("MissileFireRate")->deleteData();
-		temp->getComponent("MissileFireRate")->addData(fireRate - temp->getComponent("FireRateIncrement")->getDataInt().at(0));
+		int fireRate = launcherAi->getComponent("MissileFireRate")->getDataInt().at(0);
+		launcherAi->getComponent("MissileFireRate")->deleteData();
+		launcherAi->getComponent("MissileFireRate")->addData(fireRate - launcherAi->getComponent("FireRateIncrement")->getDataInt().at(0));
 
-		int splitChance = temp->getComponent("SplitChance")->getDataInt().at(0);
-		temp->getComponent("SplitChance")->deleteData();
-		temp->getComponent("SplitChance")->addData(splitChance - temp->getComponent("SplitChanceIncrement")->getDataInt().at(0));
+		int splitChance = launcherAi->getComponent("SplitChance")->getDataInt().at(0);
+		launcherAi->getComponent("SplitChance")->deleteData();
+		launcherAi->getComponent("SplitChance")->addData(splitChance - launcherAi->getComponent("SplitChanceIncrement")->getDataInt().at(0));
 
-		int smartBombChance = temp->getComponent("SmartBombChance")->getDataInt().at(0);
-		temp->getComponent("SmartBombChance")->deleteData();
-		temp->getComponent("SmartBombChance")->addData(smartBombChance - temp->getComponent("SmartBombChanceIncrement")->getDataInt().at(0));
+		int smartBombChance = launcherAi->getComponent("SmartBombChance")->getDataInt().at(0);
+		launcherAi->getComponent("SmartBombChance")->deleteData();
+		launcherAi->getComponent("SmartBombChance")->addData(smartBombChance - launcherAi->getComponent("SmartBombChanceIncrement")->getDataInt().at(0));
 
-		temp->getComponent("SetTargets")->deleteData();
-		temp->getComponent("SetTargets")->addData(false);
+		launcherAi->getComponent("SetTargets")->deleteData();
+		launcherAi->getComponent("SetTargets")->addData(false);
 
-		temp->getComponent("TargetOne")->deleteData();
-		temp->getComponent("TargetOne")->addData(0);
-		temp->getComponent("TargetTwo")->deleteData();
-		temp->getComponent("TargetTwo")->addData(0);
-		temp->getComponent("TargetThree")->deleteData();
-		temp->getComponent("TargetThree")->addData(0);
+		launcherAi->getComponent("TargetOne")->deleteData();
+		launcherAi->getComponent("TargetOne")->addData(0);
+		launcherAi->getComponent("TargetTwo")->deleteData();
+		launcherAi->getComponent("TargetTwo")->addData(0);
+		launcherAi->getComponent("TargetThree")->deleteData();
+		launcherAi->getComponent("TargetThree")->addData(0);
 
 
 		//Reset enemy missiles.
-		for (int i = 0; i < temp->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
+		for (int i = 0; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
 		{
-			Entity *missile = temp->getComponent("MissilesHeld")->getDataEntity().at(i);
+			Entity *missile = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
 			missile->getComponent("Life")->deleteData();
 			missile->getComponent("Life")->addData(true);
 			missile->getComponent("ExplosionPhase")->deleteData();
@@ -290,7 +290,7 @@ std::string LevelChange::end(SystemManager *systemManager, AssetManager *assetMa
 
 			int oldVelocity = missile->getComponent("Velocity")->getDataDouble().at(0);
 			missile->getComponent("Velocity")->deleteData();
-			missile->getComponent("Velocity")->addData(abs(oldVelocity) * 2);
+			missile->getComponent("Velocity")->addData(abs(oldVelocity) + launcherAi->getComponent("VelocityIncrement")->getDataDouble().at(0));
 			missile->getComponent("Velocity")->addData(1);
 			missile->getComponent("Velocity")->addData(1);
 		}

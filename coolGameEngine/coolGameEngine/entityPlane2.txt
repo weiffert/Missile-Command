@@ -11,7 +11,7 @@ DrawRectangleShape false ;
 Direction Left ;
 Sprite loadFromFile plane.png ;
 Move true ;
-Velocity 1 1 1 ;
+Velocity 2 1 1 ;
 SplitChance 100 ;
 FireRateIncrement 2 ;
 SplitChanceIncrement 2 ;

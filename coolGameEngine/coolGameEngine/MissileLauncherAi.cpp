@@ -268,7 +268,8 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 		{
 			if (planes.at(i)->getComponent("Fired")->getDataBool().at(0) && planes.at(i)->getComponent("Life")->getDataBool().at(0))
 			{
-				viablePlanes.push_back(planes.at(i));
+				if (planes.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0) > 0 && planes.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0) < window->getSize().x)
+					viablePlanes.push_back(planes.at(i));
 			}
 		}
 	}
@@ -421,7 +422,7 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		//Give correct x value
 		//A variable is used to remedy unsigned int error.
 		int width = window->getSize().x;
-		currentPlane->getComponent("CurrentPosition")->addData(width + 100);
+		currentPlane->getComponent("CurrentPosition")->addData(width + 50);
 	}
 
 	//Right
@@ -431,7 +432,7 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		currentPlane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
-		currentPlane->getComponent("CurrentPosition")->addData(-100);
+		currentPlane->getComponent("CurrentPosition")->addData(-50);
 	}
 
 	//Give "random" y height above window height * 5 / 6 and belows than window height / 4.
@@ -740,7 +741,10 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 				currentPlane->getComponent("CurrentPosition")->changeData(temp1, 0);
 
 				//If it's off the screen kill the plane
-				if ((temp1 > window->getSize().x && currentPlane->getComponent("Direction")->getDataString().at(0) == "Right") || (temp1 < 0 && currentPlane->getComponent("Direction")->getDataString().at(0) == "Left"))
+				if ((temp1 > window->getSize().x + currentPlane->getComponent("Sprite")->getDataSprite().at(0)->getLocalBounds().width / 2 
+					&& currentPlane->getComponent("Direction")->getDataString().at(0) == "Right") 
+					|| (temp1 < 0 - currentPlane->getComponent("Sprite")->getDataSprite().at(0)->getLocalBounds().width / 2 
+					&& currentPlane->getComponent("Direction")->getDataString().at(0) == "Left"))
 				{
 					currentPlane->getComponent("Life")->deleteData();
 					currentPlane->getComponent("Life")->addData(false);

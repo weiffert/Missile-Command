@@ -50,6 +50,7 @@ propertySmartBombChanceIncrement.txt
 propertyDodgeCircle.txt
 propertyShotDown.txt
 propertyBeenMoved.txt
+propertyVelocityIncrement.txt
 propertyLevelStart.txt
 
 propertyPoints.txt
