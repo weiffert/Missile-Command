@@ -10,7 +10,7 @@ PlanesHeld Plane1 Plane2 Plane3 ;
 Draw false ;
 Move false ;
 MissileFireRate 50 ;
-PlaneFireRate 123 ;
+PlaneFireRate 50 ;
 SplitChance 100 ;
 SmartBombChance 2 ;
 FireRateIncrement 2 ;

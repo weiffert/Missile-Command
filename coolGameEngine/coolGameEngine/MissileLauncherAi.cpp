@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include <iostream>
+#include <vector>
 
 #include "SFML\Window.hpp"
 #include "SFML\Graphics.hpp"
@@ -31,34 +32,39 @@ MissileLauncherAi::~MissileLauncherAi()
 void MissileLauncherAi::setTargets(bool cities[6])
 {
 	//Determine how many cities are left
-	int alive = 0;
+	std::vector<bool> alive;
+	std::vector<int> corresponding;
 	int counter = 0;
 	int number = 0;
 	for (int i = 0; i < 6; i++)
 	{
 		if (cities[i])
-			alive++;
+		{
+			alive.push_back(true);
+			corresponding.push_back(i + 1);
+		}
 	}
-	
-	targetOne = rand() % 6 + 1;
-	targetTwo = rand() % 6 + 1;
-	targetThree = rand() % 6 + 1;
 
-	while (targetOne == targetTwo || targetOne == targetThree || targetTwo == targetThree)
+	targetOne = 1;
+	targetTwo = 1;
+	targetThree = 1;
+
+	while (targetOne == targetTwo && alive.size() > 1)
 	{
-		while (targetOne == targetTwo)
-		{
-			targetTwo = rand() % 6 + 1;
-		}
-		while (targetOne == targetThree)
-		{
-			targetThree = rand() % 6 + 1;
-		}
-		while (targetTwo == targetThree)
-		{
-			targetThree = rand() % 6 + 1;
-		}
+		targetOne = rand() % alive.size() + 1;
 	}
+	while (targetOne == targetThree && alive.size() > 1)
+	{
+		targetThree = rand() % alive.size() + 1;
+	}
+	while (targetTwo == targetThree && alive.size() > 1)
+	{
+		targetTwo = rand() % alive.size() + 1;
+	}
+
+	targetOne = corresponding.at(targetOne - 1);
+	targetTwo = corresponding.at(targetTwo - 1);
+	targetThree = corresponding.at(targetThree - 1);
 
 	Property *temp = systemManager->getMaterial("MissileLauncherAi")->getComponent("TargetOne");
 	temp->deleteData();
