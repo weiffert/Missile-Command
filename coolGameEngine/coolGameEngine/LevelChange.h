@@ -16,5 +16,6 @@ public:
 	~LevelChange();
 
 	std::string control(SystemManager *, AssetManager *, sf::RenderWindow *);
+	std::string end(SystemManager *, AssetManager *);
 };
 

@@ -428,12 +428,11 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		currentPlane->getComponent("CurrentPosition")->addData(-100);
 	}
 
-	//Give "random" y height below window height * 5 / 6 and higher than window height / 4.
+	//Give "random" y height above window height * 5 / 6 and belows than window height / 4.
 	do 
 	{
-		yHeight = rand() % window->getSize().y * 5 / 6;
-	} while (yHeight > window->getSize().y / 4);
-	yHeight = 50;
+		yHeight = rand() % window->getSize().y * 4 / 5;
+	} while (yHeight > window->getSize().y / 3 * 2);
 
 	currentPlane->getComponent("CurrentPosition")->addData(yHeight);
 
@@ -487,9 +486,9 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 
 	//Decrease missiles left
 	Property *count = systemManager->getMaterial("MissileLauncherAi")->getComponent("CurrentPlaneCount");
-	int oldMissileCount = count->getDataInt().at(0);
+	int oldPlaneCount = count->getDataInt().at(0);
 	count->deleteData();
-	count->addData(--oldMissileCount);
+	count->addData(--oldPlaneCount);
 
 	return 1;
 }
@@ -622,14 +621,6 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							{
 								target->getComponent("Life")->deleteData();
 								target->getComponent("Life")->addData(false);
-								sf::Sprite *s = target->getComponent("Sprite")->getDataSprite().at(0);
-								sf::Texture *t = new sf::Texture;
-
-								if (!t->loadFromFile("ruin.png"))
-									std::cout << "Failed to load ruin.png" << std::endl;
-								s->setTexture(*t, true);
-
-								assetManager->add(t);
 
 								if (targetString.find("Base") != std::string::npos)
 								{
@@ -649,6 +640,17 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 
 									target->getComponent("CurrentMissileCount")->deleteData();
 									target->getComponent("CurrentMissileCount")->addData(0);
+								}
+								else
+								{
+									sf::Sprite *s = target->getComponent("Sprite")->getDataSprite().at(0);
+									sf::Texture *t = new sf::Texture;
+
+									if (!t->loadFromFile("ruin.png"))
+										std::cout << "Failed to load ruin.png" << std::endl;
+									s->setTexture(*t, true);
+
+									assetManager->add(t);
 								}
 							}
 						}
