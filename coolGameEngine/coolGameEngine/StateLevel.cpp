@@ -62,11 +62,6 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 
 	Entity * player = systemManager->getMaterial("Player");
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> refs/remotes/origin/master
 	bool found;
 
 	//Check for arrow key and space bar events

@@ -63,7 +63,7 @@ int Game::run()
 
 
 	//run the game loop, which returns the exit code.
-	exitCode = gameLoop();
+	//exitCode = gameLoop();
 
 	//Seed the random number generator.
 	srand(time(NULL));
@@ -79,7 +79,6 @@ int Game::run()
 //Returns the exit code.
 int Game::gameLoop()
 {
-
 	std::string change = "constant";
 	//initialize time keepers
 	double totalTime = 0.0;
@@ -116,17 +115,11 @@ int Game::gameLoop()
 		//render with parameters.
 		state->render(lag/frameRate, &gameWindow);
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 		//Framerate counter
 		float currentTime = clock.restart().asSeconds();
 		int  fps = 1/ currentTime;
 		lastTime = currentTime;
 
->>>>>>> refs/remotes/origin/master
->>>>>>> origin/UI
 		if (change != "constant")
 		{
 			if (change != "next")
@@ -135,13 +128,6 @@ int Game::gameLoop()
 				state = systemManager->getState(state->getNumber() + 1);
 		}
 	}
-	
-	/*Store the player score in the scores file for easy access
-	std::fstream scores;
-	scores.open("scores.txt", std::ios::app);
-	scores << std::endl << std::endl << systemManager->getMaterial("Player")->getComponent("Points")->getDataInt().at(0) << std::endl;
-	scores.close();
-	*/
 
 	//If a menu state hasn't been created, make one
 	try
@@ -156,6 +142,7 @@ int Game::gameLoop()
 		system("cls");
 	}
 
+	//Go into the highscore display
 	systemManager->getState("Menu")->endGame(&gameWindow);
 
 	return exitCode;

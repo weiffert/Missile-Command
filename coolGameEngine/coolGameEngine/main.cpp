@@ -80,14 +80,7 @@ int main()
 
 	//clean up
 	file.close();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/UI
 
-=======
-	
->>>>>>> refs/remotes/origin/master
 	return 0;
 }
 
