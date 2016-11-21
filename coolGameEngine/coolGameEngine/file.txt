@@ -52,6 +52,8 @@ propertyShotDown.txt
 propertyBeenMoved.txt
 propertyVelocityIncrement.txt
 propertyLevelStart.txt
+propertyMaxMissileCount.txt
+propertyMissileCountIncrement.txt
 
 propertyPoints.txt
 propertyPointsPerLiveCity.txt

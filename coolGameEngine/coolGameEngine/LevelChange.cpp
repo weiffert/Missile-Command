@@ -214,8 +214,6 @@ std::string LevelChange::end(SystemManager *systemManager, AssetManager *assetMa
 
 		//Reset MissileLauncherAi
 		Entity *launcherAi = systemManager->getMaterial("MissileLauncherAi");
-		launcherAi->getComponent("CurrentMissileCount")->deleteData();
-		launcherAi->getComponent("CurrentMissileCount")->addData(launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0));
 
 		int fireRate = launcherAi->getComponent("MissileFireRate")->getDataInt().at(0);
 		launcherAi->getComponent("MissileFireRate")->deleteData();
@@ -239,9 +237,8 @@ std::string LevelChange::end(SystemManager *systemManager, AssetManager *assetMa
 		launcherAi->getComponent("TargetThree")->deleteData();
 		launcherAi->getComponent("TargetThree")->addData(0);
 
-
 		//Reset enemy missiles.
-		for (int i = 0; i < launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0); i++)
+		for (int i = 0; i < launcherAi->getComponent("MaxMissileCount")->getDataInt().at(0); i++)
 		{
 			Entity *missile = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
 			missile->getComponent("Life")->deleteData();
@@ -294,6 +291,21 @@ std::string LevelChange::end(SystemManager *systemManager, AssetManager *assetMa
 			missile->getComponent("Velocity")->addData(1);
 			missile->getComponent("Velocity")->addData(1);
 		}
+
+		//Increment total missile count if possible.
+		int maxMissileCount = launcherAi->getComponent("MaxMissileCount")->getDataInt().at(0);
+		int totalMissileCount = launcherAi->getComponent("TotalMissileCount")->getDataInt().at(0);
+		int missileCountIncrement = launcherAi->getComponent("MissileCountIncrement")->getDataInt().at(0);
+
+		if (totalMissileCount + missileCountIncrement <= maxMissileCount)
+		{
+			totalMissileCount += missileCountIncrement;
+		}
+
+		launcherAi->getComponent("TotalMissileCount")->deleteData();
+		launcherAi->getComponent("TotalMissileCount")->addData(totalMissileCount);
+		launcherAi->getComponent("CurrentMissileCount")->deleteData();
+		launcherAi->getComponent("CurrentMissileCount")->addData(totalMissileCount);
 
 		for (int i = 0; i < 3; i++)
 		{
