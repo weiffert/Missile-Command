@@ -701,7 +701,6 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							missile->getComponent("CurrentPosition")->addData(missiles.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0));
 							missile->getComponent("CurrentPosition")->addData(missiles.at(i)->getComponent("CurrentPosition")->getDataDouble().at(1));
 
-							std::cout << "Fired: " << missile->getId() << std::endl;
 							launchMissiles(missile, window);
 						}
 					}

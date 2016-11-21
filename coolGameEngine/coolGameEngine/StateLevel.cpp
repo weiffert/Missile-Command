@@ -274,7 +274,6 @@ std::string StateLevel::update(double totalTime, sf::RenderWindow* window)
 	}
 	if (found)
 	{
-		std::cout << "Fired: " << missile->getId() << std::endl;
 		missileLauncherAi.launchMissiles(missile, window);
 	}
 	
