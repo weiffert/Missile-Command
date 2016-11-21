@@ -26,5 +26,5 @@ RectangleShape setSize 0 2 ;
 ColorEnemy ;
 SoundMissileExplosion ;
 Target default ;
-DodgeCircle ;
+DodgeCircle setRadius 20 setOrigin 20 20 setPosition 0 0 ;
 BeenMoved false ;

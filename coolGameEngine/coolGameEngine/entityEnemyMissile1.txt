@@ -27,6 +27,6 @@ ColorEnemy ;
 SoundMissileExplosion ;
 Target default ;
 IsSmart false ;
-DodgeCircle setRadius 20 ;
+DodgeCircle setRadius 20 setOrigin 20 20 setPosition 0 0 ;
 ShotDown false ;
 BeenMoved false ;

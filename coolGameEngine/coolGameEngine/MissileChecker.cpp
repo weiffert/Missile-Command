@@ -69,24 +69,47 @@ void MissileChecker::control(sf::RenderWindow * window)
 				temp = launcherAi->getComponent("MissilesHeld")->getDataEntity().at(i);
 				if (temp->getComponent("Fired")->getDataBool().at(0) && temp->getComponent("Life")->getDataBool().at(0))
 				{
-					//Get new limits.
-					sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
-					double x, y;
-					x = s->getGlobalBounds().left + s->getGlobalBounds().width / 2;
-					y = s->getGlobalBounds().top + s->getGlobalBounds().height / 2;
-					//For all conventional purposes, it is basically a point.
-					/*
-					double xLeft, xRight, yTop, yBottom;
-					xLeft = s->getGlobalBounds().left;
-					xRight = xLeft + s->getGlobalBounds().width;
-					yTop = s->getGlobalBounds().top;
-					yBottom = yTop + s->getGlobalBounds().height;
-					*/
-					std::string id = temp->getId();
+					if (temp->getComponent("IsSmart")->getDataBool().at(0))
+					{
+						sf::CircleShape *c = temp->getComponent("DodgeCircle")->getDataCircleShape().at(0);
+						double xLeft, xRight, yTop, yBottom;
+						xLeft = c->getGlobalBounds().left;
+						xRight = xLeft + c->getGlobalBounds().width;
+						yTop = c->getGlobalBounds().top;
+						yBottom = yTop + c->getGlobalBounds().height;
 
-					//Insert into proper locations
-					storeAndSort(x, id, posX, idX);
-					storeAndSort(y, id, posY, idY);
+						std::string id = "DodgeCircle" + temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(xLeft, xRight, id, posX, idX);
+						storeAndSort(yTop, yBottom, id, posY, idY);
+
+						sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+						xLeft = s->getGlobalBounds().left;
+						xRight = xLeft + s->getGlobalBounds().width;
+						yTop = s->getGlobalBounds().top;
+						yBottom = yTop + s->getGlobalBounds().height;
+
+						id = temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(xLeft, xRight, id, posX, idX);
+						storeAndSort(yTop, yBottom, id, posY, idY);
+					}
+					else
+					{
+						//Get new limits.
+						sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+						double x, y;
+						x = s->getGlobalBounds().left + s->getGlobalBounds().width / 2;
+						y = s->getGlobalBounds().top + s->getGlobalBounds().height / 2;
+						//For all conventional purposes, it is basically a point.
+						std::string id = temp->getId();
+
+						//Insert into proper locations
+						storeAndSort(x, id, posX, idX);
+						storeAndSort(y, id, posY, idY);
+					}
 				}
 			}
 		}
@@ -99,16 +122,19 @@ void MissileChecker::control(sf::RenderWindow * window)
 				//Get new limits.
 				double xLeft, xRight, yTop, yBottom;
 				temp = launcherAi->getComponent("PlanesHeld")->getDataEntity().at(i);
-				sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
-				xLeft = s->getGlobalBounds().left;
-				xRight = xLeft + s->getGlobalBounds().width;
-				yTop = s->getGlobalBounds().top;
-				yBottom = yTop + s->getGlobalBounds().height;
-				std::string id = temp->getId();
+				if (temp->getComponent("Life")->getDataBool().at(0))
+				{
+					sf::Sprite *s = temp->getComponent("Sprite")->getDataSprite().at(0);
+					xLeft = s->getGlobalBounds().left;
+					xRight = xLeft + s->getGlobalBounds().width;
+					yTop = s->getGlobalBounds().top;
+					yBottom = yTop + s->getGlobalBounds().height;
+					std::string id = temp->getId();
 
-				//Insert into proper locations
-				storeAndSort(xLeft, xRight, id, posX, idX);
-				storeAndSort(yTop, yBottom, id, posY, idY);
+					//Insert into proper locations
+					storeAndSort(xLeft, xRight, id, posX, idX);
+					storeAndSort(yTop, yBottom, id, posY, idY);
+				}
 			}
 		}
 
@@ -205,13 +231,24 @@ void MissileChecker::control(sf::RenderWindow * window)
 								if (finalCheckX.at(i) == finalCheckY.at(j))
 								{
 									sf::Vector2f position;
-									Entity *currentExplodable = systemManager->getMaterial(finalCheckX.at(i));
+									Entity *currentExplodable;
+									std::string dodge = "DodgeCircle";
+									bool smart = false;
+
+									if (finalCheckX.at(i).find(dodge) == std::string::npos)
+										currentExplodable = systemManager->getMaterial(finalCheckX.at(i));
+									else
+									{
+										currentExplodable = systemManager->getMaterial(finalCheckX.at(i).substr(dodge.length()));
+										smart = true;
+									}
+
 									position.x = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(0);
 									position.y = currentExplodable->getComponent("CurrentPosition")->getDataDouble().at(1);
 									temp = systemManager->getMaterial(explosionId);
 
 									//Check for collision.
-									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentExplodable->getComponent("Sprite")->getDataSprite().at(0)) 
+									if (intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentExplodable->getComponent("Sprite")->getDataSprite().at(0))
 										|| intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), position))
 									{
 										//Set proper flags.
@@ -228,6 +265,11 @@ void MissileChecker::control(sf::RenderWindow * window)
 										//Kept for knowing wheter to add points.
 										currentExplodable->getComponent("ShotDown")->deleteData();
 										currentExplodable->getComponent("ShotDown")->addData(true);
+									}
+									if (smart && intersection(temp->getComponent("CircleShape")->getDataCircleShape().at(0), currentExplodable->getComponent("DodgeCircle")->getDataCircleShape().at(0)))
+									{
+										SmartBombControl smartBombControl;
+										smartBombControl.control(currentExplodable, temp);
 									}
 								}
 							}
@@ -297,6 +339,7 @@ void MissileChecker::storeAndSort(double small, double large, std::string id, st
 
 	return;
 }
+
 
 void MissileChecker::storeAndSort(double value, std::string id, std::vector<double> & pos, std::vector<std::string> & ids)
 {
@@ -382,35 +425,20 @@ bool MissileChecker::intersection(sf::CircleShape *circle, sf::Vector2f point)
 }
 
 
-bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::CircleShape *other)
+bool MissileChecker::intersection(sf::CircleShape *circle, sf::CircleShape *other)
 {
 	float radius = circle->getLocalBounds().height / 2;
 	float otherRadius = other->getLocalBounds().height / 2;
 
-	sf::Vector2f point;
-	point.x = e->getComponent("CurrentPosition")->getDataDouble().at(0);
-	point.y = e->getComponent("CurrentPosition")->getDataDouble().at(1);
-
-	if (intersection(circle, point))
-		return true;
-
-	return false;
-}
-
-
-bool MissileChecker::intersection(Entity *e, sf::CircleShape *circle, sf::Sprite *other)
-{
-	float radius = circle->getLocalBounds().height / 2;
-
 	sf::Vector2f distance;
 	sf::Vector2f circleCenter;
-	sf::Vector2f spriteCenter;
+	sf::Vector2f otherCenter;
 
 	circleCenter = sf::Vector2f((sf::FloatRect(circle->getGlobalBounds()).left) + (sf::FloatRect(circle->getGlobalBounds()).width / 2), (sf::FloatRect(circle->getGlobalBounds()).top) + sf::FloatRect(circle->getGlobalBounds()).height / 2);
-	spriteCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
+	otherCenter = sf::Vector2f((sf::FloatRect(other->getGlobalBounds()).left) + (sf::FloatRect(other->getGlobalBounds()).width / 2), (sf::FloatRect(other->getGlobalBounds()).top) + sf::FloatRect(other->getGlobalBounds()).height / 2);
 
-	distance.x = spriteCenter.x - circleCenter.x;
-	distance.y = spriteCenter.y - circleCenter.y;
+	distance.x = otherCenter.x - circleCenter.x;
+	distance.y = otherCenter.y - circleCenter.y;
 
 	double angle = atan(distance.y / distance.x);
 

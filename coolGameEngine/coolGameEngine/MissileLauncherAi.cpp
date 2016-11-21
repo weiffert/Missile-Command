@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include <iostream>
+#include <vector>
 
 #include "SFML\Window.hpp"
 #include "SFML\Graphics.hpp"
@@ -31,34 +32,39 @@ MissileLauncherAi::~MissileLauncherAi()
 void MissileLauncherAi::setTargets(bool cities[6])
 {
 	//Determine how many cities are left
-	int alive = 0;
+	std::vector<bool> alive;
+	std::vector<int> corresponding;
 	int counter = 0;
 	int number = 0;
 	for (int i = 0; i < 6; i++)
 	{
 		if (cities[i])
-			alive++;
+		{
+			alive.push_back(true);
+			corresponding.push_back(i + 1);
+		}
 	}
-	
-	targetOne = rand() % 6 + 1;
-	targetTwo = rand() % 6 + 1;
-	targetThree = rand() % 6 + 1;
 
-	while (targetOne == targetTwo || targetOne == targetThree || targetTwo == targetThree)
+	targetOne = 1;
+	targetTwo = 1;
+	targetThree = 1;
+
+	while (targetOne == targetTwo && alive.size() > 1)
 	{
-		while (targetOne == targetTwo)
-		{
-			targetTwo = rand() % 6 + 1;
-		}
-		while (targetOne == targetThree)
-		{
-			targetThree = rand() % 6 + 1;
-		}
-		while (targetTwo == targetThree)
-		{
-			targetThree = rand() % 6 + 1;
-		}
+		targetOne = rand() % alive.size() + 1;
 	}
+	while (targetOne == targetThree && alive.size() > 1)
+	{
+		targetThree = rand() % alive.size() + 1;
+	}
+	while (targetTwo == targetThree && alive.size() > 1)
+	{
+		targetTwo = rand() % alive.size() + 1;
+	}
+
+	targetOne = corresponding.at(targetOne - 1);
+	targetTwo = corresponding.at(targetTwo - 1);
+	targetThree = corresponding.at(targetThree - 1);
 
 	Property *temp = systemManager->getMaterial("MissileLauncherAi")->getComponent("TargetOne");
 	temp->deleteData();
@@ -262,7 +268,8 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 		{
 			if (planes.at(i)->getComponent("Fired")->getDataBool().at(0) && planes.at(i)->getComponent("Life")->getDataBool().at(0))
 			{
-				viablePlanes.push_back(planes.at(i));
+				if (planes.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0) > 0 && planes.at(i)->getComponent("CurrentPosition")->getDataDouble().at(0) < window->getSize().x)
+					viablePlanes.push_back(planes.at(i));
 			}
 		}
 	}
@@ -373,10 +380,18 @@ int MissileLauncherAi::launchMissiles(Entity *currentMissile, sf::RenderWindow *
 
 			currentMissile->getComponent("DrawRectangleShape")->deleteData();
 			currentMissile->getComponent("DrawRectangleShape")->addData(false);
+			currentMissile->getComponent("DrawSprite")->deleteData();
+			currentMissile->getComponent("DrawSprite")->addData(true);
 			currentMissile->getComponent("Split")->deleteData();
 			currentMissile->getComponent("Split")->addData(true);
 			currentMissile->getComponent("SplitFired")->deleteData();
 			currentMissile->getComponent("SplitFired")->addData(true);
+
+			sf::RectangleShape *r = currentMissile->getComponent("RectangleShape")->getDataRectangleShape().at(0);
+			sf::Color *c = new sf::Color(0, 0, 225);
+			r->setFillColor(*c);
+			r->setOutlineColor(*c);
+
 		}
 	}
 
@@ -407,7 +422,7 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		//Give correct x value
 		//A variable is used to remedy unsigned int error.
 		int width = window->getSize().x;
-		currentPlane->getComponent("CurrentPosition")->addData(width + 100);
+		currentPlane->getComponent("CurrentPosition")->addData(width + 50);
 	}
 
 	//Right
@@ -417,15 +432,14 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 		currentPlane->getComponent("Direction")->changeData(direction, 0);
 
 		//Give correct x value
-		currentPlane->getComponent("CurrentPosition")->addData(-100);
+		currentPlane->getComponent("CurrentPosition")->addData(-50);
 	}
 
-	//Give "random" y height below window height * 5 / 6 and higher than window height / 4.
+	//Give "random" y height above window height * 5 / 6 and belows than window height / 4.
 	do 
 	{
-		yHeight = rand() % window->getSize().y * 5 / 6;
-	} while (yHeight > window->getSize().y / 4);
-	yHeight = 50;
+		yHeight = rand() % window->getSize().y * 4 / 5;
+	} while (yHeight > window->getSize().y / 3 * 2);
 
 	currentPlane->getComponent("CurrentPosition")->addData(yHeight);
 
@@ -479,9 +493,9 @@ int MissileLauncherAi::launchPlanes(Entity *currentPlane, sf::RenderWindow *wind
 
 	//Decrease missiles left
 	Property *count = systemManager->getMaterial("MissileLauncherAi")->getComponent("CurrentPlaneCount");
-	int oldMissileCount = count->getDataInt().at(0);
+	int oldPlaneCount = count->getDataInt().at(0);
 	count->deleteData();
-	count->addData(--oldMissileCount);
+	count->addData(--oldPlaneCount);
 
 	return 1;
 }
@@ -542,6 +556,12 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 
 						sf::Sprite *s = missiles.at(i)->getComponent("Sprite")->getDataSprite().at(0);
 						s->setPosition(temp1, temp2);
+
+						if (missiles.at(i)->getComponent("IsSmart")->getDataBool().at(0))
+						{
+							sf::CircleShape *c = missiles.at(i)->getComponent("DodgeCircle")->getDataCircleShape().at(0);
+							c->setPosition(temp1, temp2);
+						}
 
 						if (missiles.at(i)->getComponent("DrawRectangleShape")->getDataBool().at(0))
 						{
@@ -608,10 +628,6 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							{
 								target->getComponent("Life")->deleteData();
 								target->getComponent("Life")->addData(false);
-								target->getComponent("Draw")->deleteData();
-								target->getComponent("Draw")->addData(false);
-								target->getComponent("DrawSprite")->deleteData();
-								target->getComponent("DrawSprite")->addData(false);
 
 								if (targetString.find("Base") != std::string::npos)
 								{
@@ -631,6 +647,17 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 
 									target->getComponent("CurrentMissileCount")->deleteData();
 									target->getComponent("CurrentMissileCount")->addData(0);
+								}
+								else
+								{
+									sf::Sprite *s = target->getComponent("Sprite")->getDataSprite().at(0);
+									sf::Texture *t = new sf::Texture;
+
+									if (!t->loadFromFile("ruin.png"))
+										std::cout << "Failed to load ruin.png" << std::endl;
+									s->setTexture(*t, true);
+
+									assetManager->add(t);
 								}
 							}
 						}
@@ -677,7 +704,6 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 							launchMissiles(missile, window);
 						}
 					}
-
 				}
 			}
 		}
@@ -715,7 +741,10 @@ void MissileLauncherAi::update(sf::RenderWindow *window, Entity *launcherAi)
 				currentPlane->getComponent("CurrentPosition")->changeData(temp1, 0);
 
 				//If it's off the screen kill the plane
-				if ((temp1 > window->getSize().x && currentPlane->getComponent("Direction")->getDataString().at(0) == "Right") || (temp1 < 0 && currentPlane->getComponent("Direction")->getDataString().at(0) == "Left"))
+				if ((temp1 > window->getSize().x + currentPlane->getComponent("Sprite")->getDataSprite().at(0)->getLocalBounds().width / 2 
+					&& currentPlane->getComponent("Direction")->getDataString().at(0) == "Right") 
+					|| (temp1 < 0 - currentPlane->getComponent("Sprite")->getDataSprite().at(0)->getLocalBounds().width / 2 
+					&& currentPlane->getComponent("Direction")->getDataString().at(0) == "Left"))
 				{
 					currentPlane->getComponent("Life")->deleteData();
 					currentPlane->getComponent("Life")->addData(false);
