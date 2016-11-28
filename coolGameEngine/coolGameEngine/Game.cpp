@@ -16,6 +16,7 @@
 #include "AssetManager.h"
 #include "StateLoading.h"
 #include "StateDebug.h"
+#include "StateMenu.h"
 
 
 Game::Game()
@@ -122,6 +123,22 @@ int Game::gameLoop()
 				state = systemManager->getState(state->getNumber() + 1);
 		}
 	}
+
+	//If a menu state hasn't been created, make one
+	try
+	{
+		systemManager->getState("Menu");
+	}
+	catch (std::bad_typeid& error)
+	{
+		systemManager->add(new StateMenu(systemManager, assetManager));
+
+		//Clear off the getstate warning caused by this try failing
+		system("cls");
+	}
+
+	//Go into the highscore display and endgame
+	systemManager->getState("Menu")->endGame(&gameWindow);
 
 	return exitCode;
 }

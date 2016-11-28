@@ -18,6 +18,12 @@ public:
 	//Update function. Overloads the pure virtual update function in BaseState.
 	virtual std::string update(double, sf::RenderWindow *);
 
+	//Pause function for use in StateMenu, needed for inheritance but is useless in BaseState
+	virtual void paused(sf::RenderWindow*) { return; }
+
+	//End of game scorekeeping function for use in StateMenu, needed for inheritance
+	virtual void endGame(sf::RenderWindow*) { return; }
+
 private:
 	//Stores filenames.
 	std::vector<std::string> filenames;
