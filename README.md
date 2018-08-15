@@ -1,4 +1,7 @@
-# Component-Based-Game-Engine
-This is a game engine designed to use entities and component based design.
-An implementation project will be missile command.
-Please refer to our wiki pages.
+# Missile-Command
+
+This is the implemented version of the [Component-Based-Game-Engine](https://github.com/weiffert/Component-Based-Game-Engine). Please refer to it for documentation.
+
+Languages: C++
+
+Libraries: SFML
